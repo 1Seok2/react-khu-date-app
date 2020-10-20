@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppRouter from './Router';
 import GlobalStyle from '@/assets/style/GlobalStyle';
 
-function App() {
+const App: React.FC = () => {
+  const [isSignIn, setSignIn] = useState(false);
+
   return (
     <>
-      <AppRouter />
+      <AppRouter isSignIn={isSignIn} />
       <GlobalStyle />
     </>
   );
-}
+};
 
 export default App;

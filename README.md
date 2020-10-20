@@ -10,6 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Project Architecture Diagram
 
+<img src='https://user-images.githubusercontent.com/49581472/96583805-3c7e8700-1318-11eb-99ca-070a8dfa5812.png'/>
+
+<br />
 <br />
 
 ## with Firebase !!
