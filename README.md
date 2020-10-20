@@ -4,8 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Deploy
 
-- with [Firebase Hosting](https://health100-51c29.firebaseapp.com)
-- with [Freenom](https://health100.ga)
+- with ...
 
 <br />
 
