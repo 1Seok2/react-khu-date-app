@@ -1,5 +1,6 @@
 import React from 'react';
+import { Hello } from './Home.styled';
 
-const Home = () => <div>home!!</div>;
+const Home = () => <Hello>home!!</Hello>;
 
 export default Home;
