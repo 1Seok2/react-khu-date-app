@@ -23,12 +23,20 @@ import Receive from './page/mypage/receive';
 import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
 
+interface UserObj {
+  displayName: string | null;
+  uid: string | null;
+  updateProfile: any;
+}
+
 interface RouterProps {
   isSignIn: boolean;
+  userObj: UserObj | null;
 }
 
 const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
+  userObj,
 }): JSX.Element => (
   <Router>
     <Switch>
