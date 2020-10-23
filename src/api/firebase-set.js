@@ -6,7 +6,7 @@
 
 import { FirebaseRDB } from '@/config/firebase.config';
 
-export const setApi = (path, form) =>
+export const fbsetWithPathAndFormApi = (path, form) =>
   FirebaseRDB.ref(path).set({
     ...form,
   });
