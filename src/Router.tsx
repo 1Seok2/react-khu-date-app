@@ -21,6 +21,7 @@ import List from './page/contact/list';
 import Edit from './page/mypage/edit';
 import Receive from './page/mypage/receive';
 import Send from './page/mypage/send';
+import { SmallTabletWidth } from './theme/width';
 
 interface RouterProps {
   isSignIn: boolean;
@@ -32,7 +33,7 @@ const AppRouter: React.FC<RouterProps> = ({
   <Router>
     <Switch>
       {isSignIn ? (
-        <>
+        <div style={OuterContainer}>
           <Route exact path="/" render={() => <Home />} />
           <Route
             exact
@@ -60,9 +61,9 @@ const AppRouter: React.FC<RouterProps> = ({
             render={() => <Send />}
           />
           <Redirect path="*" to="/" />
-        </>
+        </div>
       ) : (
-        <>
+        <div style={OuterContainer}>
           <Route
             exact
             path="/auth/signin"
@@ -74,10 +75,17 @@ const AppRouter: React.FC<RouterProps> = ({
             render={() => <SignUp />}
           />
           <Redirect path="*" to="/auth/signin" />
-        </>
+        </div>
       )}
     </Switch>
   </Router>
 );
 
 export default AppRouter;
+
+const OuterContainer = {
+  maxWidth: SmallTabletWidth,
+  minHeight: '100vh',
+  margin: '0 auto',
+  backgroundColor: 'gray',
+};
