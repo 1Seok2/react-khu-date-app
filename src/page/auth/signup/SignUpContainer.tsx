@@ -12,6 +12,7 @@ import GetInputList from './GetInputList';
 import SignError from '../AuthError';
 
 import SignUpPresenter from './SignUpPresenter';
+import { FirebaseAuth } from '@/config/firebase.config';
 
 const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
@@ -49,17 +50,23 @@ const SignUpContainer = (): JSX.Element => {
     } finally {
       if (data) {
         /* save info in db */
-        const { uid }: any = Auth.CurrentUser;
-
         const createdAt: number = Date.now(); // 회원가입 생성 ms
 
-        fbsetWithPathAndFormApi(`users/${uid}`, {
-          email: userInfo.email,
-          name: userInfo.name,
-          createdAt: createdAt,
+        getUid().then(uid => {
+          fbsetWithPathAndFormApi(`users/${uid}`, {
+            email: userInfo.email,
+            name: userInfo.name,
+            createdAt: createdAt,
+          });
         });
       }
     }
+  };
+
+  const getUid = async () => {
+    const { uid }: any = FirebaseAuth.currentUser;
+    console.log(uid);
+    return uid;
   };
 
   return (
