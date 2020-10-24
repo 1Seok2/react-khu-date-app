@@ -15,3 +15,11 @@ export interface UserSignInObj {
   email: string;
   password: string;
 }
+
+export interface AuthPresenterProps {
+  inputList: Record<string, string>[];
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => void;
+  onSubmit: () => Promise<void>;
+}
