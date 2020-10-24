@@ -14,7 +14,7 @@ interface SendProps {
   userObj: UserObj | null;
 }
 
-const Send = ({
+const SendContainer = ({
   userObj,
   ...props
 }: SendProps): JSX.Element => {
@@ -55,4 +55,4 @@ const Send = ({
     />
   );
 };
-export default Send;
+export default SendContainer;

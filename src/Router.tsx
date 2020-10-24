@@ -58,7 +58,9 @@ const AppRouter: React.FC<RouterProps> = ({
             />
             <Route
               path="/mypage/receive"
-              render={() => <Receive />}
+              render={() => (
+                <Receive userObj={userObj} {...props} />
+              )}
             />
             <Route
               path="/mypage/send"
