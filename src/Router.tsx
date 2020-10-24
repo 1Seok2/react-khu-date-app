@@ -15,6 +15,7 @@ import SignIn from './page/auth/signin';
 import SignUp from './page/auth/signup';
 
 /* after sign in ... */
+import Intro from './page/intro';
 import Home from './page/home';
 import Detail from './page/contact/detail';
 import List from './page/contact/list';
@@ -35,6 +36,12 @@ const AppRouter: React.FC<RouterProps> = ({
       {isSignIn ? (
         <div style={OuterContainer}>
           <Route exact path="/" render={() => <Home />} />
+          <Route
+            exact
+            path="/intro"
+            render={() => <Intro />}
+          />
+
           <Route
             exact
             path="/contact/list"
@@ -60,7 +67,7 @@ const AppRouter: React.FC<RouterProps> = ({
             path="/mypage/send"
             render={() => <Send />}
           />
-          <Redirect path="*" to="/" />
+          {/* <Redirect path="*" to="/" /> */}
         </div>
       ) : (
         <div style={OuterContainer}>
