@@ -4,9 +4,9 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
 import { RouteComponentProps } from 'react-router';
 import { FirebaseRDB } from '@/config/firebase.config';
+import DetailPresenter from './DetailPresenter';
 
 const Detail: React.FC<RouteComponentProps> = (
   props: any,
@@ -82,27 +82,12 @@ const Detail: React.FC<RouteComponentProps> = (
       );
   }, []);
   return (
-    <div>
-      {isLoading ? (
-        <div>ld...</div>
-      ) : (
-        <>
-          <h1>상대 소개 상세 정보</h1>
-          <div>
-            <h2>
-              가입일 :{' '}
-              {moment(person.createdAt).format('YY.MM.DD')}
-            </h2>
-            <h2>{person.email}</h2>
-            <h2>{person.gender}</h2>
-            <h2>{person.name}</h2>
-          </div>
-          <button onClick={sendInterest}>
-            {enable ? '전송완료' : '관심표현'}
-          </button>
-        </>
-      )}
-    </div>
+    <DetailPresenter
+      isLoading={isLoading}
+      person={person}
+      sendInterest={sendInterest}
+      enable={enable}
+    />
   );
 };
 

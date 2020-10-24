@@ -2,22 +2,16 @@
  * @description 내가 호감 표시한 사람들 목록
  */
 
-import { UserObj } from '@/components/util/usertype';
-import { FirebaseRDB } from '@/config/firebase.config';
 import React, { useEffect, useState } from 'react';
+import { FirebaseRDB } from '@/config/firebase.config';
+
 import SendPresenter from './SendPresenter';
+
+import { UserObj } from '@/components/util/usertype';
+import { ChatObj } from '../type';
 
 interface SendProps {
   userObj: UserObj | null;
-}
-
-interface SendChatObj {
-  senderId: string;
-  sender: string;
-  receiver: string;
-  createdAt: string;
-  receiverOk: number;
-  receiverSaw: number;
 }
 
 const Send = ({
@@ -27,9 +21,7 @@ const Send = ({
   /**
    * 내가 보낸 리스트
    */
-  const [sendList, setList] = useState<Array<SendChatObj>>(
-    [],
-  );
+  const [sendList, setList] = useState<Array<ChatObj>>([]);
   const [isLoading, setLoading] = useState(true);
 
   /**

@@ -4,19 +4,11 @@
  */
 import React from 'react';
 import moment from 'moment';
+import { ChatObj } from '../type';
 
 interface SendProps {
-  sendList: Array<SendChatObj>;
+  sendList: Array<ChatObj>;
   isLoading: boolean;
-}
-
-interface SendChatObj {
-  senderId: string;
-  sender: string;
-  receiver: string;
-  createdAt: string;
-  receiverOk: number;
-  receiverSaw: number;
 }
 
 const SendPresenter = ({
