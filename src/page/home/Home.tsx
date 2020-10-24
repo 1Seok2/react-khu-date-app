@@ -1,3 +1,4 @@
+import { FirebaseAuth } from '@/config/firebase.config';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Hello } from './Home.styled';
@@ -19,6 +20,11 @@ const Home = (): JSX.Element => (
     </div>
     <div>
       <Link to="/mypage/send">zzz</Link>
+    </div>
+    <div>
+      <button onClick={() => FirebaseAuth.signOut()}>
+        signout
+      </button>
     </div>
   </>
 );

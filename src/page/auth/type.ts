@@ -7,6 +7,7 @@ export interface UserSignUpObj {
   password: string;
   nickname: string;
   name: string;
+  gender: string;
   age: string;
   introduce: string;
 }
@@ -19,7 +20,11 @@ export interface UserSignInObj {
 export interface AuthPresenterProps {
   inputList: Record<string, string>[];
   onChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >,
   ) => void;
-  onSubmit: () => Promise<void>;
+  onSubmit: (e: any) => Promise<void>;
+  userInfo?: UserSignUpObj;
+  setInfo?: any;
 }

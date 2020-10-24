@@ -40,7 +40,7 @@ const AppRouter: React.FC<RouterProps> = ({
   userObj,
 }): JSX.Element => (
   <div style={OuterContainer}>
-    {!isSignIn ? (
+    {isSignIn ? (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/intro" render={() => <Intro />} />
