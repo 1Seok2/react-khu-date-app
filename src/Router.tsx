@@ -39,67 +39,11 @@ const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
   userObj,
 }): JSX.Element => (
-<<<<<<< HEAD
-  <Router>
-    <Switch>
-      {isSignIn ? (
-        <div style={OuterContainer}>
-          <Route exact path="/" render={() => <Home />} />
-          <Route
-            exact
-            path="/intro"
-            render={() => <Intro />}
-          />
-
-          <Route
-            exact
-            path="/contact/list"
-            render={() => <List />}
-          />
-          <Route
-            exact
-            path="/contact/detail"
-            render={() => <Detail />}
-          />
-          <Route
-            exact
-            path="/mypage/edit"
-            render={() => <Edit />}
-          />
-          <Route
-            exact
-            path="/mypage/receive"
-            render={() => <Receive />}
-          />
-          <Route
-            exact
-            path="/mypage/send"
-            render={() => <Send />}
-          />
-          {/* <Redirect path="*" to="/" /> */}
-        </div>
-      ) : (
-        <div style={OuterContainer}>
-          <Route
-            exact
-            path="/auth/signin"
-            render={() => <SignIn />}
-          />
-          <Route
-            exact
-            path="/auth/signup"
-            render={() => <SignUp />}
-          />
-          <Redirect path="*" to="/auth/signin" />
-        </div>
-      )}
-    </Switch>
-  </Router>
-=======
   <div style={OuterContainer}>
     {!isSignIn ? (
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/intro" render={() => <Intro />} />
         <Route
           path="/contact/list"
           render={() => <List />}
@@ -138,7 +82,6 @@ const AppRouter: React.FC<RouterProps> = ({
       </Switch>
     )}
   </div>
->>>>>>> e52c30707c35f4993c927a031938153b20118fe4
 );
 
 export default AppRouter;

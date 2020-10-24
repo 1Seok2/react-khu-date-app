@@ -2,19 +2,25 @@
 import styled from 'styled-components';
 
 export const IntroSection = styled.section`
-  background: white;
+  background: #fffafa;
   height: 100vh;
   width: 768px;
+  transition: opacity 0.5s;
 `;
 
 export const ContentContainer = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   text-align: center;
   align-items: center;
-  flex-direction: column;
+`;
+
+export const ArrowWrapper = styled.div`
+  align-items: center;
 `;
 
 export const ContentText = styled.p`
-  font-size: 48px;
+  font-size: 40px;
 `;

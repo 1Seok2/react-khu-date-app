@@ -4,10 +4,6 @@ import GlobalStyle from '@/assets/global/GlobalStyle';
 import { FirebaseAuth } from './config/firebase.config';
 import { BrowserRouter } from 'react-router-dom';
 
-<<<<<<< HEAD
-const App: React.FC = () => {
-  const [isSignIn, setSignIn] = useState(true);
-=======
 interface UserObj {
   displayName: string | null;
   uid: string | null;
@@ -45,7 +41,6 @@ const App: React.FC = (): JSX.Element => {
       },
     );
   }, []);
->>>>>>> e52c30707c35f4993c927a031938153b20118fe4
 
   return (
     <>
