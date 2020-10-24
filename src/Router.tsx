@@ -15,6 +15,7 @@ import SignIn from './page/auth/signin';
 import SignUp from './page/auth/signup';
 
 /* after sign in ... */
+import Intro from './page/intro';
 import Home from './page/home';
 import Detail from './page/contact/detail';
 import List from './page/contact/list';
@@ -42,6 +43,7 @@ const AppRouter: React.FC<RouterProps> = ({
     {isSignIn ? (
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/intro" render={() => <Intro />} />
         <Route
           path="/contact/list"
           render={() => <List />}
