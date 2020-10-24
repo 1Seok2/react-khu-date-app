@@ -3,15 +3,8 @@
  */
 
 import React from 'react';
-import {
-  AuthWrapper,
-  AuthForm,
-  AuthTitle,
-  SubmitButton,
-  ChangeAuthButton,
-} from '../Auth.styled';
+import * as s from '../Auth.styled';
 
-import TextArea from '@/components/util/textarea';
 import TextInput from '@/components/util/textinput';
 
 import { AuthPresenterProps } from '../type';
@@ -22,26 +15,18 @@ const SignUpPresenter = ({
   onSubmit,
   userInfo,
   setInfo,
+  error,
 }: AuthPresenterProps): JSX.Element => (
-  <AuthWrapper>
-    <AuthTitle>경희의 손개팅</AuthTitle>
-    <AuthForm onSubmit={onSubmit}>
+  <s.AuthWrapper>
+    <s.AuthTitle>경희의 손개팅</s.AuthTitle>
+    <s.AuthForm onSubmit={onSubmit}>
       {inputList.map((item: Record<string, string>) => {
-        if (item.name === 'introduce')
-          return (
-            <TextArea
-              key={item.name}
-              name={item.name}
-              value={item.value}
-              placeholder={item.placeholder}
-              onChange={onChange}
-              required={true}
-            />
-          );
+        if (item.name === 'introduce') return null;
         else if (item.name === 'gender')
           return (
-            <div key={item.name}>
-              <a
+            <s.GenderWrapper key={item.name}>
+              <s.ChangeGender
+                current={userInfo?.gender === 'male'}
                 onClick={() =>
                   setInfo({
                     ...userInfo,
@@ -49,9 +34,10 @@ const SignUpPresenter = ({
                   })
                 }
               >
-                남성 (male)
-              </a>
-              <a
+                남성
+              </s.ChangeGender>
+              <s.ChangeGender
+                current={userInfo?.gender === 'female'}
                 onClick={() =>
                   setInfo({
                     ...userInfo,
@@ -59,9 +45,9 @@ const SignUpPresenter = ({
                   })
                 }
               >
-                여성 (female)
-              </a>
-            </div>
+                여성
+              </s.ChangeGender>
+            </s.GenderWrapper>
           );
         else
           return (
@@ -75,14 +61,15 @@ const SignUpPresenter = ({
             />
           );
       })}
+      <div>{error}</div>
       <>
-        <ChangeAuthButton to="/auth/signin">
+        <s.ChangeAuthButton to="/auth/signin">
           계정이 이미 있으신가요?
-        </ChangeAuthButton>
-        <SubmitButton>회원가입</SubmitButton>
+        </s.ChangeAuthButton>
+        <s.SubmitButton>회원가입</s.SubmitButton>
       </>
-    </AuthForm>
-  </AuthWrapper>
+    </s.AuthForm>
+  </s.AuthWrapper>
 );
 
 export default SignUpPresenter;

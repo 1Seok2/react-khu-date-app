@@ -34,3 +34,25 @@ export const AuthTitle = styled.h1`
 export const SubmitButton = styled.button``;
 
 export const ChangeAuthButton = styled(Link)``;
+
+export const GenderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 8px 18px;
+  height: 30px;
+  width: 80%;
+`;
+
+interface GenderProps {
+  current: boolean;
+}
+
+export const ChangeGender = styled.a`
+  flex: 1;
+  padding: 10px;
+  background-color: ${(props: GenderProps) =>
+    props.current ? color.date : 'white'};
+  border-radius: 3px;
+`;

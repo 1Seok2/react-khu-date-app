@@ -3,12 +3,9 @@
  */
 
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+import { UserObj } from './components/util/usertype';
 
 /* before sign in ... */
 import SignIn from './page/auth/signin';
@@ -24,48 +21,50 @@ import Receive from './page/mypage/receive';
 import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
 
-interface UserObj {
-  displayName: string | null;
-  uid: string | null;
-  updateProfile: any;
-}
-
 interface RouterProps {
   isSignIn: boolean;
   userObj: UserObj | null;
+  isLoading: boolean;
 }
 
 const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
   userObj,
+  isLoading,
 }): JSX.Element => (
   <div style={OuterContainer}>
     {isSignIn ? (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/intro" render={() => <Intro />} />
-        <Route
-          path="/contact/list"
-          render={() => <List />}
-        />
-        <Route
-          path="/contact/detail"
-          render={() => <Detail />}
-        />
-        <Route
-          path="/mypage/edit"
-          render={() => <Edit />}
-        />
-        <Route
-          path="/mypage/receive"
-          render={() => <Receive />}
-        />
-        <Route
-          path="/mypage/send"
-          render={() => <Send />}
-        />
-        <Redirect to="/" />
-      </Switch>
+      <>
+        {isLoading ? (
+          <div>loading...</div>
+        ) : (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/intro" render={() => <Intro />} />
+            <Route
+              path="/contact/list"
+              render={() => <List userObj={userObj} />}
+            />
+            <Route
+              path="/contact/detail"
+              render={() => <Detail />}
+            />
+            <Route
+              path="/mypage/edit"
+              render={() => <Edit />}
+            />
+            <Route
+              path="/mypage/receive"
+              render={() => <Receive />}
+            />
+            <Route
+              path="/mypage/send"
+              render={() => <Send />}
+            />
+            <Redirect to="/" />
+          </Switch>
+        )}
+      </>
     ) : (
       <Switch>
         <Route

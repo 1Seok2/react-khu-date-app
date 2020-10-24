@@ -2,19 +2,14 @@
  * @description auth에 관한 type은 여기에 ...
  */
 
-export interface UserSignUpObj {
+export interface UserAuthObj {
   email: string;
   password: string;
-  nickname: string;
-  name: string;
-  gender: string;
-  age: string;
-  introduce: string;
-}
-
-export interface UserSignInObj {
-  email: string;
-  password: string;
+  nickname?: string;
+  name?: string;
+  gender?: string;
+  age?: string;
+  introduce?: string;
 }
 
 export interface AuthPresenterProps {
@@ -25,6 +20,7 @@ export interface AuthPresenterProps {
     >,
   ) => void;
   onSubmit: (e: any) => Promise<void>;
-  userInfo?: UserSignUpObj;
+  userInfo?: UserAuthObj;
   setInfo?: any;
+  error: string;
 }

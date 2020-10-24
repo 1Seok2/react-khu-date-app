@@ -4,13 +4,7 @@
 
 import TextInput from '@/components/util/textinput';
 import React from 'react';
-import {
-  AuthWrapper,
-  AuthForm,
-  AuthTitle,
-  SubmitButton,
-  ChangeAuthButton,
-} from '../Auth.styled';
+import * as s from '../Auth.styled';
 
 import { AuthPresenterProps } from '../type';
 
@@ -18,10 +12,11 @@ const SignInPresenter = ({
   inputList,
   onChange,
   onSubmit,
+  error,
 }: AuthPresenterProps): JSX.Element => (
-  <AuthWrapper>
-    <AuthTitle>경희의 손개팅</AuthTitle>
-    <AuthForm>
+  <s.AuthWrapper>
+    <s.AuthTitle>경희의 손개팅</s.AuthTitle>
+    <s.AuthForm onSubmit={onSubmit}>
       {inputList.map((item: Record<string, string>) => (
         <TextInput
           key={item.name}
@@ -32,14 +27,15 @@ const SignInPresenter = ({
           required={true}
         />
       ))}
-      <>
-        <ChangeAuthButton to="/auth/signup">
+      <div>{error}</div>
+      <div>
+        <s.ChangeAuthButton to="/auth/signup">
           계정이 없으신가요?
-        </ChangeAuthButton>
-        <SubmitButton>로그인</SubmitButton>
-      </>
-    </AuthForm>
-  </AuthWrapper>
+        </s.ChangeAuthButton>
+        <s.SubmitButton>로그인</s.SubmitButton>
+      </div>
+    </s.AuthForm>
+  </s.AuthWrapper>
 );
 
 export default SignInPresenter;

@@ -2,10 +2,10 @@
  * @description 로그인 폼의 입력창들 정보 배열로 리턴
  */
 
-import { UserSignInObj } from '../type';
+import { UserAuthObj } from '../type';
 
 const GetInputList = (
-  user: UserSignInObj,
+  user: UserAuthObj,
 ): Array<Record<string, string>> => [
   {
     name: 'email',
