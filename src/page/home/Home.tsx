@@ -7,6 +7,9 @@ const Home = (): JSX.Element => (
   <>
     <Hello>home!!</Hello>
     <div>
+      <Link to="/intro">Intro</Link>
+    </div>
+    <div>
       <Link to="/contact/list">zzz</Link>
     </div>
     <div>
