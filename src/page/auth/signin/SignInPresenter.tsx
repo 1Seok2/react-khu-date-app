@@ -2,8 +2,8 @@
  * @description 로그인 창
  */
 
-import TextInput from '@/components/util/textinput';
 import React from 'react';
+import TextInput from '@/components/util/textinput';
 import * as s from '../Auth.styled';
 
 import { AuthPresenterProps } from '../type';

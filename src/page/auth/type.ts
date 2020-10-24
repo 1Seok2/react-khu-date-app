@@ -5,11 +5,7 @@
 export interface UserAuthObj {
   email: string;
   password: string;
-  nickname?: string;
   name?: string;
-  gender?: string;
-  age?: string;
-  introduce?: string;
 }
 
 export interface AuthPresenterProps {

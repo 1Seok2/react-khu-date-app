@@ -3,12 +3,13 @@
  */
 
 import React, { useState } from 'react';
+import { Auth } from '@/api/firebase-auth';
 
 import GetInputList from './GetInputList';
 import SignInPresenter from './SignInPresenter';
-import { UserAuthObj } from '../type';
 import SignError from '../AuthError';
-import { Auth } from '@/api/firebase-auth';
+
+import { UserAuthObj } from '../type';
 
 const SignIn = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({

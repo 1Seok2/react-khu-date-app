@@ -18,30 +18,30 @@ const GetInputList = (
     placeholder: '비밀번호를 입력해주세요',
   },
   {
-    name: 'nickname',
-    value: user.nickname || '',
-    placeholder: '별명을 입력해주세요',
-  },
-  {
     name: 'name',
     value: user.name || '',
     placeholder: '이름을 입력해주세요',
   },
-  {
-    name: 'gender',
-    value: user.gender || '',
-    placeholder: '나이를 입력해주세요',
-  },
-  {
-    name: 'age',
-    value: user.age || '',
-    placeholder: '나이를 입력해주세요',
-  },
-  {
-    name: 'introduce',
-    value: user.introduce || '',
-    placeholder: '소개를 입력해주세요',
-  },
+  // {
+  //   name: 'nickname',
+  //   value: user.nickname || '',
+  //   placeholder: '별명을 입력해주세요',
+  // },
+  // {
+  //   name: 'gender',
+  //   value: user.gender || '',
+  //   placeholder: '나이를 입력해주세요',
+  // },
+  // {
+  //   name: 'age',
+  //   value: user.age || '',
+  //   placeholder: '나이를 입력해주세요',
+  // },
+  // {
+  //   name: 'introduce',
+  //   value: user.introduce || '',
+  //   placeholder: '소개를 입력해주세요',
+  // },
 ];
 
 export default GetInputList;
