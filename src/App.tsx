@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AppRouter from './Router';
 import GlobalStyle from '@/assets/global/GlobalStyle';
 import { FirebaseAuth } from './config/firebase.config';
+import { BrowserRouter } from 'react-router-dom';
 
 interface UserObj {
   displayName: string | null;
@@ -44,13 +45,13 @@ const App: React.FC = (): JSX.Element => {
   return (
     <>
       {init && (
-        <>
+        <BrowserRouter>
           <AppRouter
             isSignIn={isSignIn}
             userObj={userObj}
           />
           <GlobalStyle />
-        </>
+        </BrowserRouter>
       )}
     </>
   );

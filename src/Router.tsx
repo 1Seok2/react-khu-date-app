@@ -38,55 +38,48 @@ const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
   userObj,
 }): JSX.Element => (
-  <Router>
-    <Switch>
-      {isSignIn ? (
-        <div style={OuterContainer}>
-          <Route exact path="/" render={() => <Home />} />
-          <Route
-            exact
-            path="/contact/list"
-            render={() => <List />}
-          />
-          <Route
-            exact
-            path="/contact/detail"
-            render={() => <Detail />}
-          />
-          <Route
-            exact
-            path="/mypage/edit"
-            render={() => <Edit />}
-          />
-          <Route
-            exact
-            path="/mypage/receive"
-            render={() => <Receive />}
-          />
-          <Route
-            exact
-            path="/mypage/send"
-            render={() => <Send />}
-          />
-          <Redirect path="*" to="/" />
-        </div>
-      ) : (
-        <div style={OuterContainer}>
-          <Route
-            exact
-            path="/auth/signin"
-            render={() => <SignIn />}
-          />
-          <Route
-            exact
-            path="/auth/signup"
-            render={() => <SignUp />}
-          />
-          <Redirect path="*" to="/auth/signin" />
-        </div>
-      )}
-    </Switch>
-  </Router>
+  <div style={OuterContainer}>
+    {!isSignIn ? (
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route
+          path="/contact/list"
+          render={() => <List />}
+        />
+        <Route
+          path="/contact/detail"
+          render={() => <Detail />}
+        />
+        <Route
+          path="/mypage/edit"
+          render={() => <Edit />}
+        />
+        <Route
+          path="/mypage/receive"
+          render={() => <Receive />}
+        />
+        <Route
+          path="/mypage/send"
+          render={() => <Send />}
+        />
+        <Redirect to="/" />
+      </Switch>
+    ) : (
+      <Switch>
+        <Route
+          exact
+          path="/auth/signin"
+          render={() => <SignIn />}
+        />
+        <Route
+          exact
+          path="/auth/signup"
+          render={() => <SignUp />}
+        />
+        <Redirect path="*" to="/auth/signin" />
+      </Switch>
+    )}
+  </div>
 );
 
 export default AppRouter;
