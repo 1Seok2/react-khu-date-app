@@ -12,6 +12,7 @@ import { UserObj } from '@/components/util/usertype';
 
 const ListContainer = ({
   userObj,
+  ...props
 }: ListProps): JSX.Element => {
   const gender = userObj?.gender;
 

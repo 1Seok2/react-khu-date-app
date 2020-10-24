@@ -31,6 +31,7 @@ const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
   userObj,
   isLoading,
+  ...props
 }): JSX.Element => (
   <div style={OuterContainer}>
     {isSignIn ? (
@@ -43,7 +44,9 @@ const AppRouter: React.FC<RouterProps> = ({
             <Route path="/intro" render={() => <Intro />} />
             <Route
               path="/contact/list"
-              render={() => <List userObj={userObj} />}
+              render={() => (
+                <List userObj={userObj} {...props} />
+              )}
             />
             <Route
               path="/contact/detail"
@@ -59,7 +62,9 @@ const AppRouter: React.FC<RouterProps> = ({
             />
             <Route
               path="/mypage/send"
-              render={() => <Send />}
+              render={() => (
+                <Send userObj={userObj} {...props} />
+              )}
             />
             <Redirect to="/" />
           </Switch>

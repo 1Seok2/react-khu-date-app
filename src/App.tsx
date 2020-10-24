@@ -44,7 +44,7 @@ const App: React.FC = (): JSX.Element => {
           /* loading time ... */
           setTimeout(() => {
             setLoading(false);
-          }, 1000);
+          }, 300);
           setSignIn(true);
         } else {
           setUserObj(null);
