@@ -3,13 +3,16 @@
  */
 
 import React, { useState } from 'react';
-import { FirebaseAuth } from '@/config/firebase.config';
+import {
+  FirebaseAuth,
+  FirebaseRDB,
+} from '@/config/firebase.config';
 
 import { UserSignUpObj } from '../type';
 import SignUpPresenter from './SignUpPresenter';
 
 import GetInputList from './GetInputList';
-import SignError from '../SignError';
+import SignError from '../AuthError';
 
 const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserSignUpObj>({
@@ -17,13 +20,16 @@ const SignUpContainer = (): JSX.Element => {
     password: '',
     nickname: '',
     name: '',
+    gender: 'male',
     age: '',
     introduce: '',
   });
   const [error, setError] = useState<string>('');
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
     setInfo({
@@ -32,9 +38,17 @@ const SignUpContainer = (): JSX.Element => {
     });
   };
 
+  const onClickGender = (e: any, value: string): void => {
+    setInfo({
+      ...userInfo,
+      gender: value,
+    });
+  };
+
   const inputList = GetInputList(userInfo);
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
     let data;
     try {
       data = await FirebaseAuth.createUserWithEmailAndPassword(
@@ -47,6 +61,16 @@ const SignUpContainer = (): JSX.Element => {
     } finally {
       if (data) {
         /* save info in db */
+        const { uid }: any = FirebaseAuth.currentUser;
+
+        const createdAt: number = Date.now(); // 회원가입 생성 ms
+
+        FirebaseRDB.ref(
+          `users/${userInfo.gender}/${uid}`,
+        ).set({
+          ...userInfo,
+          createdAt: createdAt,
+        });
       }
     }
   };
@@ -56,6 +80,8 @@ const SignUpContainer = (): JSX.Element => {
       inputList={inputList}
       onChange={onChange}
       onSubmit={onSubmit}
+      userInfo={userInfo}
+      setInfo={setInfo}
     />
   );
 };

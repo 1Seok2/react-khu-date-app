@@ -2,14 +2,14 @@
  * @description 로그인 창
  */
 
-import React, { useState } from 'react';
+import TextInput from '@/components/util/textinput';
+import React from 'react';
 import {
-  SignWrapper,
-  SignInForm,
-  SignInTitle,
-  SInput,
+  AuthWrapper,
+  AuthForm,
+  AuthTitle,
   SubmitButton,
-  SignUpButton,
+  ChangeAuthButton,
 } from '../Auth.styled';
 
 import { AuthPresenterProps } from '../type';
@@ -19,28 +19,27 @@ const SignInPresenter = ({
   onChange,
   onSubmit,
 }: AuthPresenterProps): JSX.Element => (
-  <SignWrapper>
-    <SignInTitle>경희의 손개팅</SignInTitle>
-    <SignInForm>
+  <AuthWrapper>
+    <AuthTitle>경희의 손개팅</AuthTitle>
+    <AuthForm>
       {inputList.map((item: Record<string, string>) => (
-        <SInput
+        <TextInput
           key={item.name}
-          type={item.name}
           name={item.name}
           value={item.value}
           placeholder={item.placeholder}
           onChange={onChange}
-          required
+          required={true}
         />
       ))}
-      <div>
-        <SignUpButton to="/auth/signup">
+      <>
+        <ChangeAuthButton to="/auth/signup">
           계정이 없으신가요?
-        </SignUpButton>
+        </ChangeAuthButton>
         <SubmitButton>로그인</SubmitButton>
-      </div>
-    </SignInForm>
-  </SignWrapper>
+      </>
+    </AuthForm>
+  </AuthWrapper>
 );
 
 export default SignInPresenter;

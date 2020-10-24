@@ -28,6 +28,11 @@ const GetInputList = (
     placeholder: '이름을 입력해주세요',
   },
   {
+    name: 'gender',
+    value: user.gender,
+    placeholder: '나이를 입력해주세요',
+  },
+  {
     name: 'age',
     value: user.age,
     placeholder: '나이를 입력해주세요',

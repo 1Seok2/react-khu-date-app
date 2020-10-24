@@ -19,7 +19,9 @@ const SignIn = (): JSX.Element => {
   });
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
     setInfo({
