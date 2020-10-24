@@ -17,11 +17,7 @@ const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
     email: '',
     password: '',
-    nickname: '',
     name: '',
-    gender: 'male',
-    age: '',
-    introduce: '',
   });
   const [error, setError] = useState<string>('');
 
@@ -59,11 +55,7 @@ const SignUpContainer = (): JSX.Element => {
 
         fbsetWithPathAndFormApi(`users/${uid}`, {
           email: userInfo.email,
-          nickname: userInfo.nickname,
           name: userInfo.name,
-          gender: userInfo.gender,
-          age: userInfo.age,
-          introduce: userInfo.introduce,
           createdAt: createdAt,
         });
       }
