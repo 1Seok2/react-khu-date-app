@@ -47,7 +47,7 @@ const AppRouter: React.FC<RouterProps> = ({
             />
             <Route
               path="/contact/detail"
-              render={() => <Detail />}
+              component={Detail}
             />
             <Route
               path="/mypage/edit"

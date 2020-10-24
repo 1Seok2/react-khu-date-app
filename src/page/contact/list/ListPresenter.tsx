@@ -14,7 +14,8 @@ const ListPresenter = ({
           to={{
             pathname: '/contact/detail',
             state: {
-              ...person,
+              person: person,
+              userObj: userObj,
             },
           }}
           key={person.email}

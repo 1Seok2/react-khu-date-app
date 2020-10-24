@@ -1,7 +1,96 @@
-import React from 'react';
+/**
+ * @description 상대의 자세한 정보 볼 수 있음
+ * @todo location을 받아오는 props의 interface 지정
+ */
 
-const Detail = (): JSX.Element => (
-  <div>상대 소개 상세 정보</div>
-);
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import { RouteComponentProps } from 'react-router';
+import { FirebaseRDB } from '@/config/firebase.config';
+
+const Detail: React.FC<RouteComponentProps> = (
+  props: any,
+): JSX.Element => {
+  const person = props.location.state.person;
+  const userObj = props.location.state.userObj;
+
+  const [isLoading, setLoading] = useState(true);
+  const [enable, setEnable] = useState(false);
+
+  const sendInterest = () => {
+    if (!enable) {
+      const createdAt = Date.now();
+
+      FirebaseRDB.ref(`chat/${createdAt}`).set(
+        {
+          senderId: userObj.uid,
+          sender: userObj.email,
+          receiver: person.email,
+          createdAt: createdAt,
+          receiverOk: 0,
+          receiverSaw: 0,
+        },
+        error => {
+          if (error) {
+            /* fail ... */
+            console.error(error);
+          } else {
+            /* success ... */
+            alert('성공');
+            setEnable(true);
+          }
+        },
+      );
+    }
+  };
+
+  useEffect(() => {
+    FirebaseRDB.ref(`chat`)
+      .once('value')
+      .then((snap: firebase.database.DataSnapshot) => {
+        let key;
+        let alreadySend = false;
+        for (key in snap.val()) {
+          if (
+            snap.val()[key].sender === userObj.email &&
+            snap.val()[key].receiver === person.email &&
+            !alreadySend
+          ) {
+            setEnable(true);
+            alreadySend = true;
+            break;
+          }
+        }
+      })
+      .then(() =>
+        setTimeout(() => {
+          setLoading(false);
+        }, 10),
+      );
+  }, []);
+  return (
+    <div>
+      {isLoading ? (
+        <div>ld...</div>
+      ) : (
+        <>
+          <h1>상대 소개 상세 정보</h1>
+          <div>
+            <h2>
+              가입일 :{' '}
+              {moment(person.createdAt).format('YY.MM.DD')}
+            </h2>
+            <h2>{person.email}</h2>
+            <h2>{person.gender}</h2>
+            <h2>{person.name}</h2>
+          </div>
+          <button onClick={sendInterest}>
+            {enable ? '전송완료' : '관심표현'}
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
 
 export default Detail;

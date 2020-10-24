@@ -34,11 +34,6 @@ const ListContainer = ({
         let key;
         for (key in snap.val()) {
           /* 모든 유저중 이성을 리스트로 */
-          console.log(
-            snap.val()[key].gender,
-            gender,
-            snap.val()[key].gender !== gender,
-          );
           if (snap.val()[key].gender !== gender) {
             list = [...list, snap.val()[key]];
           }
