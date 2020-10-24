@@ -8,14 +8,14 @@ import {
   FirebaseRDB,
 } from '@/config/firebase.config';
 
-import { UserSignUpObj } from '../type';
+import { UserAuthObj } from '../type';
 import SignUpPresenter from './SignUpPresenter';
 
 import GetInputList from './GetInputList';
 import SignError from '../AuthError';
 
 const SignUpContainer = (): JSX.Element => {
-  const [userInfo, setInfo] = useState<UserSignUpObj>({
+  const [userInfo, setInfo] = useState<UserAuthObj>({
     email: '',
     password: '',
     nickname: '',
@@ -35,13 +35,6 @@ const SignUpContainer = (): JSX.Element => {
     setInfo({
       ...userInfo,
       [name]: value,
-    });
-  };
-
-  const onClickGender = (e: any, value: string): void => {
-    setInfo({
-      ...userInfo,
-      gender: value,
     });
   };
 
@@ -65,11 +58,15 @@ const SignUpContainer = (): JSX.Element => {
 
         const createdAt: number = Date.now(); // 회원가입 생성 ms
 
-        FirebaseRDB.ref(
-          `users/${userInfo.gender}/${uid}`,
-        ).set({
-          ...userInfo,
+        FirebaseRDB.ref(`users/${uid}`).set({
+          email: userInfo.email,
+          nickname: userInfo.nickname,
+          name: userInfo.name,
+          gender: userInfo.gender,
+          age: userInfo.age,
+          introduce: userInfo.introduce,
           createdAt: createdAt,
+          lastSignInAt: createdAt,
         });
       }
     }
@@ -82,6 +79,7 @@ const SignUpContainer = (): JSX.Element => {
       onSubmit={onSubmit}
       userInfo={userInfo}
       setInfo={setInfo}
+      error={error}
     />
   );
 };

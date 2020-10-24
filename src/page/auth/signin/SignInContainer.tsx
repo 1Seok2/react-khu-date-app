@@ -3,20 +3,22 @@
  */
 
 import React, { useState } from 'react';
-import { FirebaseAuth } from '@/config/firebase.config';
+import {
+  FirebaseAuth,
+  FirebaseRDB,
+} from '@/config/firebase.config';
 
 import GetInputList from './GetInputList';
 import SignInPresenter from './SignInPresenter';
+import { UserAuthObj } from '../type';
+import SignError from '../AuthError';
 
 const SignIn = (): JSX.Element => {
-  const [userInfo, setInfo] = useState({
+  const [userInfo, setInfo] = useState<UserAuthObj>({
     email: '',
     password: '',
-    nickname: '',
-    name: '',
-    age: '',
-    introduce: '',
   });
+  const [error, setError] = useState<string>('');
 
   const onChange = (
     e: React.ChangeEvent<
@@ -34,18 +36,29 @@ const SignIn = (): JSX.Element => {
     userInfo,
   );
 
-  const onSubmit = async () => {
+  const onSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => {
+    e.preventDefault();
     let data;
     try {
-      // data = await FirebaseAuth.createUserWithEmailAndPassword(
-      //   userInfo.email,
-      //   userInfo.password,
-      // );
+      data = await FirebaseAuth.signInWithEmailAndPassword(
+        userInfo.email,
+        userInfo.password,
+      );
     } catch (err) {
       console.error(err);
+      setError(SignError(err.message));
     } finally {
       if (data) {
         /* save info in db */
+        const { uid }: any = FirebaseAuth.currentUser;
+
+        const lastSignInAt: number = Date.now();
+
+        // FirebaseRDB.ref(`users/${uid}`).update({
+        //   lastSignInAt: lastSignInAt,
+        // });
       }
     }
   };
@@ -55,6 +68,7 @@ const SignIn = (): JSX.Element => {
       inputList={inputList}
       onChange={onChange}
       onSubmit={onSubmit}
+      error={error}
     />
   );
 };

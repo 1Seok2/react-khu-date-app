@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import AppRouter from './Router';
 import GlobalStyle from '@/assets/global/GlobalStyle';
-import { FirebaseAuth } from './config/firebase.config';
+import {
+  FirebaseAuth,
+  FirebaseRDB,
+} from './config/firebase.config';
 import { BrowserRouter } from 'react-router-dom';
 
+/**
+ * props로 전달할 user정보
+ */
 interface UserObj {
-  displayName: string | null;
-  uid: string | null;
-  updateProfile: any;
+  uid: string;
+  name: string;
+  nickname: string;
+  age: string;
+  createdAt: number;
+  introduce: string;
+  gender: string;
+  email: string;
 }
 
 const App: React.FC = (): JSX.Element => {
   const [isSignIn, setSignIn] = useState(false);
   const [init, setInit] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [userObj, setUserObj] = useState<UserObj | null>({
-    displayName: '',
     uid: '',
-    updateProfile: '',
+    name: '',
+    nickname: '',
+    age: '',
+    createdAt: 0,
+    introduce: '',
+    gender: '',
+    email: '',
   });
 
   /**
@@ -26,12 +43,21 @@ const App: React.FC = (): JSX.Element => {
     FirebaseAuth.onAuthStateChanged(
       (user: firebase.User | null): void => {
         if (user) {
-          setUserObj({
-            displayName: user.displayName,
-            uid: user.uid,
-            updateProfile: (args: any): Promise<void> =>
-              user.updateProfile(args),
-          });
+          const { uid }: any = user;
+
+          FirebaseRDB.ref(`users/${uid}`)
+            .once('value')
+            .then(snap => {
+              const obj = snap.val();
+              setUserObj({
+                ...obj,
+                uid: uid,
+              });
+            });
+          /* loading time ... */
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
           setSignIn(true);
         } else {
           setUserObj(null);
@@ -49,6 +75,7 @@ const App: React.FC = (): JSX.Element => {
           <AppRouter
             isSignIn={isSignIn}
             userObj={userObj}
+            isLoading={isLoading}
           />
           <GlobalStyle />
         </BrowserRouter>

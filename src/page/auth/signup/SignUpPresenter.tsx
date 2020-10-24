@@ -9,6 +9,8 @@ import {
   AuthTitle,
   SubmitButton,
   ChangeAuthButton,
+  GenderWrapper,
+  ChangeGender,
 } from '../Auth.styled';
 
 import TextArea from '@/components/util/textarea';
@@ -22,26 +24,18 @@ const SignUpPresenter = ({
   onSubmit,
   userInfo,
   setInfo,
+  error,
 }: AuthPresenterProps): JSX.Element => (
   <AuthWrapper>
     <AuthTitle>경희의 손개팅</AuthTitle>
     <AuthForm onSubmit={onSubmit}>
       {inputList.map((item: Record<string, string>) => {
-        if (item.name === 'introduce')
-          return (
-            <TextArea
-              key={item.name}
-              name={item.name}
-              value={item.value}
-              placeholder={item.placeholder}
-              onChange={onChange}
-              required={true}
-            />
-          );
+        if (item.name === 'introduce') return null;
         else if (item.name === 'gender')
           return (
-            <div key={item.name}>
-              <a
+            <GenderWrapper key={item.name}>
+              <ChangeGender
+                current={userInfo?.gender === 'male'}
                 onClick={() =>
                   setInfo({
                     ...userInfo,
@@ -49,9 +43,10 @@ const SignUpPresenter = ({
                   })
                 }
               >
-                남성 (male)
-              </a>
-              <a
+                남성
+              </ChangeGender>
+              <ChangeGender
+                current={userInfo?.gender === 'female'}
                 onClick={() =>
                   setInfo({
                     ...userInfo,
@@ -59,9 +54,9 @@ const SignUpPresenter = ({
                   })
                 }
               >
-                여성 (female)
-              </a>
-            </div>
+                여성
+              </ChangeGender>
+            </GenderWrapper>
           );
         else
           return (
@@ -75,6 +70,7 @@ const SignUpPresenter = ({
             />
           );
       })}
+      <div>{error}</div>
       <>
         <ChangeAuthButton to="/auth/signin">
           계정이 이미 있으신가요?
