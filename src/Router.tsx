@@ -20,6 +20,7 @@ import Edit from './page/mypage/edit';
 import Receive from './page/mypage/receive';
 import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
+import Loading from './components/util/loading';
 
 interface RouterProps {
   isSignIn: boolean;
@@ -37,7 +38,7 @@ const AppRouter: React.FC<RouterProps> = ({
     {isSignIn ? (
       <>
         {isLoading ? (
-          <div>loading...</div>
+          <Loading />
         ) : (
           <Switch>
             <Route exact path="/" component={Home} />
@@ -77,12 +78,12 @@ const AppRouter: React.FC<RouterProps> = ({
         <Route
           exact
           path="/auth/signin"
-          render={() => <SignIn />}
+          component={SignIn}
         />
         <Route
           exact
           path="/auth/signup"
-          render={() => <SignUp />}
+          component={SignUp}
         />
         <Redirect path="*" to="/auth/signin" />
       </Switch>

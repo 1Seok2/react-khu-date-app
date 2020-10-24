@@ -1,16 +1,18 @@
 /**
- * @description 내가 호감 표시간 목록
+ * @description 호감 받은 목록
  * @todo 추후 표나 플랫리스트로 표시
  */
 import React from 'react';
 import moment from 'moment';
 import { ChatObj } from '../type';
 
+import Loading from '@/components/util/loading';
+
 interface ReceiveProps {
   receiveList: Array<ChatObj>;
   isLoading: boolean;
-  accept: (chat: any) => void;
-  reject: (chat: any) => void;
+  accept: (chat: ChatObj) => void;
+  reject: (chat: ChatObj) => void;
 }
 
 const ReceivePresenter = ({
@@ -22,9 +24,9 @@ const ReceivePresenter = ({
 }: ReceiveProps): JSX.Element => (
   <>
     {isLoading ? (
-      <div>ld...</div>
+      <Loading />
     ) : (
-      <div>
+      <>
         <h1>받은 목록</h1>
         <div>
           {receiveList.length === 0 ? (
@@ -49,7 +51,7 @@ const ReceivePresenter = ({
             ))
           )}
         </div>
-      </div>
+      </>
     )}
   </>
 );

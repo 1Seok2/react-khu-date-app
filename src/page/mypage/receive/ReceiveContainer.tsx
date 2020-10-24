@@ -15,23 +15,27 @@ const ReceiveContainer = ({
   ...props
 }: SendProps): JSX.Element => {
   /**
-   * 내가 보낸 리스트
+   * 내가 받은 리스트
    */
   const [receiveList, setList] = useState<Array<ChatObj>>(
     [],
   );
   const [isLoading, setLoading] = useState(true);
 
-  const accept = (chat: any) => {
-    FirebaseRDB.ref(`chat/${chat.senderId}`).update({
-      receiverOk: 1,
-    });
+  const accept = (chat: ChatObj) => {
+    if (!chat.enable) {
+      FirebaseRDB.ref(`chat/${chat.senderId}`).update({
+        receiverOk: 1,
+      });
+    }
   };
 
-  const reject = (chat: any) => {
-    FirebaseRDB.ref(`chat/${chat.senderId}`).update({
-      receiverOk: -1,
-    });
+  const reject = (chat: ChatObj) => {
+    if (!chat.enable) {
+      FirebaseRDB.ref(`chat/${chat.senderId}`).update({
+        receiverOk: -1,
+      });
+    }
   };
 
   /**
@@ -72,13 +76,3 @@ const ReceiveContainer = ({
   );
 };
 export default ReceiveContainer;
-/*
-
-
-    <SendPresenter
-      sendList={sendList}
-      isLoading={isLoading}
-      {...props}
-    />
-
-*/

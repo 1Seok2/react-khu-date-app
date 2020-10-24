@@ -4,6 +4,7 @@
 
 import React from 'react';
 import moment from 'moment';
+import Loading from '@/components/util/loading';
 
 interface DetailProps {
   isLoading: boolean;
@@ -20,7 +21,7 @@ const DetailPresenter = ({
 }: DetailProps): JSX.Element => (
   <div>
     {isLoading ? (
-      <div>ld...</div>
+      <Loading />
     ) : (
       <>
         <h1>상대 소개 상세 정보</h1>

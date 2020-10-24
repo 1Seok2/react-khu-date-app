@@ -5,6 +5,7 @@
 import React from 'react';
 import moment from 'moment';
 import { ChatObj } from '../type';
+import Loading from '@/components/util/loading';
 
 interface SendProps {
   sendList: Array<ChatObj>;
@@ -18,7 +19,7 @@ const SendPresenter = ({
 }: SendProps): JSX.Element => (
   <>
     {isLoading ? (
-      <div>ld...</div>
+      <Loading />
     ) : (
       <div>
         <h1>보낸 목록</h1>

@@ -3,6 +3,7 @@
  */
 
 import React, { useState } from 'react';
+import { FirebaseAuth } from '@/config/firebase.config';
 import { Auth } from '@/api/firebase-auth';
 import { fbsetWithPathAndFormApi } from '@/api/firebase-set';
 
@@ -12,7 +13,6 @@ import GetInputList from './GetInputList';
 import SignError from '../AuthError';
 
 import SignUpPresenter from './SignUpPresenter';
-import { FirebaseAuth } from '@/config/firebase.config';
 
 const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({

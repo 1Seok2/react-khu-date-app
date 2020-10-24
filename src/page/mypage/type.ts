@@ -5,4 +5,5 @@ export interface ChatObj {
   createdAt: string;
   receiverOk: number;
   receiverSaw: number;
+  enable?: boolean;
 }
