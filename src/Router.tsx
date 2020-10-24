@@ -3,12 +3,9 @@
  */
 
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+import { UserObj } from './components/util/usertype';
 
 /* before sign in ... */
 import SignIn from './page/auth/signin';
@@ -23,17 +20,6 @@ import Edit from './page/mypage/edit';
 import Receive from './page/mypage/receive';
 import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
-
-interface UserObj {
-  uid: string;
-  name: string;
-  nickname: string;
-  age: string;
-  createdAt: number;
-  introduce: string;
-  gender: string;
-  email: string;
-}
 
 interface RouterProps {
   isSignIn: boolean;
@@ -57,7 +43,7 @@ const AppRouter: React.FC<RouterProps> = ({
             <Route path="/intro" render={() => <Intro />} />
             <Route
               path="/contact/list"
-              render={() => <List />}
+              render={() => <List userObj={userObj} />}
             />
             <Route
               path="/contact/detail"

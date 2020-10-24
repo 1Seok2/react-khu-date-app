@@ -3,16 +3,15 @@
  */
 
 import React, { useState } from 'react';
-import {
-  FirebaseAuth,
-  FirebaseRDB,
-} from '@/config/firebase.config';
+import { Auth } from '@/api/firebase-auth';
+import { fbsetWithPathAndFormApi } from '@/api/firebase-set';
 
 import { UserAuthObj } from '../type';
-import SignUpPresenter from './SignUpPresenter';
 
 import GetInputList from './GetInputList';
 import SignError from '../AuthError';
+
+import SignUpPresenter from './SignUpPresenter';
 
 const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
@@ -44,7 +43,7 @@ const SignUpContainer = (): JSX.Element => {
     e.preventDefault();
     let data;
     try {
-      data = await FirebaseAuth.createUserWithEmailAndPassword(
+      data = await Auth.SignUp(
         userInfo.email,
         userInfo.password,
       );
@@ -54,11 +53,11 @@ const SignUpContainer = (): JSX.Element => {
     } finally {
       if (data) {
         /* save info in db */
-        const { uid }: any = FirebaseAuth.currentUser;
+        const { uid }: any = Auth.CurrentUser;
 
         const createdAt: number = Date.now(); // 회원가입 생성 ms
 
-        FirebaseRDB.ref(`users/${uid}`).set({
+        fbsetWithPathAndFormApi(`users/${uid}`, {
           email: userInfo.email,
           nickname: userInfo.nickname,
           name: userInfo.name,
@@ -66,7 +65,6 @@ const SignUpContainer = (): JSX.Element => {
           age: userInfo.age,
           introduce: userInfo.introduce,
           createdAt: createdAt,
-          lastSignInAt: createdAt,
         });
       }
     }

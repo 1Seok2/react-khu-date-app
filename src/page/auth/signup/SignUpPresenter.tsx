@@ -3,17 +3,8 @@
  */
 
 import React from 'react';
-import {
-  AuthWrapper,
-  AuthForm,
-  AuthTitle,
-  SubmitButton,
-  ChangeAuthButton,
-  GenderWrapper,
-  ChangeGender,
-} from '../Auth.styled';
+import * as s from '../Auth.styled';
 
-import TextArea from '@/components/util/textarea';
 import TextInput from '@/components/util/textinput';
 
 import { AuthPresenterProps } from '../type';
@@ -26,15 +17,15 @@ const SignUpPresenter = ({
   setInfo,
   error,
 }: AuthPresenterProps): JSX.Element => (
-  <AuthWrapper>
-    <AuthTitle>경희의 손개팅</AuthTitle>
-    <AuthForm onSubmit={onSubmit}>
+  <s.AuthWrapper>
+    <s.AuthTitle>경희의 손개팅</s.AuthTitle>
+    <s.AuthForm onSubmit={onSubmit}>
       {inputList.map((item: Record<string, string>) => {
         if (item.name === 'introduce') return null;
         else if (item.name === 'gender')
           return (
-            <GenderWrapper key={item.name}>
-              <ChangeGender
+            <s.GenderWrapper key={item.name}>
+              <s.ChangeGender
                 current={userInfo?.gender === 'male'}
                 onClick={() =>
                   setInfo({
@@ -44,8 +35,8 @@ const SignUpPresenter = ({
                 }
               >
                 남성
-              </ChangeGender>
-              <ChangeGender
+              </s.ChangeGender>
+              <s.ChangeGender
                 current={userInfo?.gender === 'female'}
                 onClick={() =>
                   setInfo({
@@ -55,8 +46,8 @@ const SignUpPresenter = ({
                 }
               >
                 여성
-              </ChangeGender>
-            </GenderWrapper>
+              </s.ChangeGender>
+            </s.GenderWrapper>
           );
         else
           return (
@@ -72,13 +63,13 @@ const SignUpPresenter = ({
       })}
       <div>{error}</div>
       <>
-        <ChangeAuthButton to="/auth/signin">
+        <s.ChangeAuthButton to="/auth/signin">
           계정이 이미 있으신가요?
-        </ChangeAuthButton>
-        <SubmitButton>회원가입</SubmitButton>
+        </s.ChangeAuthButton>
+        <s.SubmitButton>회원가입</s.SubmitButton>
       </>
-    </AuthForm>
-  </AuthWrapper>
+    </s.AuthForm>
+  </s.AuthWrapper>
 );
 
 export default SignUpPresenter;

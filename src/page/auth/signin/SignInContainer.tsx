@@ -3,15 +3,12 @@
  */
 
 import React, { useState } from 'react';
-import {
-  FirebaseAuth,
-  FirebaseRDB,
-} from '@/config/firebase.config';
 
 import GetInputList from './GetInputList';
 import SignInPresenter from './SignInPresenter';
 import { UserAuthObj } from '../type';
 import SignError from '../AuthError';
+import { Auth } from '@/api/firebase-auth';
 
 const SignIn = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
@@ -42,7 +39,7 @@ const SignIn = (): JSX.Element => {
     e.preventDefault();
     let data;
     try {
-      data = await FirebaseAuth.signInWithEmailAndPassword(
+      data = await Auth.SignIn(
         userInfo.email,
         userInfo.password,
       );
@@ -52,10 +49,8 @@ const SignIn = (): JSX.Element => {
     } finally {
       if (data) {
         /* save info in db */
-        const { uid }: any = FirebaseAuth.currentUser;
-
-        const lastSignInAt: number = Date.now();
-
+        // const { uid }: any = FirebaseAuth.currentUser;
+        // const lastSignInAt: number = Date.now();
         // FirebaseRDB.ref(`users/${uid}`).update({
         //   lastSignInAt: lastSignInAt,
         // });
