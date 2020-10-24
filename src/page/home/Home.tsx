@@ -7,7 +7,10 @@ const Home = (): JSX.Element => (
   <>
     <Hello>home!!</Hello>
     <div>
-      <Link to="/contact/list">이성 목록</Link>
+      <Link to="/intro">Intro</Link>
+    </div>
+    <div>
+      <Link to="/contact/list">zzz</Link>
     </div>
     <div>
       <Link to="/contact/detail">이성 디테일</Link>
