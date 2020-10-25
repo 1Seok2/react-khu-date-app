@@ -3,9 +3,9 @@ import {
   IoIosArrowBack,
   IoIosArrowForward,
 } from 'react-icons/io';
-import { ScriptDatas } from './ScriptData';
+import { ScriptDatas } from './data';
 import ContentText from './ContentText';
-import SelfIntroduce from './SelfIntroduce';
+import SelfIntroduce from './self/SelfIntroduceContainer';
 import {
   IntroSection,
   ContentContainer,
@@ -15,7 +15,7 @@ import {
 
 const Intro = (): JSX.Element => {
   const [introState, setIntroState] = useState({
-    scriptIndex: 0,
+    scriptIndex: ScriptDatas.length,
     scriptContent: ScriptDatas[0],
   });
 

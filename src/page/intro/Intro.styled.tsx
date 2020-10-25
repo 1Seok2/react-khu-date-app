@@ -13,7 +13,8 @@ export const KyoboFont = createGlobalStyle`
 `;
 
 export const IntroSection = styled.section`
-  background: #fffafa;
+  /* background: #fffafa; */
+  background: white;
   height: 100vh;
   width: 768px;
   transition: opacity 0.5s;
@@ -50,18 +51,20 @@ export const SelfIntroduceFormat = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 5%;
-  text-align: left;
+  text-align: center;
 `;
 
 export const Title = styled.h1`
   margin-top: 10%;
   font-size: 32px;
+  text-align: left;
   font-family: 'Kyobohand';
 `;
 
 export const InputWrapper = styled.div`
   display: flex;
-  height: 60%;
+  text-align: left;
+  height: 80%;
   flex-direction: column;
   justify-content: space-around;
   font-family: 'Kyobohand';
@@ -71,6 +74,7 @@ export const InputBundler = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const Label = styled.div`
@@ -81,4 +85,15 @@ export const Input = styled.input`
   margin: 0%;
 `;
 
-export const TextArea = styled.textarea``;
+export const Select = styled.select``;
+
+export const TextArea = styled.textarea`
+  resize: none;
+  width: 60%;
+  height: 150px;
+`;
+
+export const SubmitButton = styled.button`
+  font-family: 'Kyobohand';
+  background: white;
+`;
