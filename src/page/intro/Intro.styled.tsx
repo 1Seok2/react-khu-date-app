@@ -48,20 +48,37 @@ export const ContentTextParagraph = styled.p`
 //Self Introduce
 export const SelfIntroduceFormat = styled.div`
   width: 100%;
+  height: 100%;
   padding: 0 5%;
   text-align: left;
 `;
 
 export const Title = styled.h1`
-  font-family: 'Kyobohand';
+  margin-top: 10%;
   font-size: 32px;
+  font-family: 'Kyobohand';
 `;
 
 export const InputWrapper = styled.div`
   display: flex;
+  height: 60%;
   flex-direction: column;
+  justify-content: space-around;
+  font-family: 'Kyobohand';
 `;
 
-export const InputBundler = styled.div``;
+export const InputBundler = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
-export const InputRadio = styled.input``;
+export const Label = styled.div`
+  font-family: 'Kyobohand';
+`;
+
+export const Input = styled.input`
+  margin: 0%;
+`;
+
+export const TextArea = styled.textarea``;
