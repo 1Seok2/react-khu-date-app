@@ -3,12 +3,10 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import Select, {
-  ValueType,
-  OptionTypeBase,
-} from 'react-select';
+import Select from 'react-select';
 import { SelfIntroducePresenterProps } from '../type';
 import DropZone from './DropZone';
+import SelectOption from './SelectOption';
 import {
   SelfIntroduceFormat,
   Title,
@@ -22,6 +20,7 @@ import {
 
 const SelfIntroducePresenter = ({
   privateData,
+  onChangeTextInput,
   onChangeSelectSex,
   collegeOptions,
   onChangeSelectCollege,
@@ -32,7 +31,7 @@ const SelfIntroducePresenter = ({
       <InputWrapper>
         <InputBundler>
           <Label>성별</Label>
-          <Select
+          <SelectOption
             value={{
               value: privateData.sex,
               label: privateData.sex,
@@ -46,11 +45,14 @@ const SelfIntroducePresenter = ({
         </InputBundler>
         <InputBundler>
           <Label>나이</Label>
-          <Input></Input>
+          <Input
+            name={'age'}
+            onChange={onChangeTextInput}
+          ></Input>
         </InputBundler>
         <InputBundler>
           <Label>단과대</Label>
-          <Select
+          <SelectOption
             value={{
               value: privateData.college,
               label: privateData.college,
@@ -73,7 +75,10 @@ const SelfIntroducePresenter = ({
           }}
         >
           <Label>자기 소개</Label>
-          <TextArea></TextArea>
+          <TextArea
+            name={'introduce'}
+            onChange={onChangeTextInput}
+          ></TextArea>
         </InputBundler>
         <SubmitButton>제출하기</SubmitButton>
       </InputWrapper>

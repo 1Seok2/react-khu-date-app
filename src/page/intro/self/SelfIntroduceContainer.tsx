@@ -29,6 +29,24 @@ const SelfIntroduceContainer = ({}): JSX.Element => {
     introduce: '',
   });
 
+  const onChangeTextInput = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >,
+  ) => {
+    if (e.target.name === 'age') {
+      setPrivateData({
+        ...privateData,
+        age: e.target.value,
+      });
+    } else if (e.target.name === 'introduce') {
+      setPrivateData({
+        ...privateData,
+        introduce: e.target.value,
+      });
+    }
+  };
+
   const onChangeSelectSex = (
     selectedSex: ValueType<OptionTypeBase>,
   ) => {
@@ -58,6 +76,7 @@ const SelfIntroduceContainer = ({}): JSX.Element => {
   return (
     <SelfIntroducePresenter
       privateData={privateData}
+      onChangeTextInput={onChangeTextInput}
       onChangeSelectSex={onChangeSelectSex}
       collegeOptions={collegeOptions}
       onChangeSelectCollege={onChangeSelectCollege}
