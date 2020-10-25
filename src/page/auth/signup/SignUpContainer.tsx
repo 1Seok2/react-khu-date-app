@@ -3,6 +3,7 @@
  */
 
 import React, { useState } from 'react';
+import { FirebaseAuth } from '@/config/firebase.config';
 import { Auth } from '@/api/firebase-auth';
 import { fbsetWithPathAndFormApi } from '@/api/firebase-set';
 
@@ -17,11 +18,7 @@ const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
     email: '',
     password: '',
-    nickname: '',
     name: '',
-    gender: 'male',
-    age: '',
-    introduce: '',
   });
   const [error, setError] = useState<string>('');
 
@@ -53,21 +50,23 @@ const SignUpContainer = (): JSX.Element => {
     } finally {
       if (data) {
         /* save info in db */
-        const { uid }: any = Auth.CurrentUser;
-
         const createdAt: number = Date.now(); // 회원가입 생성 ms
 
-        fbsetWithPathAndFormApi(`users/${uid}`, {
-          email: userInfo.email,
-          nickname: userInfo.nickname,
-          name: userInfo.name,
-          gender: userInfo.gender,
-          age: userInfo.age,
-          introduce: userInfo.introduce,
-          createdAt: createdAt,
+        getUid().then(uid => {
+          fbsetWithPathAndFormApi(`users/${uid}`, {
+            email: userInfo.email,
+            name: userInfo.name,
+            createdAt: createdAt,
+          });
         });
       }
     }
+  };
+
+  const getUid = async () => {
+    const { uid }: any = FirebaseAuth.currentUser;
+    console.log(uid);
+    return uid;
   };
 
   return (

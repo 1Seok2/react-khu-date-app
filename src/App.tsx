@@ -10,16 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 /**
  * props로 전달할 user정보
  */
-interface UserObj {
-  uid: string;
-  name: string;
-  nickname: string;
-  age: string;
-  createdAt: number;
-  introduce: string;
-  gender: string;
-  email: string;
-}
+import { UserObj } from './components/util/usertype';
 
 const App: React.FC = (): JSX.Element => {
   const [isSignIn, setSignIn] = useState(false);
@@ -28,11 +19,7 @@ const App: React.FC = (): JSX.Element => {
   const [userObj, setUserObj] = useState<UserObj | null>({
     uid: '',
     name: '',
-    nickname: '',
-    age: '',
     createdAt: 0,
-    introduce: '',
-    gender: '',
     email: '',
   });
 
@@ -57,7 +44,7 @@ const App: React.FC = (): JSX.Element => {
           /* loading time ... */
           setTimeout(() => {
             setLoading(false);
-          }, 1000);
+          }, 300);
           setSignIn(true);
         } else {
           setUserObj(null);
