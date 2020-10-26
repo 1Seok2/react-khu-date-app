@@ -24,6 +24,7 @@ const SelfIntroducePresenter = ({
   onChangeSelectSex,
   collegeOptions,
   onChangeSelectCollege,
+  onChangeSelectArea,
 }: SelfIntroducePresenterProps): JSX.Element => {
   return (
     <SelfIntroduceFormat>
@@ -38,8 +39,8 @@ const SelfIntroducePresenter = ({
             }}
             onChange={onChangeSelectSex}
             options={[
-              { label: '남성', value: 'M' },
-              { label: '여성', value: 'F' },
+              { label: '남성', value: '남자' },
+              { label: '여성', value: '여자' },
             ]}
           />
         </InputBundler>
@@ -63,7 +64,17 @@ const SelfIntroducePresenter = ({
         </InputBundler>
         <InputBundler>
           <Label>사는 지역</Label>
-          <Input></Input>
+          <SelectOption
+            value={{
+              value: privateData.area,
+              label: privateData.area,
+            }}
+            onChange={onChangeSelectArea}
+            options={[
+              { label: '서울', value: '서울' },
+              { label: '경기', value: '경기' },
+            ]}
+          />
         </InputBundler>
         <InputBundler>
           <Label>손 사진</Label>

@@ -36,4 +36,5 @@ export interface SelfIntroducePresenterProps {
   onChangeSelectCollege: (
     item: ValueType<OptionType>,
   ) => void;
+  onChangeSelectArea: (item: ValueType<OptionType>) => void;
 }

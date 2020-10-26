@@ -67,6 +67,16 @@ const SelfIntroduceContainer = ({}): JSX.Element => {
     });
   };
 
+  const onChangeSelectArea = (
+    selectedArea: ValueType<OptionTypeBase>,
+  ) => {
+    const { value }: any = selectedArea;
+    setPrivateData({
+      ...privateData,
+      area: value,
+    });
+  };
+
   const onChangeInput = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement
@@ -80,6 +90,7 @@ const SelfIntroduceContainer = ({}): JSX.Element => {
       onChangeSelectSex={onChangeSelectSex}
       collegeOptions={collegeOptions}
       onChangeSelectCollege={onChangeSelectCollege}
+      onChangeSelectArea={onChangeSelectArea}
     />
   );
 };
