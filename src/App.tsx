@@ -57,7 +57,7 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <>
-      {init && (
+      {true && (
         <BrowserRouter>
           <AppRouter
             isSignIn={isSignIn}
