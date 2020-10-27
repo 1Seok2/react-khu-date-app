@@ -15,6 +15,7 @@ const ListContainer = ({
   ...props
 }: ListProps): JSX.Element => {
   const gender = userObj?.gender;
+  const [isLoading, setLoading] = useState(true);
 
   /**
    * 이성 리스트
@@ -40,11 +41,17 @@ const ListContainer = ({
           }
         }
         setOpponent(list);
-      });
+      })
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
-    <ListPresenter userObj={userObj} opponent={opponent} />
+    <ListPresenter
+      userObj={userObj}
+      opponent={opponent}
+      isLoading={isLoading}
+    />
   );
 };
 

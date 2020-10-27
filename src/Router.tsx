@@ -32,7 +32,6 @@ const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
   userObj,
   isLoading,
-  ...props
 }): JSX.Element => (
   <div style={OuterContainer}>
     {isSignIn ? (
@@ -45,7 +44,7 @@ const AppRouter: React.FC<RouterProps> = ({
             <Route path="/intro" render={() => <Intro />} />
             <Route
               path="/contact/list"
-              render={() => (
+              render={props => (
                 <List userObj={userObj} {...props} />
               )}
             />
@@ -55,17 +54,19 @@ const AppRouter: React.FC<RouterProps> = ({
             />
             <Route
               path="/mypage/edit"
-              render={() => <Edit />}
+              render={props => (
+                <Edit userObj={userObj} {...props} />
+              )}
             />
             <Route
               path="/mypage/receive"
-              render={() => (
+              render={props => (
                 <Receive userObj={userObj} {...props} />
               )}
             />
             <Route
               path="/mypage/send"
-              render={() => (
+              render={props => (
                 <Send userObj={userObj} {...props} />
               )}
             />
