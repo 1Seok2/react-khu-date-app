@@ -11,6 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
  * props로 전달할 user정보
  */
 import { UserObj } from './components/util/usertype';
+import Loading from './components/util/loading';
 
 const App: React.FC = (): JSX.Element => {
   const [isSignIn, setSignIn] = useState(false);
@@ -31,33 +32,54 @@ const App: React.FC = (): JSX.Element => {
       (user: firebase.User | null): void => {
         if (user) {
           const { uid }: any = user;
+          setSignIn(true);
 
-          FirebaseRDB.ref(`users/${uid}`)
-            .once('value')
-            .then(snap => {
+          /**
+           * 유저 정보 실시간 업데이트
+           */
+          FirebaseRDB.ref(`users/${uid}`).on(
+            'value',
+            (snap: firebase.database.DataSnapshot) => {
               const obj = snap.val();
               setUserObj({
                 ...obj,
                 uid: uid,
               });
-            });
-          /* loading time ... */
-          setTimeout(() => {
-            setLoading(false);
-          }, 300);
-          setSignIn(true);
+              if (isLoading) {
+                setTimeout(() => {
+                  setLoading(false);
+                }, 200);
+              }
+            },
+          );
+          // .once('value')
+          // .then(snap => {
+          //   const obj = snap.val();
+          //   setUserObj({
+          //     ...obj,
+          //     uid: uid,
+          //   });
+          // })
+          // .finally(() => {
+          //   /* loading time ... */
+          //   setTimeout(() => {
+          //     setLoading(false);
+          //   }, 200);
+          // });
         } else {
           setUserObj(null);
           setSignIn(false);
         }
-        setInit(true);
+        setTimeout(() => {
+          setInit(true);
+        }, 300);
       },
     );
   }, []);
 
   return (
     <>
-      {true && (
+      {init && (
         <BrowserRouter>
           <AppRouter
             isSignIn={isSignIn}
