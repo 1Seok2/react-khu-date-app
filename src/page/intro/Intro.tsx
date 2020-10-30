@@ -19,6 +19,8 @@ const Intro = (): JSX.Element => {
     scriptContent: ScriptDatas[0],
   });
 
+  const [selfIntroState, setSelfIntroState] = useState(0);
+
   //fade in effect
   const FadeInEffectOnText = () => {
     const target = document.querySelector('.fadeinTarget');
@@ -39,6 +41,7 @@ const Intro = (): JSX.Element => {
     }
   };
 
+  //이것들 나중에 한번에 하나의 함수로 관리하는게 나을듯
   const onClickNextButton = (
     e: React.MouseEvent<SVGElement, MouseEvent>,
   ) => {
@@ -61,15 +64,32 @@ const Intro = (): JSX.Element => {
     FadeInEffectOnText();
   };
 
+  const onClickSelfButton = (direction: number) => {
+    setSelfIntroState(selfIntroState + direction);
+    console.log(selfIntroState, introState.scriptIndex);
+    console.log(
+      {
+        hi: 'hi',
+      }['hi'],
+    );
+  };
+
   return (
     <IntroSection>
       <KyoboFont />
       <ContentContainer>
         <ArrowWrapper>
-          {introState.scriptIndex > 0 && (
+          {introState.scriptIndex === 0 ? (
+            ''
+          ) : selfIntroState === 0 ? (
             <IoIosArrowBack
               size={24}
               onClick={onClickPrevButton}
+            />
+          ) : (
+            <IoIosArrowBack
+              size={24}
+              onClick={() => onClickSelfButton(-1)}
             />
           )}
         </ArrowWrapper>
@@ -78,13 +98,18 @@ const Intro = (): JSX.Element => {
             content={introState.scriptContent}
           ></ContentText>
         ) : (
-          <SelfIntroduce />
+          <SelfIntroduce index={selfIntroState} />
         )}
         <ArrowWrapper>
-          {introState.scriptIndex < ScriptDatas.length && (
+          {introState.scriptIndex < ScriptDatas.length ? (
             <IoIosArrowForward
               size={24}
               onClick={onClickNextButton}
+            />
+          ) : (
+            <IoIosArrowForward
+              size={24}
+              onClick={() => onClickSelfButton(1)}
             />
           )}
         </ArrowWrapper>

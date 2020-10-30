@@ -3,7 +3,11 @@ import Select, {
   ValueType,
   OptionTypeBase,
 } from 'react-select';
-import { PrivateDataObject, OptionType } from '../type';
+import {
+  PrivateDataObject,
+  OptionType,
+  SelfIntroduceContainerProps,
+} from '../type';
 import { KhuCollegeList } from '../data';
 import SelfIntroducePresenter from './SelfIntroducePresenter';
 
@@ -18,16 +22,26 @@ const collegeOptions: OptionType[] = KhuCollegeList.map(
   },
 );
 
-const SelfIntroduceContainer = ({}): JSX.Element => {
+const SelfIntroduceContainer = ({
+  index,
+}: SelfIntroduceContainerProps): JSX.Element => {
   const [privateData, setPrivateData] = useState<
     PrivateDataObject
   >({
-    sex: '',
+    gender: '',
     age: '',
     college: '',
     area: '',
     introduce: '',
   });
+
+  const onClickGender = (gender: any) => {
+    setPrivateData({
+      ...privateData,
+      gender: gender,
+    });
+    console.log(privateData.gender);
+  };
 
   const onChangeTextInput = (
     e: React.ChangeEvent<
@@ -53,7 +67,7 @@ const SelfIntroduceContainer = ({}): JSX.Element => {
     const { value }: any = selectedSex;
     setPrivateData({
       ...privateData,
-      sex: value,
+      gender: value,
     });
   };
 
@@ -85,12 +99,14 @@ const SelfIntroduceContainer = ({}): JSX.Element => {
 
   return (
     <SelfIntroducePresenter
+      index={index}
       privateData={privateData}
       onChangeTextInput={onChangeTextInput}
       onChangeSelectSex={onChangeSelectSex}
       collegeOptions={collegeOptions}
       onChangeSelectCollege={onChangeSelectCollege}
       onChangeSelectArea={onChangeSelectArea}
+      onClickGender={onClickGender}
     />
   );
 };
