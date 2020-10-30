@@ -6,4 +6,5 @@ export const color = {
   lightgray: '#cfcfcf',
   gray: '#8d8d8d', // 공용 회섹
   grayborder: '#fafafa',
+  pointcolor: '#CE816A', //포인트 칼라 : 인디안 핑크
 };
