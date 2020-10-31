@@ -9,6 +9,7 @@ import AgeSelect from './age/AgeSelect';
 import CollegeSelect from './college/CollegeSelect';
 import LocationSelect from './location/LocationSelect';
 import HandImageDrop from './hand/HandImageDrop';
+import Submit from './submit/Submit';
 import {
   SelfIntroduceFormat,
   Title,
@@ -28,22 +29,28 @@ const SelfIntroducePresenter = ({
       case 0:
         return (
           <GenderSelect
+            value={privateData.gender}
             onClick={onClickGender}
           ></GenderSelect>
         );
       case 1:
         return (
-          <AgeSelect onChange={onChangeText}></AgeSelect>
+          <AgeSelect
+            value={privateData.age}
+            onChange={onChangeText}
+          ></AgeSelect>
         );
       case 2:
         return (
           <CollegeSelect
+            value={privateData.college}
             onChange={onChangeCollege}
           ></CollegeSelect>
         );
       case 3:
         return (
           <LocationSelect
+            value={privateData.location}
             onChange={onChangeLocation}
           ></LocationSelect>
         );
@@ -55,8 +62,8 @@ const SelfIntroducePresenter = ({
           ></HandImageDrop>
         );
       case 5:
-        console.log(privateData);
-        break;
+        return <Submit privateData={privateData} />;
+
       default:
         break;
     }

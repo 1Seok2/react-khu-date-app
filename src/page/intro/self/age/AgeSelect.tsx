@@ -1,7 +1,7 @@
 import React from 'react';
 import * as s from '../style/SelfStyled';
 
-const AgeSelect = ({ onChange }: any) => {
+const AgeSelect = ({ value, onChange }: any) => {
   return (
     <s.Container>
       <s.InputContainer>
@@ -9,6 +9,7 @@ const AgeSelect = ({ onChange }: any) => {
           나이를 입력하세요.
         </s.InputLabelText>
         <s.InputTextBox
+          value={value}
           name={'age'}
           onChange={onChange}
         ></s.InputTextBox>

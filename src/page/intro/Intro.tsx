@@ -95,7 +95,10 @@ const Intro = (): JSX.Element => {
           <SelfIntroduce index={selfIntroState} />
         )}
         <ArrowWrapper>
-          {introState.scriptIndex < ScriptDatas.length ? (
+          {selfIntroState === 5 ? (
+            ''
+          ) : introState.scriptIndex <
+            ScriptDatas.length ? (
             <IoIosArrowForward
               size={24}
               onClick={onClickNextButton}

@@ -9,14 +9,20 @@ export const Container = styled.div`
   justify-content: space-around;
 `;
 
-export const SelectBox = styled.div`
+export const SelectBox = styled.div<{
+  isSelected: boolean;
+}>`
   width: 200px;
   height: 200px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   border: 5px dashed ${color.pointcolor};
-  color: ${color.pointcolor};
+  color: ${props =>
+    props.isSelected ? 'white' : color.pointcolor};
+  background: ${props =>
+    props.isSelected ? color.pointcolor : 'white'};
+  font-weight: ${props => (props.isSelected ? 600 : '')};
   font-size: 48px;
   border-radius: 10px;
   font-family: 'KyoboHand';

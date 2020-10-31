@@ -42,7 +42,7 @@ const LocationOptions: OptionType[] = locationList.map(
   },
 );
 
-const LocationSelect = ({ onChange }: any) => {
+const LocationSelect = ({ value, onChange }: any) => {
   return (
     <s.Container>
       <s.InputContainer>
@@ -51,6 +51,7 @@ const LocationSelect = ({ onChange }: any) => {
         </s.InputLabelText>
         <Select
           onChange={onChange}
+          value={{ label: value, value: value }}
           styles={customStyles}
           options={LocationOptions}
         />

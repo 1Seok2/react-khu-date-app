@@ -42,7 +42,7 @@ const collegeOptions: OptionType[] = KhuCollegeList.map(
   },
 );
 
-const CollegeSelect = ({ onChange }: any) => {
+const CollegeSelect = ({ value, onChange }: any) => {
   return (
     <s.Container>
       <s.InputContainer>
@@ -51,6 +51,7 @@ const CollegeSelect = ({ onChange }: any) => {
         </s.InputLabelText>
         <Select
           styles={customStyles}
+          value={{ label: value, value: value }}
           onChange={onChange}
           options={collegeOptions}
         />
