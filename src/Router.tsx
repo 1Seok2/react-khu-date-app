@@ -21,6 +21,7 @@ import Receive from './page/mypage/receive';
 import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
 import Loading from './components/util/loading';
+import Header from './components/layout/header';
 
 interface RouterProps {
   isSignIn: boolean;
@@ -33,45 +34,61 @@ const AppRouter: React.FC<RouterProps> = ({
   userObj,
   isLoading,
 }): JSX.Element => (
-  <div style={OuterContainer}>
+  <div
+    style={{
+      maxWidth: SmallTabletWidth,
+      minHeight: '100vh',
+      margin: '0 auto',
+      backgroundColor: 'gray',
+      position: 'relative',
+    }}
+  >
     {isSignIn ? (
       <>
         {isLoading ? (
           <Loading />
         ) : (
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/intro" render={() => <Intro />} />
-            <Route
-              path="/contact/list"
-              render={props => (
-                <List userObj={userObj} {...props} />
-              )}
-            />
-            <Route
-              path="/contact/detail"
-              component={Detail}
-            />
-            <Route
-              path="/mypage/edit"
-              render={props => (
-                <Edit userObj={userObj} {...props} />
-              )}
-            />
-            <Route
-              path="/mypage/receive"
-              render={props => (
-                <Receive userObj={userObj} {...props} />
-              )}
-            />
-            <Route
-              path="/mypage/send"
-              render={props => (
-                <Send userObj={userObj} {...props} />
-              )}
-            />
-            <Redirect to="/" />
-          </Switch>
+          <div
+            style={{ paddingTop: 90, overflow: 'hidden' }}
+          >
+            <Header userObj={userObj} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route
+                path="/intro"
+                render={() => <Intro />}
+              />
+              <Route
+                path="/contact/list"
+                render={props => (
+                  <List userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                path="/contact/detail"
+                component={Detail}
+              />
+              <Route
+                path="/mypage/edit"
+                render={props => (
+                  <Edit userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                path="/mypage/receive"
+                render={props => (
+                  <Receive userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                path="/mypage/send"
+                render={props => (
+                  <Send userObj={userObj} {...props} />
+                )}
+              />
+              <Redirect to="/" />
+            </Switch>
+          </div>
         )}
       </>
     ) : (
@@ -99,4 +116,5 @@ const OuterContainer = {
   minHeight: '100vh',
   margin: '0 auto',
   backgroundColor: 'gray',
+  position: 'relative',
 };
