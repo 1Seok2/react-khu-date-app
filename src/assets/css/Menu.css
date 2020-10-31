@@ -1,8 +1,11 @@
+.other-menu-wrapper {
+  z-index: 9999959;
+}
 .nav-button {
   text-transform: uppercase;
   position: absolute;
   right: 0.5rem;
-  top: 0.8rem;
+  top: 0rem;
   z-index: 89;
   outline: none;
 }
@@ -16,7 +19,7 @@
   right: 0;
   top: 0;
   /* transform: translateX(100%); */
-  transform: rotateY(-90deg);
+  transform: rotateY(90deg);
   /* transition: transform 0.6s, visibility 0.6s; */
   transform-origin: right center;
   opacity: 0;
@@ -32,6 +35,7 @@
   transform: rotateY(0deg);
   visibility: visible;
   opacity: 1;
+  z-index: 79;
 }
 .nav {
   position: relative;

@@ -74,6 +74,7 @@ const Navigation = ({ pathname, userObj }: any) => {
               path={value.path}
               icon={value.icon}
               pathname={pathname}
+              onClickHBG={onClickHBG}
             />
           ))}
         </ul>

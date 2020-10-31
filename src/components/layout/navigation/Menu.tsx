@@ -6,10 +6,17 @@ import { color } from '@/theme/color';
 import React, { memo } from 'react';
 import * as s from './Menu.styled';
 
-const MenuList = ({ name, path, pathname, icon }: any) => {
+const MenuList = ({
+  name,
+  path,
+  pathname,
+  icon,
+  onClickHBG,
+}: any) => {
   return (
     <s.SLi>
       <s.SLink
+        onClick={onClickHBG}
         to={path}
         style={
           pathname.includes(path)
