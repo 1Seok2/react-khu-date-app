@@ -2,20 +2,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { color } from '@/theme/color';
 
-export const SLink = styled(Link)`
-  background-color: ${(props: any) =>
-    props.current ? color.date : 'none'};
-  color: ${(props: any) =>
-    props.current ? 'white' : '#666'};
-  padding-right: 12px;
-  text-align: left;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  border-radius: 3px;
+export const SLi = styled.li`
   &:hover {
-    background-color: ${(props: any) =>
-      props.current ? color.date : color.datelight};
+    background-color: ${color.gray};
   }
+`;
+
+export const SLink = styled(Link)`
+  margin-top: 6px;
 `;
 
 export const Entity = styled.span`

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+ 
+.icon-heart:before { content: '\2665'; } /* '♥' */
+.icon-paper-plane-empty:before { content: '\f1d9'; } /* '' */
+.icon-venus-mars:before { content: '\f228'; } /* '' */
+.icon-envelope-open-o:before { content: '\f2b7'; } /* '' */
+.icon-user:before { content: '👤'; } /* '\1f464' */

@@ -1,0 +1,78 @@
+/**
+ * show hamburger nav's list
+ */
+
+import { color } from '@/theme/color';
+import React, { memo } from 'react';
+import * as s from './Menu.styled';
+
+const MenuList = ({ name, path, pathname, icon }: any) => {
+  return (
+    <s.SLi>
+      <s.SLink
+        to={path}
+        style={
+          pathname.includes(path)
+            ? {
+                backgroundColor: color.date,
+                color: 'white',
+              }
+            : {
+                backgroundColor: 'rgba(255,255,255,0)',
+                color: color.black,
+              }
+        }
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            flexDirection: 'row',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <i
+              className={icon}
+              style={
+                pathname.includes(path)
+                  ? {
+                      color: 'white',
+                      marginRight: 8,
+                    }
+                  : {
+                      color: '#dedede',
+                      marginRight: 8,
+                      fontWeight: 400,
+                    }
+              }
+            />
+          </div>
+          <h3
+            style={
+              pathname.includes(path)
+                ? {
+                    color: 'white',
+                    marginRight: 8,
+                  }
+                : {
+                    color: '#dedede',
+                    marginRight: 8,
+                    fontWeight: 400,
+                  }
+            }
+          >
+            {name}
+          </h3>
+        </div>
+      </s.SLink>
+    </s.SLi>
+  );
+};
+
+export default memo(MenuList);
