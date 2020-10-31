@@ -55,10 +55,6 @@ export const ListItem = styled.div`
     height: 6rem;
   }
   @media (max-width: 320px) {
-    max-width: 5.3rem;
-    height: 5.3rem;
-  }
-  @media (max-width: 295px) {
     max-width: none;
     width: 80%;
     height: 80%;
