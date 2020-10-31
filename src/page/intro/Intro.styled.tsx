@@ -55,7 +55,8 @@ export const SelfIntroduceFormat = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin-top: 10%;
+  position: absolute;
+  top: 10%;
   font-size: 32px;
   text-align: left;
   font-family: 'Kyobohand';

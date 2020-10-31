@@ -66,12 +66,6 @@ const Intro = (): JSX.Element => {
 
   const onClickSelfButton = (direction: number) => {
     setSelfIntroState(selfIntroState + direction);
-    console.log(selfIntroState, introState.scriptIndex);
-    console.log(
-      {
-        hi: 'hi',
-      }['hi'],
-    );
   };
 
   return (
@@ -101,7 +95,10 @@ const Intro = (): JSX.Element => {
           <SelfIntroduce index={selfIntroState} />
         )}
         <ArrowWrapper>
-          {introState.scriptIndex < ScriptDatas.length ? (
+          {selfIntroState === 5 ? (
+            ''
+          ) : introState.scriptIndex <
+            ScriptDatas.length ? (
             <IoIosArrowForward
               size={24}
               onClick={onClickNextButton}
