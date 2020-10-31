@@ -12,12 +12,14 @@ export const SLink = styled(Link)`
   margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 3px;
-  font-family: 'Nanum Gothic', sans-serif;
+  &:hover {
+    background-color: ${(props: any) =>
+      props.current ? color.date : color.datelight};
+  }
 `;
 
 export const Entity = styled.span`
   color: ${(props: any) =>
     props.current ? 'white' : '#666'};
   float: right;
-  font-family: 'Nanum Gothic', sans-serif;
 `;

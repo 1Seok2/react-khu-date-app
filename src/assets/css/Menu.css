@@ -10,15 +10,18 @@
 }
 .nav-wrapper {
   background-color: #f9f9f9;
-  box-shadow: -6px 0px 12px -8px rgba(0, 0, 0, 0.3);
+  box-shadow: -10px 0px 12px -8px rgba(0, 0, 0, 0.3);
   perspective: 1000px;
   position: absolute;
   height: 100vh;
   right: 0;
   top: 0;
   /* transform: translateX(100%); */
+  transform: rotateY(-90deg);
+  transform-origin: right center;
   opacity: 0;
-  transition: opacity 0.6s, visibility 0.6s;
+  /* transition: opacity 0.6s, visibility 0.6s; */
+  transition: transform 0.6s, visibility 0.6s, opacity 0.6s;
   visibility: hidden;
   max-width: 18rem;
   width: 60vw;
@@ -27,15 +30,15 @@
 }
 .nav-visible .nav-wrapper {
   /* transform: translateX(0); */
+  transform: rotateY(0deg);
   opacity: 1;
   visibility: visible;
 }
-.nav-display {
-}
+
 .nav {
   position: relative;
-  transform: rotateY(90deg);
-  transform-origin: left center;
+  transform: rotateY(-90deg);
+  transform-origin: right center;
   transition: transform 0.6s;
   padding-left: 0;
 }
@@ -52,10 +55,10 @@
   text-transform: uppercase;
 }
 .nav a:focus,
-.nav a:hover {
+/* .nav a:hover {
   background-color: rgba(46, 152, 217, 0.15);
   text-decoration: none;
-}
+} */
 .nav-marker {
   background-color: currentColor;
   height: 2.8rem;
