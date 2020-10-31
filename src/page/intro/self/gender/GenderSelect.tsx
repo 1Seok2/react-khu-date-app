@@ -1,13 +1,13 @@
 import React from 'react';
-import * as s from './GenderSelectStyled';
+import * as s from '../style/SelfStyled';
 
-const GenderSelect = ({ onClickGender }: any) => {
+const GenderSelect = ({ onClick }: any) => {
   return (
     <s.Container>
-      <s.SelectBox onClick={() => onClickGender('M')}>
+      <s.SelectBox onClick={() => onClick('M')}>
         남
       </s.SelectBox>
-      <s.SelectBox onClick={() => onClickGender('F')}>
+      <s.SelectBox onClick={() => onClick('F')}>
         여
       </s.SelectBox>
     </s.Container>

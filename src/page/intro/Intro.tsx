@@ -66,12 +66,6 @@ const Intro = (): JSX.Element => {
 
   const onClickSelfButton = (direction: number) => {
     setSelfIntroState(selfIntroState + direction);
-    console.log(selfIntroState, introState.scriptIndex);
-    console.log(
-      {
-        hi: 'hi',
-      }['hi'],
-    );
   };
 
   return (

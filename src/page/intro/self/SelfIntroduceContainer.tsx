@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import Select, {
   ValueType,
   OptionTypeBase,
@@ -8,19 +12,9 @@ import {
   OptionType,
   SelfIntroduceContainerProps,
 } from '../type';
-import { KhuCollegeList } from '../data';
 import SelfIntroducePresenter from './SelfIntroducePresenter';
 
 //단과대 리스트 ReactSelect에서 사용할 수 있도록 OptionType으로 변환해주기
-const collegeOptions: OptionType[] = KhuCollegeList.map(
-  item => {
-    let jsonObj = {
-      value: item,
-      label: item,
-    };
-    return jsonObj;
-  },
-);
 
 const SelfIntroduceContainer = ({
   index,
@@ -31,8 +25,8 @@ const SelfIntroduceContainer = ({
     gender: '',
     age: '',
     college: '',
-    area: '',
-    introduce: '',
+    location: '',
+    files: [],
   });
 
   const onClickGender = (gender: any) => {
@@ -43,70 +37,58 @@ const SelfIntroduceContainer = ({
     console.log(privateData.gender);
   };
 
-  const onChangeTextInput = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >,
-  ) => {
-    if (e.target.name === 'age') {
-      setPrivateData({
-        ...privateData,
-        age: e.target.value,
-      });
-    } else if (e.target.name === 'introduce') {
-      setPrivateData({
-        ...privateData,
-        introduce: e.target.value,
-      });
-    }
-  };
-
-  const onChangeSelectSex = (
-    selectedSex: ValueType<OptionTypeBase>,
-  ) => {
-    const { value }: any = selectedSex;
+  const onChangeCollege = (college: any) => {
     setPrivateData({
       ...privateData,
-      gender: value,
+      college: college.value,
     });
   };
 
-  const onChangeSelectCollege = (
-    selectedCollege: ValueType<OptionTypeBase>,
+  const onChangeText = (
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const { value }: any = selectedCollege;
     setPrivateData({
       ...privateData,
-      college: value,
+      age: e.target.value,
     });
   };
 
-  const onChangeSelectArea = (
-    selectedArea: ValueType<OptionTypeBase>,
+  const onChangeLocation = (
+    location: ValueType<OptionTypeBase>,
   ) => {
-    const { value }: any = selectedArea;
+    const { value }: any = location;
     setPrivateData({
       ...privateData,
-      area: value,
+      location: value,
     });
   };
 
-  const onChangeInput = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >,
-  ) => {};
+  const onDropImage = useCallback(
+    (acceptedFiles: Array<File>) => {
+      if (
+        privateData.files.push.apply(
+          privateData.files,
+          acceptedFiles,
+        ) > 3
+      ) {
+        while (privateData.files.length > 3) {
+          privateData.files.shift();
+        }
+      }
+      console.log(privateData.files);
+    },
+    [],
+  );
 
   return (
     <SelfIntroducePresenter
       index={index}
       privateData={privateData}
-      onChangeTextInput={onChangeTextInput}
-      onChangeSelectSex={onChangeSelectSex}
-      collegeOptions={collegeOptions}
-      onChangeSelectCollege={onChangeSelectCollege}
-      onChangeSelectArea={onChangeSelectArea}
       onClickGender={onClickGender}
+      onChangeText={onChangeText}
+      onChangeCollege={onChangeCollege}
+      onChangeLocation={onChangeLocation}
+      onDropImage={onDropImage}
     />
   );
 };
