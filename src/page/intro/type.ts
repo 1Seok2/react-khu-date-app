@@ -6,7 +6,7 @@ export interface ContentTextProps {
 }
 
 export interface PrivateDataObject {
-  sex: string;
+  gender: string;
   age: string;
   college: string;
   area: string;
@@ -25,6 +25,7 @@ export interface SelectOptionProps {
 }
 
 export interface SelfIntroducePresenterProps {
+  index: number;
   privateData: PrivateDataObject;
   onChangeTextInput: (
     e: React.ChangeEvent<
@@ -37,4 +38,9 @@ export interface SelfIntroducePresenterProps {
     item: ValueType<OptionType>,
   ) => void;
   onChangeSelectArea: (item: ValueType<OptionType>) => void;
+  onClickGender: (item: number) => void;
+}
+
+export interface SelfIntroduceContainerProps {
+  index: number;
 }
