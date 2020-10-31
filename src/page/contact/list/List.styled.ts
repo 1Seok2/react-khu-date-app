@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import styled, { keyframes } from 'styled-components';
 import { color } from '@/theme/color';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 export const ListContainer = styled.div`
   width: 90%;
@@ -10,8 +9,20 @@ export const ListContainer = styled.div`
   text-align: center;
 `;
 
+const popIn = keyframes`
+0%{
+  visibility: hidden;
+  transform : scale(0.6) translateY(-8px);
+}
+100%{
+  visibility: visible;
+  transform : none;
+}
+`;
+
 interface ItemProps {
   bgUri?: string;
+  delay: number;
 }
 
 export const ListItem = styled.div`
@@ -29,7 +40,7 @@ export const ListItem = styled.div`
   margin: 0.4rem;
 
   box-shadow: 0px 0px 12px -6px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.4s;
+  transition: box-shadow 0.4s, background-size 0.4s;
   z-index: 0;
   ${(props: ItemProps) =>
     props.bgUri
@@ -41,9 +52,13 @@ export const ListItem = styled.div`
   `
       : null}
 
+  animation : ${popIn} .2s ${props =>
+    props.delay * 70}ms both ease-in;
+
   &:hover {
     box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.9);
-    transition: box-shadow 0.4s;
+    background-size: 110%;
+    transition: box-shadow 0.4s, background-size 0.4s;
   }
 
   @media (max-width: 475px) {

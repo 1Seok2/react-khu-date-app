@@ -1,12 +1,12 @@
 .other-menu-wrapper {
-  z-index: 9999959;
+  z-index: 1;
 }
 .nav-button {
   text-transform: uppercase;
   position: absolute;
   right: 0.5rem;
   top: 0rem;
-  z-index: 89;
+  z-index: 3;
   outline: none;
 }
 .nav-wrapper {
@@ -28,14 +28,14 @@
   max-width: 18rem;
   width: 60vw;
   min-width: 15rem;
-  z-index: 79;
+  z-index: 2;
 }
 .nav-visible .nav-wrapper {
   /* transform: translateX(0); */
   transform: rotateY(0deg);
   visibility: visible;
   opacity: 1;
-  z-index: 79;
+  z-index: 2;
 }
 .nav {
   position: relative;

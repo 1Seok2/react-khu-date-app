@@ -41,7 +41,6 @@ const AppRouter: React.FC<RouterProps> = ({
       margin: '0 auto',
       position: 'relative',
       boxShadow: '0px 0px 14px -5px rgba(100,100,100,0.5)',
-      zIndex: 30,
     }}
   >
     {isSignIn ? (

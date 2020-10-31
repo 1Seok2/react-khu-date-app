@@ -20,11 +20,12 @@ const ListPresenter = ({
     {isLoading ? (
       <Loading />
     ) : (
-      <div style={{ zIndex: -9999999 }}>
+      <div>
         <s.ListContainer>
-          {opponent?.map(person => (
+          {opponent?.map((person, idx) => (
             <s.ListItem
               key={person.email}
+              delay={idx}
               bgUri={
                 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
               }
@@ -37,11 +38,7 @@ const ListPresenter = ({
                     userObj: userObj,
                   },
                 }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '100%',
-                }}
+                style={styles.link}
               >
                 <div
                   style={{
@@ -54,15 +51,7 @@ const ListPresenter = ({
                     style={{ color: color.date }}
                   />
                 </div>
-                <div
-                  style={{
-                    height: '25%',
-                    marginTop: '59%',
-                    backgroundColor: 'rgba(0,0,0,0.6)',
-                    padding: '3%',
-                    borderRadius: 6,
-                  }}
-                >
+                <div style={styles.desc}>
                   <s.Group>단과대</s.Group>
                   <s.NickName>닉네임</s.NickName>
                 </div>
@@ -76,6 +65,25 @@ const ListPresenter = ({
 );
 
 export default ListPresenter;
+
+const styles = {
+  link: {
+    display: 'block',
+    width: '100%',
+    height: '100%',
+  },
+  heart: {
+    textAlign: 'right',
+    height: '10%',
+  },
+  desc: {
+    height: '25%',
+    marginTop: '59%',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    padding: '3%',
+    borderRadius: 6,
+  },
+};
 
 /*
 
