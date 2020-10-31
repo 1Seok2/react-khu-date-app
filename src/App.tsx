@@ -6,6 +6,7 @@ import {
   FirebaseRDB,
 } from './config/firebase.config';
 import { BrowserRouter } from 'react-router-dom';
+import './assets/css/Menu.css';
 
 /**
  * props로 전달할 user정보
