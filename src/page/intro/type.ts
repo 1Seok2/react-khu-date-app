@@ -9,8 +9,8 @@ export interface PrivateDataObject {
   gender: string;
   age: string;
   college: string;
-  area: string;
-  introduce: string;
+  location: string;
+  files: Array<File>;
 }
 
 export interface OptionType {
@@ -27,18 +27,13 @@ export interface SelectOptionProps {
 export interface SelfIntroducePresenterProps {
   index: number;
   privateData: PrivateDataObject;
-  onChangeTextInput: (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >,
-  ) => void;
-  onChangeSelectSex: (item: ValueType<OptionType>) => void;
-  collegeOptions: any;
-  onChangeSelectCollege: (
-    item: ValueType<OptionType>,
-  ) => void;
-  onChangeSelectArea: (item: ValueType<OptionType>) => void;
   onClickGender: (item: number) => void;
+  onChangeText: (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => void;
+  onChangeCollege: (item: ValueType<OptionType>) => void;
+  onChangeLocation: (item: ValueType<OptionType>) => void;
+  onDropImage: any;
 }
 
 export interface SelfIntroduceContainerProps {
