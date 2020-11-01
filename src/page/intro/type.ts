@@ -1,3 +1,4 @@
+import { UserObj } from './../../components/util/usertype';
 import { ValueType, OptionTypeBase } from 'react-select';
 import { Option } from 'react-select/src/filters';
 
@@ -25,6 +26,7 @@ export interface SelectOptionProps {
 }
 
 export interface SelfIntroducePresenterProps {
+  userObj: UserObj | null;
   index: number;
   privateData: PrivateDataObject;
   onClickGender: (item: number) => void;
@@ -37,5 +39,6 @@ export interface SelfIntroducePresenterProps {
 }
 
 export interface SelfIntroduceContainerProps {
+  userObj: UserObj | null;
   index: number;
 }

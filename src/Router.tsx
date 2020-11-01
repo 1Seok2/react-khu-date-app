@@ -60,7 +60,9 @@ const AppRouter: React.FC<RouterProps> = ({
               <Route exact path="/" component={Home} />
               <Route
                 path="/intro"
-                render={() => <Intro />}
+                render={props => (
+                  <Intro userObj={userObj} {...props} />
+                )}
               />
               <Route
                 path="/contact/list"
