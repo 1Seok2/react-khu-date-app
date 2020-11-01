@@ -19,7 +19,8 @@ const MenuList = ({
         onClick={onClickHBG}
         to={path}
         style={
-          pathname.includes(path)
+          pathname.includes(path) ||
+          path.includes('contact')
             ? {
                 backgroundColor: color.date,
                 color: 'white',
@@ -47,7 +48,8 @@ const MenuList = ({
             <i
               className={icon}
               style={
-                pathname.includes(path)
+                pathname.includes(path) ||
+                path.includes('contact')
                   ? {
                       color: 'white',
                       marginRight: 8,
@@ -62,7 +64,8 @@ const MenuList = ({
           </div>
           <h3
             style={
-              pathname.includes(path)
+              pathname.includes(path) ||
+              path.includes('contact')
                 ? {
                     color: 'white',
                     marginRight: 8,

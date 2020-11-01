@@ -54,7 +54,7 @@ export const ListItem = styled.div`
       : null}
 
   animation : ${popIn} .2s ${props =>
-    props.delay * 70}ms both ease-in;
+    props.delay * 80}ms both ease-in;
 
   &:hover {
     box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.9);

@@ -5,7 +5,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { FirebaseRDB } from '@/config/firebase.config';
+import {
+  FirebaseRDB,
+  FirebaseStorage,
+} from '@/config/firebase.config';
 import DetailPresenter from './DetailPresenter';
 
 const Detail: React.FC<RouteComponentProps> = (
@@ -24,6 +27,7 @@ const Detail: React.FC<RouteComponentProps> = (
    */
   const [enable, setEnable] = useState(false);
 
+  const [status, setStatus] = useState(0);
   /**
    * 관심 표현 ❤️
    */
@@ -74,19 +78,30 @@ const Detail: React.FC<RouteComponentProps> = (
             break;
           }
         }
-      })
-      .then(() =>
-        setTimeout(() => {
-          setLoading(false);
-        }, 10),
-      );
+      });
   }, []);
+
+  const [url, setUrl] = useState<any>();
+
+  useEffect(() => {
+    FirebaseStorage.ref('example/10.jpeg')
+      .getDownloadURL()
+      .then((url: any) => {
+        console.log(url);
+        setUrl([url, url, url]);
+      })
+      .then(() => setLoading(false));
+  }, []);
+
   return (
     <DetailPresenter
       isLoading={isLoading}
       person={person}
       sendInterest={sendInterest}
       enable={enable}
+      url={url}
+      status={status}
+      setStatus={setStatus}
     />
   );
 };
