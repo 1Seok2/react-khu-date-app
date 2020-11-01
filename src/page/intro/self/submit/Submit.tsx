@@ -1,8 +1,12 @@
 import React from 'react';
 import * as s from '../style/SelfStyled';
-import { FirebaseRDB } from '@/config/firebase.config';
+import {
+  FirebaseRDB,
+  FirebaseStorage,
+} from '@/config/firebase.config';
 import { PrivateDataObject } from '../../type';
 import { color } from '../../../../theme/color';
+import { storage } from 'firebase';
 
 const Submit = ({ userObj, privateData }: any) => {
   const submitMyInfo = () => {
@@ -11,6 +15,19 @@ const Submit = ({ userObj, privateData }: any) => {
         ...privateData,
       })
       .catch(err => console.error(err));
+
+    const storageRef = FirebaseStorage.ref();
+
+    privateData.files.forEach(
+      (file: File, index: number) => {
+        const imageRef = storageRef.child(
+          `hands/${userObj?.email}/${index}.jpg`,
+        );
+        imageRef.put(file).then(snapshot => {
+          console.log(snapshot);
+        });
+      },
+    );
   };
 
   return (
@@ -23,7 +40,6 @@ const Submit = ({ userObj, privateData }: any) => {
         onClick={() => {
           alert('제출!');
           submitMyInfo();
-          console.log(privateData);
         }}
       >
         {' '}
