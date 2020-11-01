@@ -6,27 +6,32 @@ import React from 'react';
 import moment from 'moment';
 import Loading from '@/components/util/loading';
 import * as s from './Detail.styled';
+import { ChatObj } from '../../type';
 
 interface DetailProps {
   isLoading: boolean;
-  person: any;
-  sendInterest: () => void;
+  receiveChat: any;
   enable: boolean;
   url?: any;
   status: number;
   changeStatus: (type: string) => void;
   history: any;
+  accept: (chat: ChatObj) => void;
+  reject: (chat: ChatObj) => void;
+  opponent?: any;
 }
 
 const DetailPresenter = ({
   isLoading,
-  person,
-  sendInterest,
+  receiveChat,
   enable,
   url,
   status,
   changeStatus,
   history,
+  accept,
+  reject,
+  opponent,
 }: DetailProps): JSX.Element => (
   <div>
     {isLoading ? (
@@ -67,28 +72,31 @@ const DetailPresenter = ({
           </h2> */}
           <s.Row>
             <s.SubTitle>닉네임</s.SubTitle>
-            <s.Description>{person.email}</s.Description>
+            <s.Description>
+              {opponent.nickname}
+            </s.Description>
           </s.Row>
           <s.Row>
             <s.SubTitle>나이</s.SubTitle>
-            <s.Description>설명</s.Description>
+            <s.Description>{opponent.age}</s.Description>
           </s.Row>
           <s.Row>
             <s.SubTitle>거주 지역</s.SubTitle>
-            <s.Description>설명</s.Description>
+            <s.Description>
+              {opponent.location}
+            </s.Description>
           </s.Row>
           <s.Row>
             <s.SubTitle>단과대학교</s.SubTitle>
-            <s.Description>설명</s.Description>
+            <s.Description>
+              {opponent.college}
+            </s.Description>
           </s.Row>
           <s.BackButton onClick={() => history.goBack()}>
             뒤로가기
           </s.BackButton>
           <s.Empty />
-          <s.SendInterestButton
-            enable={enable}
-            onClick={sendInterest}
-          >
+          <s.SendInterestButton enable={enable}>
             {enable ? '전송완료' : '관심표현'}
           </s.SendInterestButton>
         </s.DescContainer>

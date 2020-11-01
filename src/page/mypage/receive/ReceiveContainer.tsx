@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FirebaseRDB } from '@/config/firebase.config';
+import {
+  FirebaseRDB,
+  FirebaseStorage,
+} from '@/config/firebase.config';
 
 import { UserObj } from '@/components/util/usertype';
 import { ChatObj } from '../type';
@@ -20,33 +23,20 @@ const ReceiveContainer = ({
   const [receiveList, setList] = useState<Array<ChatObj>>(
     [],
   );
+
+  const [imgList, setImg] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
-  const accept = (chat: ChatObj) => {
-    if (!chat.enable) {
-      FirebaseRDB.ref(`chat/${chat.senderId}`).update({
-        receiverOk: 1,
-      });
-    }
-  };
-
-  const reject = (chat: ChatObj) => {
-    if (!chat.enable) {
-      FirebaseRDB.ref(`chat/${chat.senderId}`).update({
-        receiverOk: -1,
-      });
-    }
-  };
 
   /**
    * 리스트 가져오기
    */
   useEffect(() => {
-    let list: any = [];
+    let list: any = [...receiveList];
+    let img: any = [];
     FirebaseRDB.ref(`chat`).on(
       'value',
       (snap: firebase.database.DataSnapshot) => {
-        let key;
+        let key: any;
         for (key in snap.val()) {
           if (snap.val()[key].receiver === userObj?.email) {
             const obj = {
@@ -54,23 +44,34 @@ const ReceiveContainer = ({
               enable: snap.val()[key].receiverOk !== 0,
             };
             list = [...list, obj];
+
+            /**
+             * 상대에 해당하는 사진 가져오기
+             */
+            // FirebaseStorage.ref(`hands/${snap.val()[key].sender}/0.jpg`)
+            FirebaseStorage.ref('hands/undefined/0.jpg')
+              .getDownloadURL()
+              .then((uri: any) => {
+                img = [...img, uri];
+              })
+              .then(() => setImg(img));
           }
         }
+
         setList(list);
+        setTimeout(() => {
+          setLoading(false);
+        }, 100);
       },
     );
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 50);
   }, []);
 
   return (
     <ReceivePresenter
       receiveList={receiveList}
       isLoading={isLoading}
-      accept={accept}
-      reject={reject}
+      userObj={userObj}
+      img={imgList}
       {...props}
     />
   );

@@ -39,7 +39,10 @@ const Detail: React.FC<RouteComponentProps> = (
         {
           senderId: userObj.uid, // 관심 표현자 고유 아이디
           sender: userObj.email, // 관심 표현자 메일
+          senderNickname: userObj.nickname,
           receiver: person.email, // 받은 사람 이메일
+          receiverId: person.uid, // 관심 받는자 고유 아이디
+          receiverNickname: person.nickname,
           createdAt: createdAt, // 관심 표현 시간
           receiverOk: 0, // 좋으면 1, 미응답 0, 싫어! -1
           receiverSaw: 0, // 봤다면 1, 아직 안봤다면 0
