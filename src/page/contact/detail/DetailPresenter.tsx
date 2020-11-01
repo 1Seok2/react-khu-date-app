@@ -5,6 +5,7 @@
 import React from 'react';
 import moment from 'moment';
 import Loading from '@/components/util/loading';
+import * as s from './Detail.styled';
 
 interface DetailProps {
   isLoading: boolean;
@@ -19,12 +20,13 @@ const DetailPresenter = ({
   sendInterest,
   enable,
 }: DetailProps): JSX.Element => (
-  <div>
+  <div style={{ backgroundColor: 'yellow' }}>
     {isLoading ? (
       <Loading />
     ) : (
-      <>
-        <h1>상대 소개 상세 정보</h1>
+      <div style={{ backgroundColor: 'gray' }}>
+        <s.ImageContainer />
+        {/* <h1>상대 소개 상세 정보</h1>
         <div>
           <h2>
             가입일 :{' '}
@@ -33,11 +35,11 @@ const DetailPresenter = ({
           <h2>{person.email}</h2>
           <h2>{person.gender}</h2>
           <h2>{person.name}</h2>
-        </div>
+        </div> */}
         <button onClick={sendInterest}>
           {enable ? '전송완료' : '관심표현'}
         </button>
-      </>
+      </div>
     )}
   </div>
 );

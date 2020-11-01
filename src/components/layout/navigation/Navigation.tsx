@@ -1,37 +1,29 @@
+/**
+ * @description 햄버거 버튼 관련 메뉴 모음
+ */
+
+import React, { memo } from 'react';
 import { FirebaseAuth } from '@/config/firebase.config';
-import React, { useState } from 'react';
+import { UserObj } from '@/components/util/usertype';
+
 import MenuList from './Menu';
+import Profile from './Profile';
 
-const Navigation = ({ pathname, userObj }: any) => {
-  const MenuValueList = [
-    {
-      name: '이성목록',
-      path: '/contact/list',
-    },
-    {
-      name: '받은 목록',
-      path: '/mypage/receive',
-    },
-    {
-      name: '보낸 목록',
-      path: '/mypage/send',
-    },
-    {
-      name: '내 정보 수정',
-      path: '/mypage/edit',
-    },
-  ];
+interface NavigationProps {
+  pathname: string;
+  userObj: UserObj | null;
+}
 
+const Navigation = ({
+  pathname,
+  userObj,
+}: NavigationProps) => {
   const onClickHBG = () => {
     const wrapper: Element | null = document.querySelector(
       '.other-menu-wrapper',
     );
-    const nav_wrapper: Element | null = document.querySelector(
-      '.nav-wrapper',
-    );
-    if (wrapper && nav_wrapper) {
+    if (wrapper) {
       wrapper.classList.toggle('nav-visible');
-      nav_wrapper.classList.toggle('nav-display');
     }
   };
 
@@ -49,35 +41,46 @@ const Navigation = ({ pathname, userObj }: any) => {
           <span className="lines"></span>
         </button>
       </header>
-      <nav className="nav-wrapper nav-display">
-        <ul className="nav" style={{ paddingTop: '7rem' }}>
+      <nav className="nav-wrapper">
+        <Profile userObj={userObj} logOut={logOut} />
+        <ul className="nav" style={{ paddingTop: '.5rem' }}>
           {MenuValueList.map(value => (
             <MenuList
               key={value.name + value.path}
               name={value.name}
               path={value.path}
-              onClickHBG={onClickHBG}
+              icon={value.icon}
               pathname={pathname}
+              onClickHBG={onClickHBG}
             />
           ))}
-
-          <li className="nav-list">
-            <a
-              style={{
-                marginTop: '4rem',
-                textAlign: 'right',
-                fontFamily: 'Nanum Gothic',
-              }}
-              href="#"
-              onClick={logOut}
-            >
-              로그아웃
-            </a>
-          </li>
         </ul>
       </nav>
     </div>
   );
 };
 
-export default Navigation;
+export default memo(Navigation);
+
+const MenuValueList = [
+  {
+    name: '이성목록',
+    path: '/contact/list',
+    icon: 'icon-heart',
+  },
+  {
+    name: '받은 목록',
+    path: '/mypage/receive',
+    icon: 'icon-envelope-open-o',
+  },
+  {
+    name: '보낸 목록',
+    path: '/mypage/send',
+    icon: 'icon-paper-plane-empty',
+  },
+  {
+    name: '내 정보 수정',
+    path: '/mypage/edit',
+    icon: 'icon-user',
+  },
+];

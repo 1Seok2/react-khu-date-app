@@ -39,8 +39,8 @@ const AppRouter: React.FC<RouterProps> = ({
       maxWidth: SmallTabletWidth,
       minHeight: '100vh',
       margin: '0 auto',
-      backgroundColor: 'gray',
       position: 'relative',
+      boxShadow: '0px 0px 14px -5px rgba(100,100,100,0.5)',
     }}
   >
     {isSignIn ? (
@@ -49,7 +49,11 @@ const AppRouter: React.FC<RouterProps> = ({
           <Loading />
         ) : (
           <div
-            style={{ paddingTop: 90, overflow: 'hidden' }}
+            style={{
+              paddingTop: 55,
+              overflowY: 'scroll',
+              minHeight: 'calc(100vh - 90px)',
+            }}
           >
             <Header userObj={userObj} />
             <Switch>
@@ -115,8 +119,7 @@ export default AppRouter;
 
 const OuterContainer = {
   maxWidth: SmallTabletWidth,
-  minHeight: '100vh',
+  minHeight: '110vh',
   margin: '0 auto',
-  backgroundColor: 'gray',
   position: 'relative',
 };

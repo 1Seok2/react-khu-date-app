@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './Router';
-import GlobalStyle from '@/assets/global/GlobalStyle';
 import {
   FirebaseAuth,
   FirebaseRDB,
 } from './config/firebase.config';
-import { BrowserRouter } from 'react-router-dom';
+
+import GlobalStyle from '@/assets/global/GlobalStyle';
 import './assets/css/Menu.css';
+import './assets/font/fontello-4f6a6a22/css/fontello-embedded.css';
 
 /**
  * props로 전달할 user정보
