@@ -1,32 +1,23 @@
+/**
+ * @description 햄버거 버튼 관련 메뉴 모음
+ */
+
+import React, { memo } from 'react';
 import { FirebaseAuth } from '@/config/firebase.config';
-import React, { memo, useState } from 'react';
+import { UserObj } from '@/components/util/usertype';
+
 import MenuList from './Menu';
-import * as s from './Navigation.styled';
+import Profile from './Profile';
 
-const Navigation = ({ pathname, userObj }: any) => {
-  const MenuValueList = [
-    {
-      name: '이성목록',
-      path: '/contact/list',
-      icon: 'icon-heart',
-    },
-    {
-      name: '받은 목록',
-      path: '/mypage/receive',
-      icon: 'icon-envelope-open-o',
-    },
-    {
-      name: '보낸 목록',
-      path: '/mypage/send',
-      icon: 'icon-paper-plane-empty',
-    },
-    {
-      name: '내 정보 수정',
-      path: '/mypage/edit',
-      icon: 'icon-user',
-    },
-  ];
+interface NavigationProps {
+  pathname: string;
+  userObj: UserObj | null;
+}
 
+const Navigation = ({
+  pathname,
+  userObj,
+}: NavigationProps) => {
   const onClickHBG = () => {
     const wrapper: Element | null = document.querySelector(
       '.other-menu-wrapper',
@@ -51,21 +42,7 @@ const Navigation = ({ pathname, userObj }: any) => {
         </button>
       </header>
       <nav className="nav-wrapper">
-        <s.Profile>
-          <s.UserImageContainer>
-            <img
-              src=""
-              alt="profile-img"
-              width="100%"
-              height="100%"
-            />
-          </s.UserImageContainer>
-          <s.UserInfoContainer>
-            <s.UserGroup>단과대학</s.UserGroup>
-            <s.UserName>{userObj.name}</s.UserName>
-          </s.UserInfoContainer>
-          <s.SignOut onClick={logOut}>로그아웃</s.SignOut>
-        </s.Profile>
+        <Profile userObj={userObj} logOut={logOut} />
         <ul className="nav" style={{ paddingTop: '.5rem' }}>
           {MenuValueList.map(value => (
             <MenuList
@@ -84,3 +61,26 @@ const Navigation = ({ pathname, userObj }: any) => {
 };
 
 export default memo(Navigation);
+
+const MenuValueList = [
+  {
+    name: '이성목록',
+    path: '/contact/list',
+    icon: 'icon-heart',
+  },
+  {
+    name: '받은 목록',
+    path: '/mypage/receive',
+    icon: 'icon-envelope-open-o',
+  },
+  {
+    name: '보낸 목록',
+    path: '/mypage/send',
+    icon: 'icon-paper-plane-empty',
+  },
+  {
+    name: '내 정보 수정',
+    path: '/mypage/edit',
+    icon: 'icon-user',
+  },
+];

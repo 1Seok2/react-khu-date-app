@@ -50,7 +50,7 @@ const AppRouter: React.FC<RouterProps> = ({
         ) : (
           <div
             style={{
-              paddingTop: 70,
+              paddingTop: 55,
               overflowY: 'scroll',
               minHeight: 'calc(100vh - 90px)',
             }}

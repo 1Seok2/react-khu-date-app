@@ -34,8 +34,8 @@ const ListPresenter = ({
                 to={{
                   pathname: '/contact/detail',
                   state: {
-                    person: person,
-                    userObj: userObj,
+                    person: person, // 내가 상대 고른 상대 정보
+                    userObj: userObj, // 내 정보
                   },
                 }}
                 style={styles.link}
@@ -52,7 +52,7 @@ const ListPresenter = ({
                   />
                 </div>
                 <div style={styles.desc}>
-                  <s.Group>단과대</s.Group>
+                  <s.Group>단과대 학번</s.Group>
                   <s.NickName>닉네임</s.NickName>
                 </div>
               </Link>

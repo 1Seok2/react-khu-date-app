@@ -7,6 +7,7 @@ export const ListContainer = styled.div`
   height: auto;
   margin: 0 auto;
   text-align: center;
+  margin-top: 24px;
 `;
 
 const popIn = keyframes`

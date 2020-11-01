@@ -1,3 +1,7 @@
+/**
+ * @description 공통 헤더부분
+ */
+
 import React from 'react';
 import { withRouter } from 'react-router';
 import Navigation from '../navigation';
