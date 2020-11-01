@@ -7,7 +7,6 @@ import moment from 'moment';
 import Loading from '@/components/util/loading';
 import * as s from './Detail.styled';
 import { FirebaseStorage } from '@/config/firebase.config';
-import '@/assets/css/Slider.css';
 
 interface DetailProps {
   isLoading: boolean;
@@ -24,7 +23,7 @@ const DetailPresenter = ({
   person,
   sendInterest,
   enable,
-  url: urls,
+  url,
   status,
   setStatus,
 }: DetailProps): JSX.Element => (
@@ -35,28 +34,61 @@ const DetailPresenter = ({
       <div>
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            position: 'relative',
+            backgroundColor: '#ededed',
+            textAlign: 'center',
+            height: '18rem',
           }}
         >
-          <i>
-            {urls.map((url: any, idx: number) => (
-              <input
-                checked
-                type="radio"
-                name="s"
-                style={{
-                  backgroundImage: `url(${
-                    urls[urls.length - 1 - idx]
-                  })`,
-                }}
-                title={`손사진 ${urls.length - idx} / ${
-                  urls.length
-                }`}
-              />
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '18rem',
+              position: 'absolute',
+              top: 0,
+              left: '50%',
+              transform: 'translateX(-100%)',
+            }}
+          >
+            {url.map((uri: any, idx: number) => (
+              <s.ImageContainer
+                uri={uri}
+                key={uri}
+                current={idx === status}
+              >
+                {idx}
+              </s.ImageContainer>
             ))}
-          </i>
+          </div>
+          <s.StatusButton
+            prev={true}
+            onClick={() => {
+              setStatus(prev => {
+                if (prev === 0) {
+                  return 2;
+                  // return url.length;
+                } else {
+                  return prev - 1;
+                }
+              });
+            }}
+          >
+            left
+          </s.StatusButton>
+          <s.StatusButton
+            prev={false}
+            onClick={() => {
+              setStatus(prev => {
+                if (prev === 2) {
+                  return 0;
+                } else {
+                  return prev + 1;
+                }
+              });
+            }}
+          >
+            right
+          </s.StatusButton>
         </div>
         <h1>상대 소개 상세 정보</h1>
         <div>
@@ -69,7 +101,7 @@ const DetailPresenter = ({
           <h2>{person.name}</h2>
           <img
             // src={person.files[0].path}
-            src={urls}
+            src={url}
             width="100px"
             height="100px"
           />

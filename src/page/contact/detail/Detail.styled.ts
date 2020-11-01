@@ -3,16 +3,19 @@ import styled, { keyframes } from 'styled-components';
 
 const change = keyframes`
 0%{
-  display : none;
-  opacity : 0.3;
-  transform : scaleY(-8px);
+  opacity : 0;
+  z-index : -1;
 }
 1%{
-  display : block;
+  transform : scaleY(-10%);
+}
+60%{
+  transform : scale(10%);
 }
 100%{
   opacity : 1;
   transform : none;
+  z-index : 1;
 }
 `;
 
@@ -30,11 +33,17 @@ background-image: url(${`${props.uri}`});
       : `
 background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditional/woman-1822646_640.jpg');`}
   background-position: top;
-  background-size: 18rem;
+  background-size: cover;
   background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
   height: 18rem;
-  display: ${(props: ImageProps) =>
-    props.current ? 'block' : 'none'};
+  margin: 0;
+  padding: 0;
+  opacity: ${(props: ImageProps) =>
+    props.current ? 1 : 0};
   animation: ${(props: ImageProps) =>
       props.current ? change : null}
     0.3s both ease-in;
@@ -49,7 +58,7 @@ export const StatusButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
   ${(props: ButtonProps) =>
-    props.prev ? `left : 0;` : `right:0;`}
+    props.prev ? `left : 1rem;` : `right:1rem;`}
 
   padding : 10px;
   width: 42px;

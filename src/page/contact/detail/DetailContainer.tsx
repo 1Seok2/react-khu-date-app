@@ -88,7 +88,11 @@ const Detail: React.FC<RouteComponentProps> = (
       .getDownloadURL()
       .then((url: any) => {
         console.log(url);
-        setUrl([url, url, url]);
+        setUrl([
+          url,
+          'https://1seok2.github.io/CSS-exercises/assets/tranditional/holi-2416686_640.jpg',
+          'https://1seok2.github.io/CSS-exercises/assets/tranditional/asia-1822521_640.jpg',
+        ]);
       })
       .then(() => setLoading(false));
   }, []);
