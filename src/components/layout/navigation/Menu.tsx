@@ -20,7 +20,8 @@ const MenuList = ({
         to={path}
         style={
           pathname.includes(path) ||
-          path.includes('contact')
+          (pathname.includes('contact') &&
+            path.includes('contact'))
             ? {
                 backgroundColor: color.date,
                 color: 'white',
@@ -49,7 +50,8 @@ const MenuList = ({
               className={icon}
               style={
                 pathname.includes(path) ||
-                path.includes('contact')
+                (pathname.includes('contact') &&
+                  path.includes('contact'))
                   ? {
                       color: 'white',
                       marginRight: 8,
@@ -65,7 +67,8 @@ const MenuList = ({
           <h3
             style={
               pathname.includes(path) ||
-              path.includes('contact')
+              (pathname.includes('contact') &&
+                path.includes('contact'))
                 ? {
                     color: 'white',
                     marginRight: 8,

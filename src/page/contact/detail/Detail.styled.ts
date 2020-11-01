@@ -22,14 +22,14 @@ const change = keyframes`
 
 export const HandImageSlider = styled.div`
   position: relative;
-  background-color: rgba(222, 222, 222, 0.5);
+  /* background-color: rgba(222, 222, 222, 0.5); */
   text-align: center;
-  height: 18rem;
+  height: 21rem;
 `;
 
 export const ImageWrappser = styled.div`
   width: 100%;
-  max-width: 18rem;
+  max-width: 21rem;
   position: absolute;
   top: 0;
   left: 50%;
@@ -56,7 +56,7 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   top: 0;
   left: 50%;
   width: 100%;
-  height: 18rem;
+  height: 21rem;
   margin: 0;
   padding: 0;
   opacity: ${(props: ImageProps) =>
@@ -64,6 +64,8 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   animation: ${(props: ImageProps) =>
       props.current ? change : null}
     0.3s both ease-in;
+  border: 1px solid ${color.grayborder};
+  border-radius: 3px;
 `;
 
 interface ButtonProps {
@@ -114,4 +116,89 @@ export const ShowCount = styled.h3`
   padding: 3px;
   font-size: 12px;
   font-weight: 500;
+`;
+
+/**
+ * description
+ */
+
+export const DescContainer = styled.div`
+  margin-top: 24px;
+  padding: 0 12px;
+`;
+
+export const Title = styled.h1`
+  margin-bottom: 22px;
+  margin-left: 12px;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 500;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid ${color.grayborder};
+  margin-bottom: 10px;
+`;
+
+export const SubTitle = styled.h2`
+  margin-left: 8px;
+  margin-right: 6px;
+  width: 80px;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+export const Description = styled.span`
+  font-size: 17px;
+  font-weight: 600;
+`;
+
+interface SendButtonProps {
+  enable?: boolean;
+}
+
+export const SendInterestButton = styled.button`
+  position: fixed;
+  left: 57%;
+  bottom: 1.5rem;
+  width: 36%;
+  border: 12px;
+  background-color: ${color.date};
+  color: white;
+  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
+  ${(props: SendButtonProps) =>
+    props.enable
+      ? `background-color : ${color.datelight}; color:white; box-shadow:none; `
+      : `
+      transition: box-shadow 0.3s, background-color 0.3s;
+  &:hover {
+    box-shadow: 0px 1px 12px -3px rgba(0, 0, 0, 0.6);
+    background-color: ${color.datelight};
+    transition: box-shadow 0.3s, background-color 0.3s;
+  transition: box-shadow 0.3s, background-color 0.3s;
+  }`}
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const BackButton = styled.button`
+  position: fixed;
+  right: 57%;
+  bottom: 1.5rem;
+  width: 36%;
+  border: 12px;
+  background-color: white;
+  border: 1px solid ${color.grayborder};
+  color: ${color.gray};
+  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
+
+  &:focus {
+    outline: none;
+  }
 `;

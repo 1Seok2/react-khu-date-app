@@ -118,6 +118,14 @@ const Detail: React.FC<RouteComponentProps> = (
       .then(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStatus(prev => (prev + 1) % 3);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <DetailPresenter
       isLoading={isLoading}
@@ -127,6 +135,7 @@ const Detail: React.FC<RouteComponentProps> = (
       url={url}
       status={status}
       changeStatus={changeStatus}
+      history={props.history}
     />
   );
 };

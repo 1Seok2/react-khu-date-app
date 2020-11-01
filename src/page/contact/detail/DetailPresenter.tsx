@@ -15,6 +15,7 @@ interface DetailProps {
   url?: any;
   status: number;
   changeStatus: (type: string) => void;
+  history: any;
 }
 
 const DetailPresenter = ({
@@ -25,6 +26,7 @@ const DetailPresenter = ({
   url,
   status,
   changeStatus,
+  history,
 }: DetailProps): JSX.Element => (
   <div>
     {isLoading ? (
@@ -57,25 +59,38 @@ const DetailPresenter = ({
             {status + 1} / {url.length}
           </s.ShowCount>
         </s.HandImageSlider>
-        <h1>상대 소개 상세 정보</h1>
-        <div>
-          <h2>
+        <s.Title>상대 소개 상세 정보</s.Title>
+        <s.DescContainer>
+          {/* <h2>
             가입일 :{' '}
             {moment(person.createdAt).format('YY.MM.DD')}
-          </h2>
-          <h2>{person.email}</h2>
-          <h2>{person.gender}</h2>
-          <h2>{person.name}</h2>
-          <img
-            // src={person.files[0].path}
-            src={url}
-            width="100px"
-            height="100px"
-          />
-        </div>
-        <button onClick={sendInterest}>
-          {enable ? '전송완료' : '관심표현'}
-        </button>
+          </h2> */}
+          <s.Row>
+            <s.SubTitle>닉네임</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.Row>
+            <s.SubTitle>나이</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.Row>
+            <s.SubTitle>거주 지역</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.Row>
+            <s.SubTitle>단과대학교</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.BackButton onClick={() => history.goBack()}>
+            뒤로가기
+          </s.BackButton>
+          <s.SendInterestButton
+            enable={enable}
+            onClick={sendInterest}
+          >
+            {enable ? '전송완료' : '관심표현'}
+          </s.SendInterestButton>
+        </s.DescContainer>
       </div>
     )}
   </div>
