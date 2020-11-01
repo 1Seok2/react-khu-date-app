@@ -35,6 +35,18 @@
       "css": "envelope-open-o",
       "code": 62135,
       "src": "fontawesome"
+    },
+    {
+      "uid": "d870630ff8f81e6de3958ecaeac532f2",
+      "css": "left-open",
+      "code": 59229,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "399ef63b1e23ab1b761dfbb5591fa4da",
+      "css": "right-open",
+      "code": 59230,
+      "src": "fontawesome"
     }
   ]
 }

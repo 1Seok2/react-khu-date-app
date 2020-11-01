@@ -8,7 +8,7 @@ import {
 
 import GlobalStyle from '@/assets/global/GlobalStyle';
 import './assets/css/Menu.css';
-import './assets/font/fontello-4f6a6a22/css/fontello-embedded.css';
+import './assets/font/fontello-c7778059/css/fontello-embedded.css';
 
 /**
  * props로 전달할 user정보

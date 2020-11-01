@@ -18,6 +18,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background-color: rgba(255, 255, 255, 1);
   border-bottom: 1px solid ${color.grayborder};
+  z-index: 9999;
 `;
 
 export const HeaderTitle = styled(Link)`

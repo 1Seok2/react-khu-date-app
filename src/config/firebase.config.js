@@ -34,7 +34,7 @@ export const FirebaseInstance = firebase;
 export const FirebaseAuth = firebase.auth();
 
 /* firebase store */
-export const FirebaseStore = firebase.firestore();
+// export const FirebaseStore = firebase.firestore();
 
 /* firebase database */
 export const FirebaseRDB = firebase.database();

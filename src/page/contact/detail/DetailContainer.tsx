@@ -5,7 +5,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { FirebaseRDB } from '@/config/firebase.config';
+import {
+  FirebaseRDB,
+  FirebaseStorage,
+} from '@/config/firebase.config';
 import DetailPresenter from './DetailPresenter';
 
 const Detail: React.FC<RouteComponentProps> = (
@@ -24,6 +27,7 @@ const Detail: React.FC<RouteComponentProps> = (
    */
   const [enable, setEnable] = useState(false);
 
+  const [status, setStatus] = useState(0);
   /**
    * 관심 표현 ❤️
    */
@@ -74,19 +78,67 @@ const Detail: React.FC<RouteComponentProps> = (
             break;
           }
         }
-      })
-      .then(() =>
-        setTimeout(() => {
-          setLoading(false);
-        }, 10),
-      );
+      });
   }, []);
+
+  const [url, setUrl] = useState<any>();
+
+  const changeStatus = (type: string) => {
+    if (type === 'next') {
+      setStatus(prev => {
+        if (prev === 2) {
+          return 0;
+        } else {
+          return prev + 1;
+        }
+      });
+    } else {
+      setStatus(prev => {
+        if (prev === 0) {
+          return 2;
+          // return url.length;
+        } else {
+          return prev - 1;
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    FirebaseStorage.ref('example/10.jpeg')
+      .getDownloadURL()
+      .then((url: any) => {
+        console.log(url);
+        setUrl([
+          url,
+          'https://1seok2.github.io/CSS-exercises/assets/tranditional/holi-2416686_640.jpg',
+          'https://1seok2.github.io/CSS-exercises/assets/tranditional/asia-1822521_640.jpg',
+        ]);
+      })
+      .then(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    let interval: any;
+    if (!isLoading && url?.length > 1) {
+      interval = setInterval(() => {
+        setStatus(prev => (prev + 1) % 3);
+      }, 2500);
+    }
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
   return (
     <DetailPresenter
       isLoading={isLoading}
       person={person}
       sendInterest={sendInterest}
       enable={enable}
+      url={url}
+      status={status}
+      changeStatus={changeStatus}
+      history={props.history}
     />
   );
 };

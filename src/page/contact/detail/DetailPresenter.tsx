@@ -12,6 +12,10 @@ interface DetailProps {
   person: any;
   sendInterest: () => void;
   enable: boolean;
+  url?: any;
+  status: number;
+  changeStatus: (type: string) => void;
+  history: any;
 }
 
 const DetailPresenter = ({
@@ -19,26 +23,75 @@ const DetailPresenter = ({
   person,
   sendInterest,
   enable,
+  url,
+  status,
+  changeStatus,
+  history,
 }: DetailProps): JSX.Element => (
-  <div style={{ backgroundColor: 'yellow' }}>
+  <div>
     {isLoading ? (
       <Loading />
     ) : (
-      <div style={{ backgroundColor: 'gray' }}>
-        <s.ImageContainer />
-        {/* <h1>상대 소개 상세 정보</h1>
-        <div>
-          <h2>
+      <div>
+        <s.HandImageSlider>
+          <s.ImageWrappser>
+            {url.map((uri: any, idx: number) => (
+              <s.ImageContainer
+                uri={uri}
+                key={uri}
+                current={idx === status}
+              ></s.ImageContainer>
+            ))}
+          </s.ImageWrappser>
+          <s.StatusButton
+            prev={true}
+            onClick={() => changeStatus('prev')}
+          >
+            <i className="icon-left-open" />
+          </s.StatusButton>
+          <s.StatusButton
+            prev={false}
+            onClick={() => changeStatus('next')}
+          >
+            <i className="icon-right-open" />
+          </s.StatusButton>
+          <s.ShowCount>
+            {status + 1} / {url.length}
+          </s.ShowCount>
+        </s.HandImageSlider>
+        <s.DescContainer>
+          <s.Title>상대 소개 상세 정보</s.Title>
+          {/* <h2>
             가입일 :{' '}
             {moment(person.createdAt).format('YY.MM.DD')}
-          </h2>
-          <h2>{person.email}</h2>
-          <h2>{person.gender}</h2>
-          <h2>{person.name}</h2>
-        </div> */}
-        <button onClick={sendInterest}>
-          {enable ? '전송완료' : '관심표현'}
-        </button>
+          </h2> */}
+          <s.Row>
+            <s.SubTitle>닉네임</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.Row>
+            <s.SubTitle>나이</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.Row>
+            <s.SubTitle>거주 지역</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.Row>
+            <s.SubTitle>단과대학교</s.SubTitle>
+            <s.Description>설명</s.Description>
+          </s.Row>
+          <s.BackButton onClick={() => history.goBack()}>
+            뒤로가기
+          </s.BackButton>
+          <s.Empty />
+          <s.SendInterestButton
+            enable={enable}
+            onClick={sendInterest}
+          >
+            {enable ? '전송완료' : '관심표현'}
+          </s.SendInterestButton>
+        </s.DescContainer>
       </div>
     )}
   </div>

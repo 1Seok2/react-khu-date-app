@@ -6,7 +6,7 @@
   position: absolute;
   right: 0.5rem;
   top: 0rem;
-  z-index: 3;
+  z-index: 99999;
   outline: none;
 }
 .nav-wrapper {
@@ -28,14 +28,14 @@
   max-width: 18rem;
   width: 60vw;
   min-width: 15rem;
-  z-index: 2;
+  z-index: 9999;
 }
 .nav-visible .nav-wrapper {
   /* transform: translateX(0); */
   transform: rotateY(0deg);
   visibility: visible;
   opacity: 1;
-  z-index: 2;
+  z-index: 9999;
 }
 .nav {
   position: relative;
