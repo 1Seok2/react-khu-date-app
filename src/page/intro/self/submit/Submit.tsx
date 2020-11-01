@@ -4,14 +4,13 @@ import {
   FirebaseRDB,
   FirebaseStorage,
 } from '@/config/firebase.config';
-import { PrivateDataObject } from '../../type';
 import { color } from '../../../../theme/color';
-import { storage } from 'firebase';
 
 const Submit = ({ userObj, privateData }: any) => {
   const submitMyInfo = () => {
     FirebaseRDB.ref(`users/${userObj?.uid}`)
       .update({
+        ...userObj,
         ...privateData,
       })
       .catch(err => console.error(err));
