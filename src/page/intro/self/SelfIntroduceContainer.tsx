@@ -17,7 +17,10 @@ import SelfIntroducePresenter from './SelfIntroducePresenter';
 //단과대 리스트 ReactSelect에서 사용할 수 있도록 OptionType으로 변환해주기
 
 const SelfIntroduceContainer = React.memo(
-  ({ index }: SelfIntroduceContainerProps): JSX.Element => {
+  ({
+    userObj,
+    index,
+  }: SelfIntroduceContainerProps): JSX.Element => {
     const [privateData, setPrivateData] = useState<
       PrivateDataObject
     >({
@@ -81,6 +84,7 @@ const SelfIntroduceContainer = React.memo(
 
     return (
       <SelfIntroducePresenter
+        userObj={userObj}
         index={index}
         privateData={privateData}
         onClickGender={onClickGender}
