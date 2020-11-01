@@ -13,7 +13,7 @@ import {
   KyoboFont,
 } from './Intro.styled';
 
-const Intro = (): JSX.Element => {
+const Intro = ({ userObj, ...props }: any): JSX.Element => {
   const [introState, setIntroState] = useState({
     scriptIndex: ScriptDatas.length,
     scriptContent: ScriptDatas[0],
@@ -92,7 +92,10 @@ const Intro = (): JSX.Element => {
             content={introState.scriptContent}
           ></ContentText>
         ) : (
-          <SelfIntroduce index={selfIntroState} />
+          <SelfIntroduce
+            userObj={userObj}
+            index={selfIntroState}
+          />
         )}
         <ArrowWrapper>
           {selfIntroState === 5 ? (

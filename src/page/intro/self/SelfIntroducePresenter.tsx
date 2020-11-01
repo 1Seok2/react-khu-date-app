@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
+import React from 'react';
 import { SelfIntroducePresenterProps } from '../type';
 import GenderSelect from './gender/GenderSelect';
 import AgeSelect from './age/AgeSelect';
@@ -16,6 +12,7 @@ import {
 } from '../Intro.styled';
 
 const SelfIntroducePresenter = ({
+  userObj,
   index,
   privateData,
   onClickGender,
@@ -62,7 +59,12 @@ const SelfIntroducePresenter = ({
           ></HandImageDrop>
         );
       case 5:
-        return <Submit privateData={privateData} />;
+        return (
+          <Submit
+            userObj={userObj}
+            privateData={privateData}
+          />
+        );
 
       default:
         break;
