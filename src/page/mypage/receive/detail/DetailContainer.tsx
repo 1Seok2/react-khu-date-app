@@ -28,19 +28,35 @@ const Detail = (props: any): JSX.Element => {
 
   const [status, setStatus] = useState(0);
 
-  const accept = (chat: ChatObj) => {
-    if (!chat.enable) {
-      FirebaseRDB.ref(`chat/${chat.senderId}`).update({
+  const accept = () => {
+    if (
+      !enable &&
+      window.confirm(
+        '정말 호감을 표시하시겠습니까?\n제출한 응답에 대한 번복은 없습니다.',
+      )
+    ) {
+      FirebaseRDB.ref(
+        `chat/${receiveChat.createdAt}`,
+      ).update({
         receiverOk: 1,
       });
+      setEnable(true);
     }
   };
 
-  const reject = (chat: ChatObj) => {
-    if (!chat.enable) {
-      FirebaseRDB.ref(`chat/${chat.senderId}`).update({
+  const reject = () => {
+    if (
+      !enable &&
+      window.confirm(
+        '정말 호감을 거절하시겠습니까?\n제출한 응답에 대한 번복은 없습니다.',
+      )
+    ) {
+      FirebaseRDB.ref(
+        `chat/${receiveChat.createdAt}`,
+      ).update({
         receiverOk: -1,
       });
+      setEnable(true);
     }
   };
 
@@ -51,11 +67,14 @@ const Detail = (props: any): JSX.Element => {
     FirebaseRDB.ref(`chat/${receiveChat.createdAt}`)
       .once('value')
       .then((snap: firebase.database.DataSnapshot) => {
-        console.log(
-          'snaps...',
-          receiveChat.createdAt,
-          snap.val(),
-        );
+        if (snap.val().receiverSaw === 0) {
+          FirebaseRDB.ref(
+            `chat/${receiveChat.createdAt}`,
+          ).update({
+            receiverSaw: 1,
+          });
+        }
+        if (snap.val().receiverOk !== 0) setEnable(true);
       });
   }, []);
 

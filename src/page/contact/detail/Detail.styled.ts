@@ -165,9 +165,9 @@ interface SendButtonProps {
 
 export const SendInterestButton = styled.button`
   position: fixed;
-  left: 57%;
+  left: 52%;
   bottom: 1.5rem;
-  width: 36%;
+  width: 30%;
   border: 12px;
   background-color: ${color.date};
   font-size: 14px;
@@ -191,13 +191,19 @@ export const SendInterestButton = styled.button`
   &:focus {
     outline: none;
   }
+  @media (max-width: 325px) {
+    left: 56%;
+  }
+  @media (max-width: 270px) {
+    width: 40%;
+  }
 `;
 
 export const BackButton = styled.button`
   position: fixed;
-  right: 57%;
+  right: 52%;
   bottom: 1.5rem;
-  width: 36%;
+  width: 30%;
   border: 12px;
   background-color: white;
   border: 1px solid ${color.grayborder};
@@ -214,6 +220,12 @@ export const BackButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+  @media (max-width: 325px) {
+    right: 56%;
+  }
+  @media (max-width: 270px) {
+    width: 40%;
   }
 `;
 

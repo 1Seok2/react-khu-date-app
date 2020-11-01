@@ -16,8 +16,8 @@ interface DetailProps {
   status: number;
   changeStatus: (type: string) => void;
   history: any;
-  accept: (chat: ChatObj) => void;
-  reject: (chat: ChatObj) => void;
+  accept: () => void;
+  reject: () => void;
   opponent?: any;
 }
 
@@ -71,6 +71,14 @@ const DetailPresenter = ({
             {moment(person.createdAt).format('YY.MM.DD')}
           </h2> */}
           <s.Row>
+            <s.SubTitle>호감표시일</s.SubTitle>
+            <s.Description>
+              {moment(receiveChat.createdAt).format(
+                'YY.MM.DD HH:mm:ss',
+              )}
+            </s.Description>
+          </s.Row>
+          <s.Row>
             <s.SubTitle>닉네임</s.SubTitle>
             <s.Description>
               {opponent.nickname}
@@ -92,13 +100,22 @@ const DetailPresenter = ({
               {opponent.college}
             </s.Description>
           </s.Row>
-          <s.BackButton onClick={() => history.goBack()}>
-            뒤로가기
-          </s.BackButton>
+          <s.ButtonContainer>
+            <s.BackButton>뒤로</s.BackButton>
+            <s.RejectButton
+              enable={enable}
+              onClick={() => reject()}
+            >
+              거절
+            </s.RejectButton>
+            <s.SendButton
+              enable={enable}
+              onClick={() => accept()}
+            >
+              나도 좋아!
+            </s.SendButton>
+          </s.ButtonContainer>
           <s.Empty />
-          <s.SendInterestButton enable={enable}>
-            {enable ? '전송완료' : '관심표현'}
-          </s.SendInterestButton>
         </s.DescContainer>
       </div>
     )}

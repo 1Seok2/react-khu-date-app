@@ -159,62 +159,86 @@ export const Description = styled.span`
   font-weight: 600;
 `;
 
-interface SendButtonProps {
+interface ButtonProps {
   enable?: boolean;
 }
 
-export const SendInterestButton = styled.button`
+export const ButtonContainer = styled.div`
+  width: 260px;
   position: fixed;
-  left: 57%;
   bottom: 1.5rem;
-  width: 36%;
-  border: 12px;
-  background-color: ${color.date};
-  font-size: 14px;
-  font-weight: 400;
-  color: white;
-  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
-  max-width: 12rem;
-
-  ${(props: SendButtonProps) =>
-    props.enable
-      ? `background-color : ${color.datelight}; color:white; box-shadow:none; `
-      : `
-      transition: box-shadow 0.3s, background-color 0.3s;
-  &:hover {
-    box-shadow: 0px 1px 12px -3px rgba(0, 0, 0, 0.6);
-    background-color: ${color.datelight};
-    transition: box-shadow 0.3s, background-color 0.3s;
-    cursor : pointer;
-  }`}
-
-  &:focus {
-    outline: none;
-  }
+  left: 50%;
+  transform: translateX(-50%);
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const BackButton = styled.button`
-  position: fixed;
-  right: 57%;
-  bottom: 1.5rem;
-  width: 36%;
-  border: 12px;
-  background-color: white;
+  padding: 6px;
   border: 1px solid ${color.grayborder};
+  margin-right: 5px;
   color: ${color.gray};
-  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
-  max-width: 12rem;
-
-  font-size: 14px;
-  font-weight: 400;
-
-  &:hover {
-    cursor: pointer;
-  }
-
+  background-color: white;
   &:focus {
     outline: none;
   }
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 3px;
+  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.3);
+  height: 40px;
+  width: 80px;
+`;
+
+export const RejectButton = styled.button`
+  padding: 6px;
+  border: 1px solid ${color.gray};
+  background-color: ${color.gray};
+  color: white;
+  margin-right: 5px;
+  &:focus {
+    outline: none;
+  }
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 3px;
+  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.3);
+  height: 40px;
+  width: 80px;
+  ${(props: ButtonProps) =>
+    props.enable
+      ? `
+    background-color : #cfcfcf;
+    color : ${color.grayborder};
+    border: 1px solid #cfcfcf;
+  `
+      : null}
+`;
+
+export const SendButton = styled.button`
+  padding: 6px;
+  background-color: ${color.date};
+  border: 1px solid ${color.date};
+  color: white;
+  &:focus {
+    outline: none;
+  }
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.3);
+  height: 40px;
+  width: 100px;
+  ${(props: ButtonProps) =>
+    props.enable
+      ? `
+    background-color : ${color.datedark};
+    color : ${color.grayborder};
+    border: 1px solid ${color.datedark};
+  `
+      : null}
 `;
 
 export const Empty = styled.div`
