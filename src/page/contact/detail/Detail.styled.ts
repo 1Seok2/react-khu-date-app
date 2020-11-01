@@ -97,6 +97,7 @@ export const StatusButton = styled.button`
   &:hover {
     background-color: ${color.datelight};
     transition: background-color 0.3s;
+    cursor: pointer;
   }
   z-index: 1;
 `;
@@ -112,7 +113,7 @@ export const ShowCount = styled.h3`
   border-radius: 15px;
   position: absolute;
   bottom: 4px;
-  right: 4px;
+  right: 1rem;
   padding: 3px;
   font-size: 12px;
   font-weight: 500;
@@ -123,13 +124,14 @@ export const ShowCount = styled.h3`
  */
 
 export const DescContainer = styled.div`
+  margin: 0 auto;
   margin-top: 24px;
   padding: 0 12px;
+  max-width: 28rem;
 `;
 
 export const Title = styled.h1`
   margin-bottom: 22px;
-  margin-left: 12px;
   margin-top: 30px;
   font-size: 20px;
   font-weight: 500;
@@ -168,8 +170,12 @@ export const SendInterestButton = styled.button`
   width: 36%;
   border: 12px;
   background-color: ${color.date};
+  font-size: 14px;
+  font-weight: 400;
   color: white;
   box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
+  max-width: 12rem;
+
   ${(props: SendButtonProps) =>
     props.enable
       ? `background-color : ${color.datelight}; color:white; box-shadow:none; `
@@ -179,7 +185,7 @@ export const SendInterestButton = styled.button`
     box-shadow: 0px 1px 12px -3px rgba(0, 0, 0, 0.6);
     background-color: ${color.datelight};
     transition: box-shadow 0.3s, background-color 0.3s;
-  transition: box-shadow 0.3s, background-color 0.3s;
+    cursor : pointer;
   }`}
 
   &:focus {
@@ -197,8 +203,20 @@ export const BackButton = styled.button`
   border: 1px solid ${color.grayborder};
   color: ${color.gray};
   box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
+  max-width: 12rem;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &:focus {
     outline: none;
   }
+`;
+
+export const Empty = styled.div`
+  height: 100px;
 `;

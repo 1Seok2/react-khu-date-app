@@ -63,10 +63,18 @@ export const ListItem = styled.div`
   }
 
   @media (max-width: 475px) {
+    max-width: 9.2rem;
+    height: 9.2rem;
+  }
+  @media (max-width: 427px) {
     max-width: 8rem;
     height: 8rem;
   }
-  @media (max-width: 405px) {
+  @media (max-width: 385px) {
+    max-width: 6.8rem;
+    height: 6.8rem;
+  }
+  @media (max-width: 344px) {
     max-width: 6rem;
     height: 6rem;
   }
@@ -85,6 +93,17 @@ export const Like = styled.button`
   justify-content: center;
 `;
 
+export const DescContainer = styled.div`
+  height: 25%;
+  margin-top: 59%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 3%;
+  border-radius: 6px;
+  @media (max-width: 427px) {
+    height: 32%;
+  }
+`;
+
 export const Group = styled.h2`
   font-size: 14px;
   font-weight: 300;
@@ -92,6 +111,19 @@ export const Group = styled.h2`
   color: #fafafa;
   text-align: left;
   margin: 4px;
+
+  @media (max-width: 427px) {
+    font-size: 13px;
+  }
+  @media (max-width: 385px) {
+    font-size: 11px;
+  }
+  @media (max-width: 344px) {
+    font-size: 9px;
+  }
+  @media (max-width: 320px) {
+    font-size: 14px;
+  }
 `;
 
 export const NickName = styled.h1`
@@ -100,6 +132,19 @@ export const NickName = styled.h1`
   color: #fafafa;
   text-align: left;
   margin-left: 4px;
+
+  @media (max-width: 427px) {
+    font-size: 16px;
+  }
+  @media (max-width: 385px) {
+    font-size: 14px;
+  }
+  @media (max-width: 344px) {
+    font-size: 13px;
+  }
+  @media (max-width: 320px) {
+    font-size: 18px;
+  }
 `;
 
 export const HandImage = styled.div`

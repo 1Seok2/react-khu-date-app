@@ -51,10 +51,10 @@ const ListPresenter = ({
                     style={{ color: color.date }}
                   />
                 </div>
-                <div style={styles.desc}>
+                <s.DescContainer>
                   <s.Group>단과대 학번</s.Group>
                   <s.NickName>닉네임</s.NickName>
-                </div>
+                </s.DescContainer>
               </Link>
             </s.ListItem>
           ))}
@@ -75,13 +75,6 @@ const styles = {
   heart: {
     textAlign: 'right',
     height: '10%',
-  },
-  desc: {
-    height: '25%',
-    marginTop: '59%',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    padding: '3%',
-    borderRadius: 6,
   },
 };
 

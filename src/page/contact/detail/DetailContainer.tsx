@@ -119,12 +119,15 @@ const Detail: React.FC<RouteComponentProps> = (
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setStatus(prev => (prev + 1) % 3);
-    }, 2500);
+    let interval: any;
+    if (!isLoading && url?.length > 1) {
+      interval = setInterval(() => {
+        setStatus(prev => (prev + 1) % 3);
+      }, 2500);
+    }
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isLoading]);
 
   return (
     <DetailPresenter

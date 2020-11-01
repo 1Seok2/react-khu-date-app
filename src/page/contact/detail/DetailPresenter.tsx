@@ -59,8 +59,8 @@ const DetailPresenter = ({
             {status + 1} / {url.length}
           </s.ShowCount>
         </s.HandImageSlider>
-        <s.Title>상대 소개 상세 정보</s.Title>
         <s.DescContainer>
+          <s.Title>상대 소개 상세 정보</s.Title>
           {/* <h2>
             가입일 :{' '}
             {moment(person.createdAt).format('YY.MM.DD')}
@@ -84,6 +84,7 @@ const DetailPresenter = ({
           <s.BackButton onClick={() => history.goBack()}>
             뒤로가기
           </s.BackButton>
+          <s.Empty />
           <s.SendInterestButton
             enable={enable}
             onClick={sendInterest}
