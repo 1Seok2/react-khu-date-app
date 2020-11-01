@@ -2,6 +2,8 @@
 
  
 .icon-heart:before { content: '\2665'; } /* '♥' */
+.icon-left-open:before { content: '\e75d'; } /* '' */
+.icon-right-open:before { content: '\e75e'; } /* '' */
 .icon-paper-plane-empty:before { content: '\f1d9'; } /* '' */
 .icon-venus-mars:before { content: '\f228'; } /* '' */
 .icon-envelope-open-o:before { content: '\f2b7'; } /* '' */

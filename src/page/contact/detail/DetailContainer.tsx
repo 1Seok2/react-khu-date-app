@@ -83,6 +83,27 @@ const Detail: React.FC<RouteComponentProps> = (
 
   const [url, setUrl] = useState<any>();
 
+  const changeStatus = (type: string) => {
+    if (type === 'next') {
+      setStatus(prev => {
+        if (prev === 2) {
+          return 0;
+        } else {
+          return prev + 1;
+        }
+      });
+    } else {
+      setStatus(prev => {
+        if (prev === 0) {
+          return 2;
+          // return url.length;
+        } else {
+          return prev - 1;
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     FirebaseStorage.ref('example/10.jpeg')
       .getDownloadURL()
@@ -105,7 +126,7 @@ const Detail: React.FC<RouteComponentProps> = (
       enable={enable}
       url={url}
       status={status}
-      setStatus={setStatus}
+      changeStatus={changeStatus}
     />
   );
 };

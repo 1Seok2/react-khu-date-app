@@ -6,7 +6,6 @@ import React from 'react';
 import moment from 'moment';
 import Loading from '@/components/util/loading';
 import * as s from './Detail.styled';
-import { FirebaseStorage } from '@/config/firebase.config';
 
 interface DetailProps {
   isLoading: boolean;
@@ -15,7 +14,7 @@ interface DetailProps {
   enable: boolean;
   url?: any;
   status: number;
-  setStatus: React.Dispatch<React.SetStateAction<number>>;
+  changeStatus: (type: string) => void;
 }
 
 const DetailPresenter = ({
@@ -25,71 +24,39 @@ const DetailPresenter = ({
   enable,
   url,
   status,
-  setStatus,
+  changeStatus,
 }: DetailProps): JSX.Element => (
   <div>
     {isLoading ? (
       <Loading />
     ) : (
       <div>
-        <div
-          style={{
-            position: 'relative',
-            backgroundColor: '#ededed',
-            textAlign: 'center',
-            height: '18rem',
-          }}
-        >
-          <div
-            style={{
-              width: '100%',
-              maxWidth: '18rem',
-              position: 'absolute',
-              top: 0,
-              left: '50%',
-              transform: 'translateX(-100%)',
-            }}
-          >
+        <s.HandImageSlider>
+          <s.ImageWrappser>
             {url.map((uri: any, idx: number) => (
               <s.ImageContainer
                 uri={uri}
                 key={uri}
                 current={idx === status}
-              >
-                {idx}
-              </s.ImageContainer>
+              ></s.ImageContainer>
             ))}
-          </div>
+          </s.ImageWrappser>
           <s.StatusButton
             prev={true}
-            onClick={() => {
-              setStatus(prev => {
-                if (prev === 0) {
-                  return 2;
-                  // return url.length;
-                } else {
-                  return prev - 1;
-                }
-              });
-            }}
+            onClick={() => changeStatus('prev')}
           >
-            left
+            <i className="icon-left-open" />
           </s.StatusButton>
           <s.StatusButton
             prev={false}
-            onClick={() => {
-              setStatus(prev => {
-                if (prev === 2) {
-                  return 0;
-                } else {
-                  return prev + 1;
-                }
-              });
-            }}
+            onClick={() => changeStatus('next')}
           >
-            right
+            <i className="icon-right-open" />
           </s.StatusButton>
-        </div>
+          <s.ShowCount>
+            {status + 1} / {url.length}
+          </s.ShowCount>
+        </s.HandImageSlider>
         <h1>상대 소개 상세 정보</h1>
         <div>
           <h2>
