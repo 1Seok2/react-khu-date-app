@@ -8,4 +8,5 @@ export interface UserObj {
   location?: string;
   gender?: string;
   college?: string;
+  img?: number;
 }

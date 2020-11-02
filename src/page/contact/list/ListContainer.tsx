@@ -59,7 +59,11 @@ const ListContainer = ({
         setOpponent(list);
       })
       .catch(err => console.error(err))
-      .finally(() => setLoading(false));
+      .finally(() =>
+        setTimeout(() => {
+          setLoading(false);
+        }, 200),
+      );
   }, []);
 
   return (
