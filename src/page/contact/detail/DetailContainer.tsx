@@ -26,6 +26,7 @@ const Detail: React.FC<RouteComponentProps> = (
    * 이미 전송한 상대이면 버튼 클릭 불가
    */
   const [enable, setEnable] = useState(false);
+  const [isRead, setRead] = useState(false);
 
   const [status, setStatus] = useState(0);
   const [url, setUrl] = useState<any>();
@@ -72,6 +73,7 @@ const Detail: React.FC<RouteComponentProps> = (
         let key;
         let alreadySend = false;
         for (key in snap.val()) {
+          if (alreadySend) break;
           if (
             snap.val()[key].sender === userObj.email &&
             snap.val()[key].receiver === person.email &&
@@ -79,6 +81,9 @@ const Detail: React.FC<RouteComponentProps> = (
           ) {
             setEnable(true);
             alreadySend = true;
+            if (snap.val()[key].receiverSaw === 1) {
+              setRead(true);
+            }
             break;
           }
         }
@@ -138,6 +143,7 @@ const Detail: React.FC<RouteComponentProps> = (
       status={status}
       changeStatus={changeStatus}
       history={props.history}
+      isRead={isRead}
     />
   );
 };

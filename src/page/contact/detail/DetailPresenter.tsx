@@ -20,6 +20,7 @@ const DetailPresenter = ({
   status,
   changeStatus,
   history,
+  isRead,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -57,6 +58,14 @@ const DetailPresenter = ({
             가입일 :{' '}
             {moment(person.createdAt).format('YY.MM.DD')}
           </h2> */}
+        {enable && (
+          <s.Row>
+            <s.SubTitle>상대 확인여부</s.SubTitle>
+            <s.Description>
+              {isRead ? '확인했다!!' : '아직 안봤다 😭'}
+            </s.Description>
+          </s.Row>
+        )}
         <s.Row>
           <s.SubTitle>닉네임</s.SubTitle>
           <s.Description>{person.nickname}</s.Description>

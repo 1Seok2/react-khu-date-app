@@ -16,4 +16,5 @@ export interface DetailProps {
   status: number;
   changeStatus: (type: string) => void;
   history: any;
+  isRead: boolean;
 }

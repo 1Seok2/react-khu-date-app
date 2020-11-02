@@ -1,6 +1,5 @@
 /**
  * @description 내가 호감 표시간 목록
- * @todo 추후 표나 플랫리스트로 표시
  */
 import React from 'react';
 import moment from 'moment';
