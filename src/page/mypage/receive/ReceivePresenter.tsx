@@ -1,58 +1,91 @@
 /**
  * @description 호감 받은 목록
- * @todo 추후 표나 플랫리스트로 표시
  */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { ChatObj } from '../type';
+import { UserObj } from '@/components/util/usertype';
 
 import Loading from '@/components/util/loading';
+
+import * as s from './Receive.styled';
+import { color } from '@/theme/color';
+import Nothing from '@/components/util/nothing';
 
 interface ReceiveProps {
   receiveList: Array<ChatObj>;
   isLoading: boolean;
-  accept: (chat: ChatObj) => void;
-  reject: (chat: ChatObj) => void;
+  userObj: UserObj | null;
+  img?: any;
 }
 
 const ReceivePresenter = ({
   receiveList,
   isLoading,
-  accept,
-  reject,
+  userObj,
+  img,
   ...props
-}: ReceiveProps): JSX.Element => (
-  <>
-    {isLoading ? (
-      <Loading />
-    ) : (
-      <>
-        <h1>받은 목록</h1>
-        <div>
-          {receiveList.length === 0 ? (
-            <div> 목록이 존재하지 않아 </div>
-          ) : (
-            receiveList.map(item => (
-              <div key={item.receiver}>
-                <h2>상대 : {item.receiver}</h2>
-                <h2>
-                  받은 일자 :{' '}
-                  {moment(item.createdAt).format(
-                    'YY.MM.DD',
-                  )}
-                </h2>
-                <button onClick={() => accept(item)}>
-                  수락
-                </button>
-                <button onClick={() => reject(item)}>
-                  거절
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-      </>
-    )}
-  </>
-);
+}: ReceiveProps): JSX.Element =>
+  isLoading ? (
+    <Loading />
+  ) : receiveList.length === 0 ? (
+    <Nothing />
+  ) : (
+    <s.ListContainer>
+      {receiveList.map((receiveChat, idx) => (
+        <s.ListItem
+          key={receiveChat.createdAt}
+          delay={idx}
+          // bgUri={receiveChat.uri}
+          bgUri={img[idx]}
+        >
+          <Link
+            to={{
+              pathname: '/mypage/receive/detail',
+              state: {
+                receiveChat: receiveChat, // 내게 호감 보낸 상대와 나 간의 챗 정보
+                userObj: userObj, // 내 정보
+              },
+            }}
+            style={styles.link}
+          >
+            <div
+              style={{
+                textAlign: 'right',
+                height: '10%',
+              }}
+            >
+              <i
+                className="icon-heart"
+                style={{ color: color.date }}
+              />
+            </div>
+            <s.DescContainer>
+              <s.Group>
+                {moment(receiveChat.createdAt).format(
+                  'YY.MM.DD HH:mm:ss',
+                )}
+              </s.Group>
+              <s.NickName>
+                {receiveChat.senderNickname}
+              </s.NickName>
+            </s.DescContainer>
+          </Link>
+        </s.ListItem>
+      ))}
+    </s.ListContainer>
+  );
 export default ReceivePresenter;
+
+const styles = {
+  link: {
+    display: 'block',
+    width: '100%',
+    height: '100%',
+  },
+  heart: {
+    textAlign: 'right',
+    height: '10%',
+  },
+};
