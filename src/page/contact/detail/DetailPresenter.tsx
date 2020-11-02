@@ -75,13 +75,20 @@ const DetailPresenter = ({
         </s.Row>
         <s.Empty />
         <s.ButtonContainer>
-          <s.SButton Btype="back">뒤로가기</s.SButton>
+          <s.SButton
+            onClick={() => history.goBack()}
+            Btype="back"
+          >
+            뒤로가기
+          </s.SButton>
           <s.SButton
             Btype="like"
             bgColor={color.date}
             color="white"
+            onClick={sendInterest}
+            enable={enable}
           >
-            호감표시
+            {enable ? '전송완료' : '관심표현'}
           </s.SButton>
         </s.ButtonContainer>
       </s.DescContainer>

@@ -145,6 +145,7 @@ interface SButtonProps {
   Btype?: string;
   bgColor?: string;
   color?: string;
+  enable?: boolean;
 }
 
 export const SButton = styled.button`
@@ -160,9 +161,19 @@ export const SButton = styled.button`
   &:focus {
     outline: none;
   }
-  &:hover {
-    cursor: pointer;
-  }
+
+  ${(props: SButtonProps) =>
+    props.enable
+      ? `
+    background-color : ${color.datedark};
+  `
+      : `
+    &:hover {
+      cursor: pointer;
+    background-color: ${(props: SButtonProps) =>
+      props.Btype !== 'back' ? color.datelight : '#fff'};
+    }
+    `}
 `;
 
 /**
