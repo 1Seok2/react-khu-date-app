@@ -19,3 +19,17 @@ export interface EditProps {
   state?: UserObj | null;
   editable?: boolean;
 }
+
+export interface DetailProps {
+  isLoading: boolean;
+  receiveChat: any;
+  enable: boolean;
+  url?: any;
+  status: number;
+  changeStatus: (type: string) => void;
+  history: any;
+  accept: () => void;
+  reject: () => void;
+  opponent?: any;
+  isContact?: boolean;
+}

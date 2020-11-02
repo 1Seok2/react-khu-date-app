@@ -6,22 +6,8 @@ import React from 'react';
 import moment from 'moment';
 import Loading from '@/components/util/loading';
 import * as s from './Detail.styled';
-import { ChatObj } from '../../type';
+import { ChatObj, DetailProps } from '../../type';
 import { color } from '@/theme/color';
-
-interface DetailProps {
-  isLoading: boolean;
-  receiveChat: any;
-  enable: boolean;
-  url?: any;
-  status: number;
-  changeStatus: (type: string) => void;
-  history: any;
-  accept: () => void;
-  reject: () => void;
-  opponent?: any;
-  isContact?: boolean;
-}
 
 const DetailPresenter = ({
   isLoading,
@@ -110,26 +96,32 @@ const DetailPresenter = ({
           >
             뒤로
           </s.SButton>
-          <s.SButton
-            Bflex={1}
-            Btype="reject"
-            bgColor={color.datelight}
-            color={'white'}
-            enable={enable}
-            onClick={() => reject()}
-          >
-            거절
-          </s.SButton>
-          <s.SButton
-            Bflex={2}
-            Btype="accept"
-            bgColor={color.date}
-            color="white"
-            enable={enable}
-            onClick={() => accept()}
-          >
-            나도 좋아!
-          </s.SButton>
+          {isContact ||
+            (!enable && (
+              <s.SButton
+                Bflex={1}
+                Btype="reject"
+                bgColor={color.datelight}
+                color={'white'}
+                enable={enable}
+                onClick={() => reject()}
+              >
+                거절
+              </s.SButton>
+            ))}
+          {isContact ||
+            (!enable && (
+              <s.SButton
+                Bflex={2}
+                Btype="accept"
+                bgColor={color.date}
+                color="white"
+                enable={enable}
+                onClick={() => accept()}
+              >
+                나도 좋아!
+              </s.SButton>
+            ))}
         </s.ButtonContainer>
         <s.Empty />
       </s.DescContainer>
