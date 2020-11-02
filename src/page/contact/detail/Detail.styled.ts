@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { color } from '@/theme/color';
+import {
+  SmallTabletWidth,
+  SmartPhoneWidth,
+} from '@/theme/width';
 import styled, { keyframes } from 'styled-components';
 
 const change = keyframes`
@@ -119,6 +123,48 @@ export const ShowCount = styled.h3`
   font-weight: 500;
 `;
 
+export const ButtonContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: ${SmallTabletWidth};
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid lightgray;
+
+  @media (max-width: ${SmartPhoneWidth}) {
+    height: 42px;
+  }
+`;
+
+interface SButtonProps {
+  Btype?: string;
+  bgColor?: string;
+  color?: string;
+}
+
+export const SButton = styled.button`
+  flex: 1;
+  flex-grow: 1;
+  background-color: ${(props: SButtonProps) =>
+    props.Btype !== 'back' ? props.bgColor : '#fafafa'};
+  color: ${(props: SButtonProps) =>
+    props.Btype !== 'back' ? props.color : color.gray};
+  border-radius: 0;
+  height: 100%;
+
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 /**
  * description
  */
@@ -157,76 +203,6 @@ export const SubTitle = styled.h2`
 export const Description = styled.span`
   font-size: 17px;
   font-weight: 600;
-`;
-
-interface SendButtonProps {
-  enable?: boolean;
-}
-
-export const SendInterestButton = styled.button`
-  position: fixed;
-  left: 52%;
-  bottom: 1.5rem;
-  width: 30%;
-  border: 12px;
-  background-color: ${color.date};
-  font-size: 14px;
-  font-weight: 400;
-  color: white;
-  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
-  max-width: 12rem;
-
-  ${(props: SendButtonProps) =>
-    props.enable
-      ? `background-color : ${color.datelight}; color:white; box-shadow:none; `
-      : `
-      transition: box-shadow 0.3s, background-color 0.3s;
-  &:hover {
-    box-shadow: 0px 1px 12px -3px rgba(0, 0, 0, 0.6);
-    background-color: ${color.datelight};
-    transition: box-shadow 0.3s, background-color 0.3s;
-    cursor : pointer;
-  }`}
-
-  &:focus {
-    outline: none;
-  }
-  @media (max-width: 325px) {
-    left: 56%;
-  }
-  @media (max-width: 270px) {
-    width: 40%;
-  }
-`;
-
-export const BackButton = styled.button`
-  position: fixed;
-  right: 52%;
-  bottom: 1.5rem;
-  width: 30%;
-  border: 12px;
-  background-color: white;
-  border: 1px solid ${color.grayborder};
-  color: ${color.gray};
-  box-shadow: 0px 1px 8px -4px rgba(0, 0, 0, 0.6);
-  max-width: 12rem;
-
-  font-size: 14px;
-  font-weight: 400;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:focus {
-    outline: none;
-  }
-  @media (max-width: 325px) {
-    right: 56%;
-  }
-  @media (max-width: 270px) {
-    width: 40%;
-  }
 `;
 
 export const Empty = styled.div`

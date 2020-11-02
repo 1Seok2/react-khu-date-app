@@ -9,6 +9,7 @@ import { DetailProps } from '../type';
 import Loading from '@/components/util/loading';
 
 import * as s from './Detail.styled';
+import { color } from '@/theme/color';
 
 const DetailPresenter = ({
   isLoading,
@@ -72,16 +73,17 @@ const DetailPresenter = ({
           <s.SubTitle>단과대학교</s.SubTitle>
           <s.Description>{person.college}</s.Description>
         </s.Row>
-        <s.BackButton onClick={() => history.goBack()}>
-          뒤로가기
-        </s.BackButton>
         <s.Empty />
-        <s.SendInterestButton
-          enable={enable}
-          onClick={sendInterest}
-        >
-          {enable ? '전송완료' : '관심표현'}
-        </s.SendInterestButton>
+        <s.ButtonContainer>
+          <s.SButton Btype="back">뒤로가기</s.SButton>
+          <s.SButton
+            Btype="like"
+            bgColor={color.date}
+            color="white"
+          >
+            호감표시
+          </s.SButton>
+        </s.ButtonContainer>
       </s.DescContainer>
     </>
   );
