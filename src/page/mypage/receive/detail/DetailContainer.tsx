@@ -17,7 +17,7 @@ const Detail = (props: any): JSX.Element => {
   const receiveChat = props.location.state.receiveChat;
   const userObj = props.location.state.userObj;
 
-  const [opponent, setOpponent] = useState({});
+  const [opponent, setOpponent] = useState<any>({});
 
   const [isLoading, setLoading] = useState(true);
 
@@ -25,6 +25,7 @@ const Detail = (props: any): JSX.Element => {
    * 이미 전송한 상대이면 버튼 클릭 불가
    */
   const [enable, setEnable] = useState(false);
+  const [isContact, setContact] = useState(false);
 
   const [status, setStatus] = useState(0);
 
@@ -41,6 +42,7 @@ const Detail = (props: any): JSX.Element => {
         receiverOk: 1,
       });
       setEnable(true);
+      setContact(true);
     }
   };
 
@@ -74,7 +76,13 @@ const Detail = (props: any): JSX.Element => {
             receiverSaw: 1,
           });
         }
-        if (snap.val().receiverOk !== 0) setEnable(true);
+
+        if (snap.val().receiverOk !== 0) {
+          setEnable(true);
+          if (snap.val().receiverOk === 1) {
+            setContact(true);
+          }
+        }
       });
   }, []);
 
@@ -84,18 +92,38 @@ const Detail = (props: any): JSX.Element => {
    * 이미지 가져오기
    */
   useEffect(() => {
-    FirebaseStorage.ref('example/10.jpeg')
-      .getDownloadURL()
-      .then((url: any) => {
-        console.log(url);
-        setUrl([
-          url,
-          'https://1seok2.github.io/CSS-exercises/assets/tranditional/holi-2416686_640.jpg',
-          'https://1seok2.github.io/CSS-exercises/assets/tranditional/asia-1822521_640.jpg',
-        ]);
-      })
-      .then(() => setLoading(false));
-  }, []);
+    let interval: any;
+    let ok = false;
+    let uris: any = [];
+
+    if (opponent) {
+      for (let i = 0; i < opponent?.img; i++) {
+        FirebaseStorage.ref(
+          `hands/${opponent?.email}/${i}.jpg`,
+        )
+          .getDownloadURL()
+          .then(uri => {
+            uris = [...uris, uri];
+            setUrl(uris);
+            ok = true;
+          })
+          .then(() => {
+            if (ok && i === 0) {
+              setTimeout(() => {
+                setLoading(false);
+                interval = setInterval(() => {
+                  setStatus(
+                    prev => (prev + 1) % opponent?.img,
+                  );
+                }, 2500);
+              }, 300);
+            }
+          });
+      }
+    }
+
+    return () => clearInterval(interval);
+  }, [opponent]);
 
   /**
    * 이미지 슬라이더
@@ -120,17 +148,6 @@ const Detail = (props: any): JSX.Element => {
       });
     }
   };
-
-  useEffect(() => {
-    let interval: any;
-    if (!isLoading && url?.length > 1) {
-      interval = setInterval(() => {
-        setStatus(prev => (prev + 1) % 3);
-      }, 2500);
-    }
-
-    return () => clearInterval(interval);
-  }, [isLoading]);
 
   /**
    *  상대 정보 가져옴
@@ -157,6 +174,7 @@ const Detail = (props: any): JSX.Element => {
       changeStatus={changeStatus}
       history={props.history}
       opponent={opponent}
+      isContact={isContact}
     />
   );
 };

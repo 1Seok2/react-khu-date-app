@@ -7,6 +7,7 @@ import moment from 'moment';
 import Loading from '@/components/util/loading';
 import * as s from './Detail.styled';
 import { ChatObj } from '../../type';
+import { color } from '@/theme/color';
 
 interface DetailProps {
   isLoading: boolean;
@@ -19,6 +20,7 @@ interface DetailProps {
   accept: () => void;
   reject: () => void;
   opponent?: any;
+  isContact?: boolean;
 }
 
 const DetailPresenter = ({
@@ -32,6 +34,7 @@ const DetailPresenter = ({
   accept,
   reject,
   opponent,
+  isContact,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -93,20 +96,40 @@ const DetailPresenter = ({
           <s.SubTitle>단과대학교</s.SubTitle>
           <s.Description>{opponent.college}</s.Description>
         </s.Row>
+        {isContact && (
+          <s.Row>
+            <s.SubTitle>이메일</s.SubTitle>
+            <s.Description>{opponent.email}</s.Description>
+          </s.Row>
+        )}
         <s.ButtonContainer>
-          <s.BackButton>뒤로</s.BackButton>
-          <s.RejectButton
+          <s.SButton
+            Bflex={1}
+            Btype="back"
+            onClick={() => history.goBack()}
+          >
+            뒤로
+          </s.SButton>
+          <s.SButton
+            Bflex={1}
+            Btype="reject"
+            bgColor={color.datelight}
+            color={'white'}
             enable={enable}
             onClick={() => reject()}
           >
             거절
-          </s.RejectButton>
-          <s.SendButton
+          </s.SButton>
+          <s.SButton
+            Bflex={2}
+            Btype="accept"
+            bgColor={color.date}
+            color="white"
             enable={enable}
             onClick={() => accept()}
           >
             나도 좋아!
-          </s.SendButton>
+          </s.SButton>
         </s.ButtonContainer>
         <s.Empty />
       </s.DescContainer>

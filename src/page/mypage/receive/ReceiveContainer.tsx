@@ -48,8 +48,7 @@ const ReceiveContainer = ({
             /**
              * 상대에 해당하는 사진 가져오기
              */
-            // FirebaseStorage.ref(`hands/${snap.val()[key].sender}/0.jpg`)
-            FirebaseStorage.ref(`hands/${obj.email}/0.jpg`)
+            FirebaseStorage.ref(`hands/${obj.sender}/0.jpg`)
               .getDownloadURL()
               .then((uri: any) => {
                 img = [...img, uri];
@@ -58,10 +57,13 @@ const ReceiveContainer = ({
           }
         }
 
+        /**
+         * 이미지 로딩 중 이미지가 변하는 과정 안보이게
+         */
         setList(list);
         setTimeout(() => {
           setLoading(false);
-        }, 100);
+        }, 300);
       },
     );
   }, []);

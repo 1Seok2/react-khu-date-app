@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { color } from '@/theme/color';
+import {
+  SmallTabletWidth,
+  SmartPhoneWidth,
+} from '@/theme/width';
 import styled, { keyframes } from 'styled-components';
 
 const change = keyframes`
@@ -164,81 +168,58 @@ interface ButtonProps {
 }
 
 export const ButtonContainer = styled.div`
-  width: 260px;
   position: fixed;
-  bottom: 1.5rem;
   left: 50%;
+  bottom: 0;
   transform: translateX(-50%);
-  height: 52px;
+  width: 100vw;
+  max-width: ${SmallTabletWidth};
+  height: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid lightgray;
+
+  @media (max-width: ${SmartPhoneWidth}) {
+    height: 42px;
+  }
 `;
 
-export const BackButton = styled.button`
-  padding: 6px;
-  border: 1px solid ${color.grayborder};
-  margin-right: 5px;
-  color: ${color.gray};
-  background-color: white;
+interface SButtonProps {
+  Bflex?: number;
+  Btype?: string;
+  bgColor?: string;
+  color?: string;
+  enable?: boolean;
+}
+
+export const SButton = styled.button`
+  flex: 1;
+  flex-grow: ${(props: SButtonProps) =>
+    props.Bflex ? props.Bflex : 1};
+  background-color: ${(props: SButtonProps) =>
+    props.Btype !== 'back' ? props.bgColor : '#fafafa'};
+  color: ${(props: SButtonProps) =>
+    props.Btype !== 'back' ? props.color : color.gray};
+  border-radius: 0;
+  height: 100%;
+
   &:focus {
     outline: none;
   }
-  font-size: 14px;
-  font-weight: 300;
-  border-radius: 3px;
-  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.3);
-  height: 40px;
-  width: 80px;
-`;
 
-export const RejectButton = styled.button`
-  padding: 6px;
-  border: 1px solid ${color.gray};
-  background-color: ${color.gray};
-  color: white;
-  margin-right: 5px;
-  &:focus {
-    outline: none;
-  }
-  font-size: 14px;
-  font-weight: 300;
-  border-radius: 3px;
-  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.3);
-  height: 40px;
-  width: 80px;
-  ${(props: ButtonProps) =>
-    props.enable
-      ? `
-    background-color : #cfcfcf;
-    color : ${color.grayborder};
-    border: 1px solid #cfcfcf;
-  `
-      : null}
-`;
-
-export const SendButton = styled.button`
-  padding: 6px;
-  background-color: ${color.date};
-  border: 1px solid ${color.date};
-  color: white;
-  &:focus {
-    outline: none;
-  }
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 3px;
-  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.3);
-  height: 40px;
-  width: 100px;
-  ${(props: ButtonProps) =>
+  ${(props: SButtonProps) =>
     props.enable
       ? `
     background-color : ${color.datedark};
-    color : ${color.grayborder};
-    border: 1px solid ${color.datedark};
   `
-      : null}
+      : `
+    &:hover {
+      cursor: pointer;
+    background-color: ${(props: SButtonProps) =>
+      props.Btype !== 'back' ? color.datelight : '#fff'};
+    }
+    `}
 `;
 
 export const Empty = styled.div`

@@ -1,6 +1,5 @@
 /**
  * @description 호감 받은 목록
- * @todo 추후 표나 플랫리스트로 표시
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -36,7 +35,7 @@ const ReceivePresenter = ({
     <s.ListContainer>
       {receiveList.map((receiveChat, idx) => (
         <s.ListItem
-          key={receiveChat.receiver}
+          key={receiveChat.createdAt}
           delay={idx}
           // bgUri={receiveChat.uri}
           bgUri={img[idx]}
@@ -45,7 +44,7 @@ const ReceivePresenter = ({
             to={{
               pathname: '/mypage/receive/detail',
               state: {
-                receiveChat: receiveChat, // 내가 상대 고른 상대 정보
+                receiveChat: receiveChat, // 내게 호감 보낸 상대와 나 간의 챗 정보
                 userObj: userObj, // 내 정보
               },
             }}
