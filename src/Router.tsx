@@ -18,6 +18,7 @@ import Detail from './page/contact/detail';
 import List from './page/contact/list';
 import Edit from './page/mypage/edit';
 import Receive from './page/mypage/receive';
+import ReceiveDetail from './page/mypage/receive/detail';
 import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
 import Loading from './components/util/loading';
@@ -81,9 +82,16 @@ const AppRouter: React.FC<RouterProps> = ({
                 )}
               />
               <Route
+                exact
                 path="/mypage/receive"
                 render={props => (
                   <Receive userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                path="/mypage/receive/detail"
+                render={props => (
+                  <ReceiveDetail {...props} />
                 )}
               />
               <Route

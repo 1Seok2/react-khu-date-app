@@ -5,54 +5,69 @@ import { color } from '@/theme/color';
 const key1 = keyframes`
 0% {
   background-color: ${color.datedark};
+  transform : translateY(50%);
 }
 33% {
   background-color : ${color.date};
+  transform : none;
 }
 50% {
   background-color: ${color.datelight};
+  transform : translateY(-50%);
 }
 83% {
   background-color: ${color.date};
+  transform : none;
 }
 100% {
   background-color: ${color.datedark};
+  transform : translateY(50%);
 }
 `;
 
 const key2 = keyframes`
 0% {
   background-color: ${color.date};
+  transform : none;
 }
 17% {
   background-color : ${color.datelight};
+  transform : translateY(-50%);
 }
 50% {
   background-color: ${color.date};
+  transform : none;
 }
 83% {
   background-color: ${color.datedark};
+  transform : translateY(50%);
 }
 100% {
   background-color: ${color.date};
+  transform : none;
 }
 `;
 
 const key3 = keyframes`
 0% {
   background-color: ${color.datelight};
+  transform : translateY(-50%);
 }
 17% {
   background-color : ${color.date};
+  transform : none;
 }
 50% {
   background-color: ${color.datedark};
+  transform : translateY(50%);
 }
 83% {
   background-color: ${color.date};
+  transform : none;
 }
 100% {
   background-color: ${color.datelight};
+  transform : translateY(-50%);
 }
 `;
 
@@ -67,6 +82,7 @@ export const LoadingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0);
 `;
 
 interface PropsType {

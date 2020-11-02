@@ -123,59 +123,6 @@ export const ShowCount = styled.h3`
   font-weight: 500;
 `;
 
-export const ButtonContainer = styled.div`
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 100vw;
-  max-width: ${SmallTabletWidth};
-  height: 56px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid lightgray;
-
-  @media (max-width: ${SmartPhoneWidth}) {
-    height: 42px;
-  }
-`;
-
-interface SButtonProps {
-  Btype?: string;
-  bgColor?: string;
-  color?: string;
-  enable?: boolean;
-}
-
-export const SButton = styled.button`
-  flex: 1;
-  flex-grow: 1;
-  background-color: ${(props: SButtonProps) =>
-    props.Btype !== 'back' ? props.bgColor : '#fafafa'};
-  color: ${(props: SButtonProps) =>
-    props.Btype !== 'back' ? props.color : color.gray};
-  border-radius: 0;
-  height: 100%;
-
-  &:focus {
-    outline: none;
-  }
-
-  ${(props: SButtonProps) =>
-    props.enable
-      ? `
-    background-color : ${color.datedark};
-  `
-      : `
-    &:hover {
-      cursor: pointer;
-    background-color: ${(props: SButtonProps) =>
-      props.Btype !== 'back' ? color.datelight : '#fff'};
-    }
-    `}
-`;
-
 /**
  * description
  */
@@ -214,6 +161,65 @@ export const SubTitle = styled.h2`
 export const Description = styled.span`
   font-size: 17px;
   font-weight: 600;
+`;
+
+interface ButtonProps {
+  enable?: boolean;
+}
+
+export const ButtonContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: ${SmallTabletWidth};
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid lightgray;
+
+  @media (max-width: ${SmartPhoneWidth}) {
+    height: 42px;
+  }
+`;
+
+interface SButtonProps {
+  Bflex?: number;
+  Btype?: string;
+  bgColor?: string;
+  color?: string;
+  enable?: boolean;
+}
+
+export const SButton = styled.button`
+  flex: 1;
+  flex-grow: ${(props: SButtonProps) =>
+    props.Bflex ? props.Bflex : 1};
+  background-color: ${(props: SButtonProps) =>
+    props.Btype !== 'back' ? props.bgColor : '#fafafa'};
+  color: ${(props: SButtonProps) =>
+    props.Btype !== 'back' ? props.color : color.gray};
+  border-radius: 0;
+  height: 100%;
+
+  &:focus {
+    outline: none;
+  }
+
+  ${(props: SButtonProps) =>
+    props.enable
+      ? `
+    background-color : ${color.datedark};
+  `
+      : `
+    &:hover {
+      cursor: pointer;
+    background-color: ${(props: SButtonProps) =>
+      props.Btype !== 'back' ? color.datelight : '#fff'};
+    }
+    `}
 `;
 
 export const Empty = styled.div`

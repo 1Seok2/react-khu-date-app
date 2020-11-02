@@ -26,8 +26,10 @@ const Detail: React.FC<RouteComponentProps> = (
    * 이미 전송한 상대이면 버튼 클릭 불가
    */
   const [enable, setEnable] = useState(false);
+  const [isRead, setRead] = useState(false);
 
   const [status, setStatus] = useState(0);
+  const [url, setUrl] = useState<any>();
   /**
    * 관심 표현 ❤️
    */
@@ -39,7 +41,10 @@ const Detail: React.FC<RouteComponentProps> = (
         {
           senderId: userObj.uid, // 관심 표현자 고유 아이디
           sender: userObj.email, // 관심 표현자 메일
+          senderNickname: userObj.nickname,
           receiver: person.email, // 받은 사람 이메일
+          receiverId: person.uid, // 관심 받는자 고유 아이디
+          receiverNickname: person.nickname,
           createdAt: createdAt, // 관심 표현 시간
           receiverOk: 0, // 좋으면 1, 미응답 0, 싫어! -1
           receiverSaw: 0, // 봤다면 1, 아직 안봤다면 0
@@ -68,6 +73,7 @@ const Detail: React.FC<RouteComponentProps> = (
         let key;
         let alreadySend = false;
         for (key in snap.val()) {
+          if (alreadySend) break;
           if (
             snap.val()[key].sender === userObj.email &&
             snap.val()[key].receiver === person.email &&
@@ -75,59 +81,57 @@ const Detail: React.FC<RouteComponentProps> = (
           ) {
             setEnable(true);
             alreadySend = true;
+            if (snap.val()[key].receiverSaw === 1) {
+              setRead(true);
+            }
             break;
           }
         }
       });
   }, []);
 
-  const [url, setUrl] = useState<any>();
-
+  /**
+   * slider 이전, 다음버튼
+   */
   const changeStatus = (type: string) => {
     if (type === 'next') {
-      setStatus(prev => {
-        if (prev === 2) {
-          return 0;
-        } else {
-          return prev + 1;
-        }
-      });
+      setStatus(prev => (prev + 1) % person.img);
     } else {
-      setStatus(prev => {
-        if (prev === 0) {
-          return 2;
-          // return url.length;
-        } else {
-          return prev - 1;
-        }
-      });
+      setStatus(prev => (prev - 1) % person.img);
     }
   };
 
+  /**
+   * img 가져오기
+   */
   useEffect(() => {
-    FirebaseStorage.ref('example/10.jpeg')
-      .getDownloadURL()
-      .then((url: any) => {
-        console.log(url);
-        setUrl([
-          url,
-          'https://1seok2.github.io/CSS-exercises/assets/tranditional/holi-2416686_640.jpg',
-          'https://1seok2.github.io/CSS-exercises/assets/tranditional/asia-1822521_640.jpg',
-        ]);
-      })
-      .then(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
+    // let uri_list: Array<string> = [];
     let interval: any;
-    if (!isLoading && url?.length > 1) {
-      interval = setInterval(() => {
-        setStatus(prev => (prev + 1) % 3);
-      }, 2500);
+    let ok = false;
+    let uris: any = [];
+
+    for (let i = 0; i < person.img; i++) {
+      FirebaseStorage.ref(`hands/${person.email}/${i}.jpg`)
+        .getDownloadURL()
+        .then(uri => {
+          uris = [...uris, uri];
+          setUrl(uris);
+          ok = true;
+        })
+        .then(() => {
+          if (ok && i === 0) {
+            setTimeout(() => {
+              setLoading(false);
+              interval = setInterval(() => {
+                setStatus(prev => (prev + 1) % person.img);
+              }, 2500);
+            }, 300);
+          }
+        });
     }
 
     return () => clearInterval(interval);
-  }, [isLoading]);
+  }, []);
 
   return (
     <DetailPresenter
@@ -139,6 +143,7 @@ const Detail: React.FC<RouteComponentProps> = (
       status={status}
       changeStatus={changeStatus}
       history={props.history}
+      isRead={isRead}
     />
   );
 };
