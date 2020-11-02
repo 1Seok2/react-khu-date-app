@@ -5,6 +5,7 @@ export interface UserObj {
   createdAt: number;
   nickname?: string;
   age?: string;
-  introduce?: string;
+  location?: string;
   gender?: string;
+  college?: string;
 }

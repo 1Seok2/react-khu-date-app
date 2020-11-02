@@ -16,6 +16,7 @@ const ListPresenter = ({
   userObj,
   opponent,
   isLoading,
+  imgList,
 }: ListProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -28,7 +29,10 @@ const ListPresenter = ({
           key={person.email}
           delay={idx}
           bgUri={
-            'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
+            // 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
+            imgList !== undefined
+              ? imgList[idx]
+              : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
           }
         >
           <Link
@@ -53,8 +57,10 @@ const ListPresenter = ({
               />
             </div>
             <s.DescContainer>
-              <s.Group>단과대 학번</s.Group>
-              <s.NickName>닉네임</s.NickName>
+              <s.Group>
+                {person.college} {person.age}세
+              </s.Group>
+              <s.NickName>{person.nickname}</s.NickName>
             </s.DescContainer>
           </Link>
         </s.ListItem>

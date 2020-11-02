@@ -3,20 +3,12 @@
  */
 
 import React from 'react';
-import moment from 'moment';
-import Loading from '@/components/util/loading';
-import * as s from './Detail.styled';
 
-interface DetailProps {
-  isLoading: boolean;
-  person: any;
-  sendInterest: () => void;
-  enable: boolean;
-  url?: any;
-  status: number;
-  changeStatus: (type: string) => void;
-  history: any;
-}
+import { DetailProps } from '../type';
+
+import Loading from '@/components/util/loading';
+
+import * as s from './Detail.styled';
 
 const DetailPresenter = ({
   isLoading,
@@ -34,7 +26,7 @@ const DetailPresenter = ({
     <>
       <s.HandImageSlider>
         <s.ImageWrappser>
-          {url.map((uri: any, idx: number) => (
+          {url?.map((uri: string, idx: number) => (
             <s.ImageContainer
               uri={uri}
               key={uri}
@@ -55,7 +47,7 @@ const DetailPresenter = ({
           <i className="icon-right-open" />
         </s.StatusButton>
         <s.ShowCount>
-          {status + 1} / {url.length}
+          {status + 1} / {url?.length}
         </s.ShowCount>
       </s.HandImageSlider>
       <s.DescContainer>
@@ -66,19 +58,19 @@ const DetailPresenter = ({
           </h2> */}
         <s.Row>
           <s.SubTitle>닉네임</s.SubTitle>
-          <s.Description>{person.email}</s.Description>
+          <s.Description>{person.nickname}</s.Description>
         </s.Row>
         <s.Row>
           <s.SubTitle>나이</s.SubTitle>
-          <s.Description>설명</s.Description>
+          <s.Description>{person.age}</s.Description>
         </s.Row>
         <s.Row>
           <s.SubTitle>거주 지역</s.SubTitle>
-          <s.Description>설명</s.Description>
+          <s.Description>{person.location}</s.Description>
         </s.Row>
         <s.Row>
           <s.SubTitle>단과대학교</s.SubTitle>
-          <s.Description>설명</s.Description>
+          <s.Description>{person.college}</s.Description>
         </s.Row>
         <s.BackButton onClick={() => history.goBack()}>
           뒤로가기
