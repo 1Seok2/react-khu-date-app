@@ -1,5 +1,6 @@
 /**
  * @description 이성 목록 불러오기
+ * @todo 유저 이미지 불러오기
  */
 
 import React, { useEffect, useState } from 'react';
