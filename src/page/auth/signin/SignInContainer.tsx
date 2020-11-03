@@ -16,7 +16,7 @@ const SignIn = (): JSX.Element => {
     email: '',
     password: '',
   });
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
 
   const onChange = (
     e: React.ChangeEvent<
@@ -34,39 +34,32 @@ const SignIn = (): JSX.Element => {
     userInfo,
   );
 
-  const onSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ) => {
-    e.preventDefault();
-    let data;
-    try {
-      data = await Auth.SignIn(
-        userInfo.email,
-        userInfo.password,
-      );
-    } catch (err) {
-      console.error(err);
-      setError(SignError(err.message));
-    } finally {
-      if (data) {
-        /* save info in db */
-        // const { uid }: any = FirebaseAuth.currentUser;
-        // const lastSignInAt: number = Date.now();
-        // FirebaseRDB.ref(`users/${uid}`).update({
-        //   lastSignInAt: lastSignInAt,
-        // });
-      }
-    }
-  };
+  // const onSubmit = async (
+  //   e: React.FormEvent<HTMLFormElement>,
+  // ) => {
+  //   e.preventDefault();
+  //   let data;
+  //   try {
+  //     data = await Auth.SignIn(
+  //       userInfo.email,
+  //       userInfo.password,
+  //     );
+  //   } catch (err) {
+  //     console.error(err);
+  //     setError(SignError(err.message));
+  //   } finally {
+  //     if (data) {
+  //       /* save info in db */
+  //       // const { uid }: any = FirebaseAuth.currentUser;
+  //       // const lastSignInAt: number = Date.now();
+  //       // FirebaseRDB.ref(`users/${uid}`).update({
+  //       //   lastSignInAt: lastSignInAt,
+  //       // });
+  //     }
+  //   }
+  // };
 
-  return (
-    <SignInPresenter
-      inputList={inputList}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      error={error}
-    />
-  );
+  return <SignInPresenter error={error} />;
 };
 
 export default SignIn;

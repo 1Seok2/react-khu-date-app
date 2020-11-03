@@ -22,7 +22,8 @@ const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
     nickname: '',
   });
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
+  const [show, setShow] = useState(false);
 
   const onChange = (
     e: React.ChangeEvent<
@@ -65,7 +66,7 @@ const SignUpContainer = (): JSX.Element => {
 
         if (emailGroup !== 'khu.ac.kr') {
           /* 다른 웹 메일 사용 */
-          alert('경희대학교 웹 메일로 로그인해주세요');
+          setShow(true);
           return;
         } else {
           /* 학교 웹 메일 사용 */
@@ -83,20 +84,19 @@ const SignUpContainer = (): JSX.Element => {
           }
         }
       } else {
-        alert('로그인 실패');
+        setError(true);
       }
     });
   };
 
   return (
     <SignUpPresenter
-      inputList={inputList}
-      onChange={onChange}
       // onSubmit={onSubmit}
       SNSLogin={SNSLogin}
-      userInfo={userInfo}
-      setInfo={setInfo}
       error={error}
+      setError={setError}
+      show={show}
+      setShow={setShow}
     />
   );
 };

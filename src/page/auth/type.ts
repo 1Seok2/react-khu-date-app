@@ -7,15 +7,9 @@ export interface UserAuthObj {
 }
 
 export interface AuthPresenterProps {
-  inputList: Record<string, string>[];
-  onChange: (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
-    >,
-  ) => void;
-  onSubmit?: (e: any) => Promise<void>;
-  userInfo?: UserAuthObj;
-  setInfo?: any;
-  error: string;
   SNSLogin?: (e: React.FormEvent<HTMLFormElement>) => void;
+  error?: boolean;
+  setError?: React.Dispatch<React.SetStateAction<boolean>>;
+  show?: boolean;
+  setShow?: React.Dispatch<React.SetStateAction<boolean>>;
 }

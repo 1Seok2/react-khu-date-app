@@ -9,15 +9,12 @@ import * as s from '../Auth.styled';
 import { AuthPresenterProps } from '../type';
 
 const SignInPresenter = ({
-  inputList,
-  onChange,
-  onSubmit,
   error,
 }: AuthPresenterProps): JSX.Element => (
   <s.AuthWrapper>
     <s.AuthTitle>경희의 손개팅</s.AuthTitle>
-    <s.AuthForm onSubmit={onSubmit}>
-      {inputList.map((item: Record<string, string>) => (
+    <s.AuthForm>
+      {/* {inputList.map((item: Record<string, string>) => (
         <TextInput
           key={item.name}
           name={item.name}
@@ -26,7 +23,7 @@ const SignInPresenter = ({
           onChange={onChange}
           required={true}
         />
-      ))}
+      ))} */}
       <div>{error}</div>
       <div>
         <s.ChangeAuthButton to="/auth/signup">

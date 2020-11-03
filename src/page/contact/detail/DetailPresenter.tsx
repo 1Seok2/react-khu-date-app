@@ -10,6 +10,7 @@ import Loading from '@/components/util/loading';
 
 import * as s from './Detail.styled';
 import { color } from '@/theme/color';
+import Toast from '@/components/util/toast';
 
 const DetailPresenter = ({
   isLoading,
@@ -21,6 +22,8 @@ const DetailPresenter = ({
   changeStatus,
   history,
   isRead,
+  success,
+  setSuccess,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -101,6 +104,9 @@ const DetailPresenter = ({
           </s.SButton>
         </s.ButtonContainer>
       </s.DescContainer>
+      {success && (
+        <Toast message={'전송 완료'} setShow={setSuccess} />
+      )}
     </>
   );
 export default DetailPresenter;

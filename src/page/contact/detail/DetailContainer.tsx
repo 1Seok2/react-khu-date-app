@@ -21,6 +21,7 @@ const Detail: React.FC<RouteComponentProps> = (
   const userObj = props.location.state.userObj;
 
   const [isLoading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(false);
 
   /**
    * 이미 전송한 상대이면 버튼 클릭 불가
@@ -55,7 +56,7 @@ const Detail: React.FC<RouteComponentProps> = (
             console.error(error);
           } else {
             /* success ... */
-            alert('성공');
+            setSuccess(true);
             setEnable(true);
           }
         },
@@ -146,6 +147,8 @@ const Detail: React.FC<RouteComponentProps> = (
       changeStatus={changeStatus}
       history={props.history}
       isRead={isRead}
+      success={success}
+      setSuccess={setSuccess}
     />
   );
 };
