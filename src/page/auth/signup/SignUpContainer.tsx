@@ -57,7 +57,6 @@ const SignUpContainer = (): JSX.Element => {
   ) => {
     e.preventDefault();
     googleLogin().then(async (data: any) => {
-      console.log('data ...', data);
       if (data) {
         const userEmail: string =
           data.additionalUserInfo?.profile?.email;
@@ -86,7 +85,6 @@ const SignUpContainer = (): JSX.Element => {
       } else {
         alert('로그인 실패');
       }
-      alert('hi');
     });
   };
 

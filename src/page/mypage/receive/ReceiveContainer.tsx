@@ -1,3 +1,7 @@
+/**
+ * @description 내가 받은 목록
+ */
+
 import React, { useEffect, useState } from 'react';
 import {
   FirebaseRDB,

@@ -2,9 +2,9 @@
  * show hamburger nav's list
  */
 
-import { color } from '@/theme/color';
 import React, { memo } from 'react';
 import * as s from './Menu.styled';
+import { color } from '@/theme/color';
 
 const MenuList = ({
   name,

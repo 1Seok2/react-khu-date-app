@@ -5,8 +5,6 @@
 import React from 'react';
 import * as s from '../Auth.styled';
 
-import TextInput from '@/components/util/textinput';
-
 import { AuthPresenterProps } from '../type';
 
 const SignUpPresenter = ({

@@ -1,3 +1,7 @@
+/**
+ * @description 앱 시작
+ */
+
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './Router';
@@ -38,13 +42,6 @@ const App: React.FC = (): JSX.Element => {
           const emailGroup:
             | string
             | undefined = userEmail?.split('@')[1];
-
-          console.log(
-            'compare',
-            userEmail,
-            emailGroup,
-            emailGroup !== 'khu.ac.kr',
-          );
 
           if (emailGroup === 'khu.ac.kr') {
             const { uid }: any = user;
