@@ -115,6 +115,8 @@ const Detail: React.FC<RouteComponentProps> = (
         .getDownloadURL()
         .then(uri => {
           uris = [...uris, uri];
+          console.log(uri);
+
           setUrl(uris);
           ok = true;
         })

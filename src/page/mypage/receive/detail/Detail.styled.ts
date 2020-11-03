@@ -72,7 +72,7 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   border-radius: 3px;
 `;
 
-interface ButtonProps {
+interface StatusButtonProps {
   prev?: boolean;
 }
 
@@ -80,7 +80,7 @@ export const StatusButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  ${(props: ButtonProps) =>
+  ${(props: StatusButtonProps) =>
     props.prev ? `left : 1rem;` : `right:1rem;`}
 
   padding : 0px;
@@ -162,10 +162,6 @@ export const Description = styled.span`
   font-size: 17px;
   font-weight: 600;
 `;
-
-interface ButtonProps {
-  enable?: boolean;
-}
 
 export const ButtonContainer = styled.div`
   position: fixed;

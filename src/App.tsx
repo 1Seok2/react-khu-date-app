@@ -1,3 +1,7 @@
+/**
+ * @description 앱 시작
+ */
+
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './Router';
@@ -34,41 +38,36 @@ const App: React.FC = (): JSX.Element => {
     FirebaseAuth.onAuthStateChanged(
       (user: firebase.User | null): void => {
         if (user) {
-          const { uid }: any = user;
-          setSignIn(true);
+          const userEmail: string | null = user.email;
+          const emailGroup:
+            | string
+            | undefined = userEmail?.split('@')[1];
 
-          /**
-           * 유저 정보 실시간 업데이트
-           */
-          FirebaseRDB.ref(`users/${uid}`).on(
-            'value',
-            (snap: firebase.database.DataSnapshot) => {
-              const obj = snap.val();
-              setUserObj({
-                ...obj,
-                uid: uid,
-              });
-              if (isLoading) {
-                setTimeout(() => {
-                  setLoading(false);
-                }, 200);
-              }
-            },
-          );
-          // .once('value')
-          // .then(snap => {
-          //   const obj = snap.val();
-          //   setUserObj({
-          //     ...obj,
-          //     uid: uid,
-          //   });
-          // })
-          // .finally(() => {
-          //   /* loading time ... */
-          //   setTimeout(() => {
-          //     setLoading(false);
-          //   }, 200);
-          // });
+          if (emailGroup === 'khu.ac.kr') {
+            const { uid }: any = user;
+            setSignIn(true);
+
+            console.log(user.email);
+
+            /**
+             * 유저 정보 실시간 업데이트
+             */
+            FirebaseRDB.ref(`users/${uid}`).on(
+              'value',
+              (snap: firebase.database.DataSnapshot) => {
+                const obj = snap.val();
+                setUserObj({
+                  ...obj,
+                  uid: uid,
+                });
+                if (isLoading) {
+                  setTimeout(() => {
+                    setLoading(false);
+                  }, 200);
+                }
+              },
+            );
+          }
         } else {
           setUserObj(null);
           setSignIn(false);

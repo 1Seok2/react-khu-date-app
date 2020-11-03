@@ -35,7 +35,7 @@ const SendPresenter = ({
     <s.ListContainer>
       {sendList.map((person, idx) => (
         <s.ListItem
-          key={opponent[idx].email}
+          key={opponent[idx]?.email}
           delay={idx}
           bgUri={
             // 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
@@ -67,11 +67,11 @@ const SendPresenter = ({
             </div>
             <s.DescContainer>
               <s.Group>
-                {opponent[idx].college} {opponent[idx].age}
-                세
+                {opponent[idx]?.college}{' '}
+                {opponent[idx]?.age}세
               </s.Group>
               <s.NickName>
-                {opponent[idx].nickname}
+                {opponent[idx]?.nickname}
               </s.NickName>
             </s.DescContainer>
           </Link>
