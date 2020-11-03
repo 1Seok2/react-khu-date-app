@@ -2,8 +2,8 @@
  * @description 사이드 바의 프로필 부분
  */
 
-import { UserObj } from '@/components/util/usertype';
 import React, { memo } from 'react';
+import { UserObj } from '@/components/util/usertype';
 import * as s from './Navigation.styled';
 
 interface ProfileProps {

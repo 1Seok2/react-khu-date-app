@@ -8,19 +8,9 @@ const GetInputList = (
   user: UserAuthObj,
 ): Array<Record<string, string>> => [
   {
-    name: 'email',
-    value: user.email,
-    placeholder: '이메일을 입력해주세요',
-  },
-  {
-    name: 'password',
-    value: user.password,
-    placeholder: '비밀번호를 입력해주세요',
-  },
-  {
-    name: 'name',
-    value: user.name || '',
-    placeholder: '이름을 입력해주세요',
+    name: 'nickname',
+    value: user.nickname,
+    placeholder: '닉네임을 입력해주세요',
   },
   // {
   //   name: 'nickname',

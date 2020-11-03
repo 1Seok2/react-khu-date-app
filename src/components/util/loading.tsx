@@ -1,3 +1,7 @@
+/**
+ * @description 공통 로딩 화면
+ */
+
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { color } from '@/theme/color';

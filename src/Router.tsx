@@ -9,7 +9,7 @@ import { UserObj } from './components/util/usertype';
 
 /* before sign in ... */
 import SignIn from './page/auth/signin';
-import SignUp from './page/auth/signup';
+import Auth from './page/auth/signup';
 
 /* after sign in ... */
 import Intro from './page/intro';
@@ -107,17 +107,13 @@ const AppRouter: React.FC<RouterProps> = ({
       </>
     ) : (
       <Switch>
-        <Route
+        {/* <Route
           exact
           path="/auth/signin"
           component={SignIn}
-        />
-        <Route
-          exact
-          path="/auth/signup"
-          component={SignUp}
-        />
-        <Redirect path="*" to="/auth/signin" />
+        /> */}
+        <Route exact path="/auth" component={Auth} />
+        <Redirect path="*" to="/auth" />
       </Switch>
     )}
   </div>
