@@ -3,9 +3,7 @@
  */
 
 export interface UserAuthObj {
-  email: string;
-  password: string;
-  name?: string;
+  nickname: string;
 }
 
 export interface AuthPresenterProps {
@@ -15,8 +13,9 @@ export interface AuthPresenterProps {
       HTMLInputElement | HTMLTextAreaElement
     >,
   ) => void;
-  onSubmit: (e: any) => Promise<void>;
+  onSubmit?: (e: any) => Promise<void>;
   userInfo?: UserAuthObj;
   setInfo?: any;
   error: string;
+  SNSLogin?: (e: React.FormEvent<HTMLFormElement>) => void;
 }

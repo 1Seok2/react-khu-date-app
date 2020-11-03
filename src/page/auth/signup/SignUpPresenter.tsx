@@ -16,11 +16,12 @@ const SignUpPresenter = ({
   userInfo,
   setInfo,
   error,
+  SNSLogin,
 }: AuthPresenterProps): JSX.Element => (
   <s.AuthWrapper>
     <s.AuthTitle>경희의 손개팅</s.AuthTitle>
-    <s.AuthForm onSubmit={onSubmit}>
-      {inputList.map((item: Record<string, string>) => (
+    <s.AuthForm onSubmit={SNSLogin}>
+      {/* {inputList.map((item: Record<string, string>) => (
         <TextInput
           key={item.name}
           name={item.name}
@@ -29,14 +30,15 @@ const SignUpPresenter = ({
           onChange={onChange}
           required={true}
         />
-      ))}
+      ))} */}
       <div>{error}</div>
-      <>
+      {/* <>
         <s.ChangeAuthButton to="/auth/signin">
           계정이 이미 있으신가요?
         </s.ChangeAuthButton>
-        <s.SubmitButton>회원가입</s.SubmitButton>
-      </>
+        <s.SubmitButton>학교 웹 메일로 로그인</s.SubmitButton>
+      </> */}
+      <s.SubmitButton>학교 웹 메일로 로그인</s.SubmitButton>
     </s.AuthForm>
   </s.AuthWrapper>
 );

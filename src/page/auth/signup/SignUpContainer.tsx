@@ -3,7 +3,11 @@
  */
 
 import React, { useState } from 'react';
-import { FirebaseAuth } from '@/config/firebase.config';
+import {
+  FirebaseAuth,
+  FirebaseInstance,
+  FirebaseRDB,
+} from '@/config/firebase.config';
 import { Auth } from '@/api/firebase-auth';
 import { fbsetWithPathAndFormApi } from '@/api/firebase-set';
 
@@ -16,9 +20,7 @@ import SignUpPresenter from './SignUpPresenter';
 
 const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
-    email: '',
-    password: '',
-    name: '',
+    nickname: '',
   });
   const [error, setError] = useState<string>('');
 
@@ -36,44 +38,64 @@ const SignUpContainer = (): JSX.Element => {
 
   const inputList = GetInputList(userInfo);
 
-  const onSubmit = async (e: any) => {
-    e.preventDefault();
-    let data;
-    try {
-      data = await Auth.SignUp(
-        userInfo.email,
-        userInfo.password,
-      );
-    } catch (err) {
-      console.error(err);
-      setError(SignError(err.message));
-    } finally {
-      if (data) {
-        /* save info in db */
-        const createdAt: number = Date.now(); // 회원가입 생성 ms
-
-        getUid().then(uid => {
-          fbsetWithPathAndFormApi(`users/${uid}`, {
-            email: userInfo.email,
-            name: userInfo.name,
-            createdAt: createdAt,
-          });
-        });
-      }
-    }
-  };
-
   const getUid = async () => {
     const { uid }: any = FirebaseAuth.currentUser;
     console.log(uid);
     return uid;
   };
 
+  const googleLogin = async () => {
+    const provider: firebase.auth.GoogleAuthProvider = new FirebaseInstance.auth.GoogleAuthProvider();
+    const data: firebase.auth.UserCredential = await FirebaseAuth.signInWithPopup(
+      provider,
+    );
+    return data;
+  };
+
+  const SNSLogin = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => {
+    e.preventDefault();
+    googleLogin().then(async (data: any) => {
+      console.log('data ...', data);
+      if (data) {
+        const userEmail: string =
+          data.additionalUserInfo?.profile?.email;
+
+        const emailGroup: string = userEmail.split('@')[1];
+
+        if (emailGroup !== 'khu.ac.kr') {
+          /* 다른 웹 메일 사용 */
+          alert('경희대학교 웹 메일로 로그인해주세요');
+          return;
+        } else {
+          /* 학교 웹 메일 사용 */
+          const user: firebase.User | null =
+            FirebaseAuth.currentUser;
+
+          /* 새로운 유저라면 */
+          if (data.additionalUserInfo?.isNewUser) {
+            const createdAt: number = Date.now();
+
+            FirebaseRDB.ref(`users/${user?.uid}`).set({
+              email: userEmail,
+              createdAt: createdAt,
+            });
+          }
+        }
+      } else {
+        alert('로그인 실패');
+      }
+      alert('hi');
+    });
+  };
+
   return (
     <SignUpPresenter
       inputList={inputList}
       onChange={onChange}
-      onSubmit={onSubmit}
+      // onSubmit={onSubmit}
+      SNSLogin={SNSLogin}
       userInfo={userInfo}
       setInfo={setInfo}
       error={error}

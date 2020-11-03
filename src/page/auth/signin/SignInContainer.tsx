@@ -12,7 +12,7 @@ import SignError from '../AuthError';
 import { UserAuthObj } from '../type';
 
 const SignIn = (): JSX.Element => {
-  const [userInfo, setInfo] = useState<UserAuthObj>({
+  const [userInfo, setInfo] = useState<any>({
     email: '',
     password: '',
   });
