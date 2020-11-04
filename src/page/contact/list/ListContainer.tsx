@@ -1,6 +1,5 @@
 /**
  * @description 이성 목록 불러오기
- * @todo 유저 이미지 불러오기
  */
 
 import React, { useEffect, useState } from 'react';
@@ -16,7 +15,6 @@ import { UserObj } from '@/components/util/usertype';
 
 const ListContainer = ({
   userObj,
-  ...props
 }: ListProps): JSX.Element => {
   const gender = userObj?.gender;
   const [isLoading, setLoading] = useState(true);
@@ -66,27 +64,6 @@ const ListContainer = ({
         }, 200),
       );
   }, []);
-
-  // useEffect(() => {
-  //   let img: any = [];
-
-  //   for (let i = 0; i < opponent.length; i++) {
-  //     FirebaseStorage.ref(
-  //       `hands/${opponent[i].email}/0.jpg`,
-  //     )
-  //       .getDownloadURL()
-  //       .then((uri: any) => {
-  //         img = [...img, uri];
-  //         console.log(uri, opponent[i].email);
-  //       })
-  //       .then(() => setImg([...img]))
-  //       .finally(() =>
-  //         setTimeout(() => {
-  //           setLoading(false);
-  //         }, 200),
-  //       );
-  //   }
-  // }, [opponent]);
 
   return (
     <ListPresenter

@@ -102,6 +102,19 @@ const Detail: React.FC<RouteComponentProps> = (
     }
   };
 
+  const getImage = async () => {
+    let uris: any = [];
+    for (let i = 0; i < person.img; i++) {
+      const uri = await FirebaseStorage.ref(
+        `hands/${person.email}/${i}.jpg`,
+      ).getDownloadURL();
+
+      uris = [...uris, uri];
+    }
+
+    return uris;
+  };
+
   /**
    * img 가져오기
    */
@@ -109,31 +122,18 @@ const Detail: React.FC<RouteComponentProps> = (
     // let uri_list: Array<string> = [];
     let interval: any;
     let ok = false;
-    let uris: any = [];
 
-    for (let i = 0; i < person.img; i++) {
-      console.log(person.email);
-
-      FirebaseStorage.ref(`hands/${person.email}/${i}.jpg`)
-        .getDownloadURL()
-        .then(uri => {
-          uris = [...uris, uri];
-          console.log(uri);
-
-          setUrl(uris);
-          ok = true;
-        })
-        .then(() => {
-          if (ok && i === 0) {
-            setTimeout(() => {
-              setLoading(false);
-              interval = setInterval(() => {
-                setStatus(prev => (prev + 1) % person.img);
-              }, 2500);
-            }, 300);
-          }
-        });
-    }
+    getImage()
+      .then(uris => {
+        setUrl(uris);
+        ok = true;
+      })
+      .then(() => {
+        setLoading(false);
+        interval = setInterval(() => {
+          setStatus(prev => (prev + 1) % person.img);
+        }, 2500);
+      });
 
     return () => clearInterval(interval);
   }, []);
