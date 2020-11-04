@@ -23,7 +23,7 @@ const MenuList = ({
           (pathname.includes('contact') &&
             path.includes('contact'))
             ? {
-                backgroundColor: color.date,
+                backgroundColor: color.datedark,
                 color: 'white',
               }
             : {
@@ -57,7 +57,7 @@ const MenuList = ({
                       marginRight: 8,
                     }
                   : {
-                      color: '#dedede',
+                      color: '#eee',
                       marginRight: 8,
                       fontWeight: 400,
                     }
@@ -74,7 +74,7 @@ const MenuList = ({
                     marginRight: 8,
                   }
                 : {
-                    color: '#dedede',
+                    color: '#eee',
                     marginRight: 8,
                     fontWeight: 400,
                   }

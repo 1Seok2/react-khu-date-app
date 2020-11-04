@@ -31,24 +31,31 @@ export const UserInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-left: 0.5rem;
+  margin-left: 1.5rem;
 `;
 
 export const UserGroup = styled.h2`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   color: #fafafa;
 `;
 
 export const UserName = styled.h1`
-  font-size: 18px;
+  font-size: 23px;
   font-weight: 600;
-  margin-top: 8px;
+  margin-top: 12px;
+  color: #555;
+`;
+
+export const Sir = styled.span`
+  font-size: 15px;
+  font-weight: 600;
   color: #fafafa;
+  margin-left: 8px;
 `;
 
 export const SignOut = styled.a`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 300;
   position: absolute;
   right: 1rem;

@@ -19,11 +19,29 @@ const SForm = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 80%;
 `;
 
 const SInput = styled.input`
   padding: 6px 9px;
   border: 1px solid ${color.grayborder};
+
+  @media (max-width: 450px) {
+    width: 100px;
+  }
+
+  @media (max-width: 340px) {
+    width: 70px;
+  }
+
+  @media (max-width: 290px) {
+    width: 50px;
+  }
+`;
+
+const SButton = styled.button`
+  padding: 0;
+  margin-left: 8px;
 `;
 
 const GetMoney = () => {
@@ -44,7 +62,7 @@ const GetMoney = () => {
   ) => {
     e.preventDefault();
 
-    if (parseInt(money) < 1000) {
+    if (parseInt(money) < 1000 || money === '') {
       setToast(true);
       console.log('low...');
     } else {
@@ -61,7 +79,7 @@ const GetMoney = () => {
         onChange={onChange}
         placeholder="원"
       />
-      <button>후원</button>
+      <SButton>후원</SButton>
       {toast && (
         <Toast
           message="1000원 이상 가능합니다"
