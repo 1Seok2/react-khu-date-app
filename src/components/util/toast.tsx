@@ -22,11 +22,16 @@ const toast = keyframes`
 }
 `;
 
+interface ToastStyleProps {
+  bottom?: any;
+}
+
 const ToastContainer = styled.div`
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 4rem;
+  bottom: ${(props: ToastStyleProps) =>
+    props.bottom ? props.bottom : '4rem'};
   background-color: rgba(50, 50, 50, 0.7);
   width: 180px;
   padding: 12px 24px;
@@ -50,9 +55,16 @@ interface ToastProps {
   setShow:
     | React.Dispatch<React.SetStateAction<boolean>>
     | undefined;
+  style?: any;
+  bottom?: any;
 }
 
-const Toast = ({ message, setShow }: ToastProps) => {
+const Toast = ({
+  message,
+  setShow,
+  style,
+  bottom,
+}: ToastProps) => {
   useEffect(() => {
     setTimeout(() => {
       if (setShow) {
@@ -62,7 +74,7 @@ const Toast = ({ message, setShow }: ToastProps) => {
   }, []);
 
   return (
-    <ToastContainer>
+    <ToastContainer {...style} bottom={bottom}>
       <Message>{message}</Message>
     </ToastContainer>
   );
