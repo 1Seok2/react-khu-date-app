@@ -43,11 +43,9 @@ const App: React.FC = (): JSX.Element => {
             | string
             | undefined = userEmail?.split('@')[1];
 
-          if (emailGroup === 'khu.ac.kr') {
+          if (/* emailGroup === 'khu.ac.kr' */ 1) {
             const { uid }: any = user;
             setSignIn(true);
-
-            console.log(user.email);
 
             /**
              * 유저 정보 실시간 업데이트
