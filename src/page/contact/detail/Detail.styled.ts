@@ -25,19 +25,22 @@ const change = keyframes`
 `;
 
 export const HandImageSlider = styled.div`
-  position: relative;
+  display: flex;
   /* background-color: rgba(222, 222, 222, 0.5); */
-  text-align: center;
-  height: 21rem;
+  width: 100%;
+  height: 100vw;
+  max-height: ${SmallTabletWidth};
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ImageWrappser = styled.div`
-  width: 100%;
-  max-width: 21rem;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-100%);
+  width: 98.6%;
+  height: 98.6%;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  border: 1px solid ${color.grayborder};
+  position: relative;
 `;
 
 interface ImageProps {
@@ -53,14 +56,14 @@ background-image: url(${`${props.uri}`});
 `
       : `
 background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditional/woman-1822646_640.jpg');`}
-  background-position: top;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 0;
   width: 100%;
-  height: 21rem;
+  height: 100%;
   margin: 0;
   padding: 0;
   opacity: ${(props: ImageProps) =>
@@ -68,8 +71,6 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   animation: ${(props: ImageProps) =>
       props.current ? change : null}
     0.3s both ease-in;
-  border: 1px solid ${color.grayborder};
-  border-radius: 3px;
 `;
 
 interface ButtonProps {
@@ -135,6 +136,7 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-top: 1px solid lightgray;
+  z-index: 1;
 
   @media (max-width: ${SmartPhoneWidth}) {
     height: 42px;
@@ -182,25 +184,23 @@ export const SButton = styled.button`
 
 export const DescContainer = styled.div`
   margin: 0 auto;
-  margin-top: 24px;
   padding: 0 12px;
   max-width: 28rem;
 `;
 
 export const Title = styled.h1`
   margin-bottom: 22px;
-  margin-top: 30px;
+  margin-top: 11px;
   font-size: 20px;
   font-weight: 500;
+  margin-left: 8px;
 `;
 
 export const Row = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${color.grayborder};
-  margin-bottom: 10px;
+  margin-bottom: 11px;
 `;
 
 export const SubTitle = styled.h2`
