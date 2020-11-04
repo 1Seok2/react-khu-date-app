@@ -35,29 +35,30 @@ const ListContainer = ({
    */
   useEffect(() => {
     let list: any = [];
-    let img: any = [];
 
     FirebaseRDB.ref(`users`)
       .once('value')
-      .then((snap: firebase.database.DataSnapshot) => {
-        let key;
-        for (key in snap.val()) {
-          /* 모든 유저중 이성을 리스트로 */
-          if (snap.val()[key].gender !== gender) {
-            list = [...list, snap.val()[key]];
+      .then(
+        async (snap: firebase.database.DataSnapshot) => {
+          let key;
+          for (key in snap.val()) {
+            /* 모든 유저중 이성을 리스트로 */
+            if (snap.val()[key].gender !== gender) {
+              const uri = await FirebaseStorage.ref(
+                `hands/${snap.val()[key].email}/0.jpg`,
+              ).getDownloadURL();
 
-            FirebaseStorage.ref(
-              `hands/${snap.val()[key].email}/0.jpg`,
-            )
-              .getDownloadURL()
-              .then((uri: any) => {
-                img = [...img, uri];
-              })
-              .then(() => setImg(img));
+              const obj = {
+                ...snap.val()[key],
+                uri: uri,
+              };
+
+              list = [...list, obj];
+            }
           }
-        }
-        setOpponent(list);
-      })
+          setOpponent(list);
+        },
+      )
       .catch(err => console.error(err))
       .finally(() =>
         setTimeout(() => {
@@ -65,6 +66,27 @@ const ListContainer = ({
         }, 200),
       );
   }, []);
+
+  // useEffect(() => {
+  //   let img: any = [];
+
+  //   for (let i = 0; i < opponent.length; i++) {
+  //     FirebaseStorage.ref(
+  //       `hands/${opponent[i].email}/0.jpg`,
+  //     )
+  //       .getDownloadURL()
+  //       .then((uri: any) => {
+  //         img = [...img, uri];
+  //         console.log(uri, opponent[i].email);
+  //       })
+  //       .then(() => setImg([...img]))
+  //       .finally(() =>
+  //         setTimeout(() => {
+  //           setLoading(false);
+  //         }, 200),
+  //       );
+  //   }
+  // }, [opponent]);
 
   return (
     <ListPresenter

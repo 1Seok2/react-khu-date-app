@@ -112,6 +112,8 @@ const Detail: React.FC<RouteComponentProps> = (
     let uris: any = [];
 
     for (let i = 0; i < person.img; i++) {
+      console.log(person.email);
+
       FirebaseStorage.ref(`hands/${person.email}/${i}.jpg`)
         .getDownloadURL()
         .then(uri => {

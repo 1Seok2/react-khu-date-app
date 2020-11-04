@@ -9,4 +9,5 @@ export interface UserObj {
   gender?: string;
   college?: string;
   img?: number;
+  uri?: string;
 }

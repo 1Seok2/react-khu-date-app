@@ -30,9 +30,10 @@ const ListPresenter = ({
           delay={idx}
           bgUri={
             // 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
-            imgList !== undefined
-              ? imgList[idx]
-              : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
+            // imgList !== undefined
+            //   ? imgList[idx]
+            //   : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
+            person.uri
           }
         >
           <Link
@@ -56,12 +57,12 @@ const ListPresenter = ({
                 style={{ color: color.date }}
               />
             </div> */}
-            {/* <s.DescContainer>
+            <s.DescContainer>
               <s.Group>
                 {person.college} {person.age}세
               </s.Group>
               <s.NickName>{person.nickname}</s.NickName>
-            </s.DescContainer> */}
+            </s.DescContainer>
           </Link>
         </s.ListItem>
       ))}
