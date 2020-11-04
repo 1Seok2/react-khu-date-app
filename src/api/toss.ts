@@ -26,8 +26,11 @@ const Toss_API = (money: number): void => {
       // console.log('Body:', JSON.parse(this.responseText));
       const response = JSON.parse(this.responseText);
 
-      // window.open(response.success.link);
-      window.open(response.success.scheme);
+      if (window.confirm('toss 앱이 있나요 ?')) {
+        window.open(response.success.scheme);
+      } else {
+        window.open(response.success.link);
+      }
     }
   };
 
