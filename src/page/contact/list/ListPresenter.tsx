@@ -45,7 +45,7 @@ const ListPresenter = ({
             }}
             style={styles.link}
           >
-            <div
+            {/* <div
               style={{
                 textAlign: 'right',
                 height: '10%',
@@ -55,13 +55,13 @@ const ListPresenter = ({
                 className="icon-heart"
                 style={{ color: color.date }}
               />
-            </div>
-            <s.DescContainer>
+            </div> */}
+            {/* <s.DescContainer>
               <s.Group>
                 {person.college} {person.age}세
               </s.Group>
               <s.NickName>{person.nickname}</s.NickName>
-            </s.DescContainer>
+            </s.DescContainer> */}
           </Link>
         </s.ListItem>
       ))}
