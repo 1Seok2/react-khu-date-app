@@ -17,4 +17,8 @@ export interface DetailProps {
   changeStatus: (type: string) => void;
   history: any;
   isRead: boolean;
+  success?: boolean;
+  setSuccess?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 }

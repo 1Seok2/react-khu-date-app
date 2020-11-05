@@ -4,7 +4,7 @@ import { color } from '@/theme/color';
 
 export const SLi = styled.li`
   &:hover {
-    background-color: ${color.gray};
+    background-color: ${color.datelight};
   }
 `;
 

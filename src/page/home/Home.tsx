@@ -1,7 +1,8 @@
-import { FirebaseAuth } from '@/config/firebase.config';
+/**
+ * @description home 화면
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Hello } from './Home.styled';
 
 const Home = (): JSX.Element => (
   <>

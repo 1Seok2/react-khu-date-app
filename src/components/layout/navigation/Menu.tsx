@@ -12,6 +12,7 @@ const MenuList = ({
   pathname,
   icon,
   onClickHBG,
+  unread,
 }: any) => {
   return (
     <s.SLi>
@@ -23,7 +24,7 @@ const MenuList = ({
           (pathname.includes('contact') &&
             path.includes('contact'))
             ? {
-                backgroundColor: color.date,
+                backgroundColor: color.datedark,
                 color: 'white',
               }
             : {
@@ -37,6 +38,7 @@ const MenuList = ({
             display: 'flex',
             justifyContent: 'flex-start',
             flexDirection: 'row',
+            position: 'relative',
           }}
         >
           <div
@@ -57,7 +59,7 @@ const MenuList = ({
                       marginRight: 8,
                     }
                   : {
-                      color: '#dedede',
+                      color: '#eee',
                       marginRight: 8,
                       fontWeight: 400,
                     }
@@ -74,13 +76,41 @@ const MenuList = ({
                     marginRight: 8,
                   }
                 : {
-                    color: '#dedede',
+                    color: '#eee',
                     marginRight: 8,
                     fontWeight: 400,
                   }
             }
           >
-            {name}
+            {name}{' '}
+            {name === '받은 목록' && unread !== 0 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 16,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: 18,
+                  height: 18,
+                  textAlign: 'center',
+                  borderRadius: 12,
+                  backgroundColor: color.datedark,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <h4
+                  style={{
+                    color: 'white',
+                    fontSize: 8,
+                    fontWeight: 500,
+                  }}
+                >
+                  {unread}
+                </h4>
+              </div>
+            )}
           </h3>
         </div>
       </s.SLink>
