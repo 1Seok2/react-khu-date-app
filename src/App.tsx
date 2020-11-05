@@ -39,11 +39,14 @@ const App: React.FC = (): JSX.Element => {
       (user: firebase.User | null): void => {
         if (user) {
           const userEmail: string | null = user.email;
+          const userVerified = user.emailVerified;
           const emailGroup:
             | string
             | undefined = userEmail?.split('@')[1];
 
-          if (/* emailGroup === 'khu.ac.kr' */ 1) {
+          console.log('user', user);
+
+          if (emailGroup === 'khu.ac.kr') {
             const { uid }: any = user;
             setSignIn(true);
 
@@ -57,6 +60,8 @@ const App: React.FC = (): JSX.Element => {
                 setUserObj({
                   ...obj,
                   uid: uid,
+                  emailVerified: userVerified,
+                  email: userEmail,
                 });
                 if (isLoading) {
                   setTimeout(() => {
@@ -66,9 +71,13 @@ const App: React.FC = (): JSX.Element => {
               },
             );
           }
+          // else if (!userVerified) {
+          //   alert('이메일 링크 확인 필요');
+          // }
         } else {
           setUserObj(null);
           setSignIn(false);
+          FirebaseAuth.signOut();
         }
         setTimeout(() => {
           setInit(true);

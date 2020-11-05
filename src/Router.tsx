@@ -8,7 +8,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { UserObj } from './components/util/usertype';
 
 /* before sign in ... */
-import SignIn from './page/auth/signin';
+// import SignIn from './page/auth/signin';
 import Auth from './page/auth/signup';
 
 /* after sign in ... */
@@ -23,6 +23,7 @@ import Send from './page/mypage/send';
 import { SmallTabletWidth } from './theme/width';
 import Loading from './components/util/loading';
 import Header from './components/layout/header';
+import VerifyEmail from './page/auth/verify';
 
 interface RouterProps {
   isSignIn: boolean;
@@ -57,51 +58,66 @@ const AppRouter: React.FC<RouterProps> = ({
             }}
           >
             <Header userObj={userObj} />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route
-                path="/intro"
-                render={props => (
-                  <Intro userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                path="/contact/list"
-                render={props => (
-                  <List userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                path="/contact/detail"
-                component={Detail}
-              />
-              <Route
-                path="/mypage/edit"
-                render={props => (
-                  <Edit userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                exact
-                path="/mypage/receive"
-                render={props => (
-                  <Receive userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                path="/mypage/receive/detail"
-                render={props => (
-                  <ReceiveDetail {...props} />
-                )}
-              />
-              <Route
-                path="/mypage/send"
-                render={props => (
-                  <Send userObj={userObj} {...props} />
-                )}
-              />
-              <Redirect to="/" />
-            </Switch>
+
+            {userObj?.emailVerified ? (
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route
+                  path="/intro"
+                  render={props => (
+                    <Intro userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  path="/contact/list"
+                  render={props => (
+                    <List userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  path="/contact/detail"
+                  component={Detail}
+                />
+                <Route
+                  path="/mypage/edit"
+                  render={props => (
+                    <Edit userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/mypage/receive"
+                  render={props => (
+                    <Receive userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  path="/mypage/receive/detail"
+                  render={props => (
+                    <ReceiveDetail {...props} />
+                  )}
+                />
+                <Route
+                  path="/mypage/send"
+                  render={props => (
+                    <Send userObj={userObj} {...props} />
+                  )}
+                />
+                <Redirect to="/" />
+              </Switch>
+            ) : (
+              <Switch>
+                <Route
+                  path="/auth/verify"
+                  render={() => (
+                    <VerifyEmail userObj={userObj} />
+                  )}
+                  // component={VerifyEmail}
+                  // param={userObj}
+                />
+                <Redirect to="/auth/verify" />
+              </Switch>
+            )}
           </div>
         )}
       </>

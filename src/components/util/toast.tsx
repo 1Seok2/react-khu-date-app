@@ -47,6 +47,7 @@ const ToastContainer = styled.div`
 const Message = styled.h1`
   color: white;
   font-weight: 300;
+  font-size: 12px;
 `;
 
 interface ToastProps {
