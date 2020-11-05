@@ -21,9 +21,6 @@ const Toss_API = (money: number): void => {
    */
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
-      // console.log('Status:', this.status);
-      // console.log('Headers:', this.getAllResponseHeaders());
-      // console.log('Body:', JSON.parse(this.responseText));
       const response = JSON.parse(this.responseText);
 
       if (window.confirm('toss 앱이 있나요 ?')) {

@@ -64,7 +64,6 @@ const GetMoney = () => {
 
     if (parseInt(money) < 1000 || money === '') {
       setToast(true);
-      console.log('low...');
     } else {
       Toss_API(parseInt(money));
     }

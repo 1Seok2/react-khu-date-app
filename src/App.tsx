@@ -44,8 +44,6 @@ const App: React.FC = (): JSX.Element => {
             | string
             | undefined = userEmail?.split('@')[1];
 
-          console.log('user', user);
-
           if (emailGroup === 'khu.ac.kr') {
             const { uid }: any = user;
             setSignIn(true);

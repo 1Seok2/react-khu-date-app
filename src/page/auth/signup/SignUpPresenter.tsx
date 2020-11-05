@@ -6,8 +6,7 @@ import React from 'react';
 
 import TextInput from '@/components/util/textinput';
 
-import * as s from '../Auth.styled';
-import * as ps from './SignUp.styled';
+import * as s from './SignUp.styled';
 
 import { AuthPresenterProps } from '../type';
 import Logo from '@/components/util/logo';
@@ -37,7 +36,7 @@ const SignUpPresenter = ({
       {/* <s.AuthTitle>경희의 손개팅</s.AuthTitle> */}
       <img src={Logo} width="180px" height="180px" />
       <s.AuthForm>
-        <ps.InputContainer>
+        <s.InputContainer>
           <TextInput
             name="nickname"
             value={userInfo?.nickname}
@@ -46,9 +45,9 @@ const SignUpPresenter = ({
             required={true}
             onKeyUp={onKeyUp}
           />
-          <ps.Group>@khu.ac.kr</ps.Group>
-        </ps.InputContainer>
-        <ps.InputContainer>
+          <s.Group>@khu.ac.kr</s.Group>
+        </s.InputContainer>
+        <s.InputContainer>
           <TextInput
             name="password"
             value={userInfo?.password}
@@ -57,15 +56,13 @@ const SignUpPresenter = ({
             required={true}
             onKeyUp={onKeyUp}
           />
-        </ps.InputContainer>
-        <ps.ErrorPw>{error && `* ${error}`}</ps.ErrorPw>
+        </s.InputContainer>
+        <s.ErrorPw>{error && `* ${error}`}</s.ErrorPw>
         <s.SubmitButton onClick={emailLinkAuth}>
           {newAccount ? '회원가입' : '로그인'}
         </s.SubmitButton>
-        <ps.ChangeAuthStatus
+        <s.ChangeAuthStatus
           onClick={() => {
-            console.log('hi');
-
             setNewAccount(!newAccount);
             setError('');
           }}
@@ -73,7 +70,7 @@ const SignUpPresenter = ({
           {newAccount
             ? '이미 계정이 있으신가요?'
             : '학교 웹메일로 회원가입'}
-        </ps.ChangeAuthStatus>
+        </s.ChangeAuthStatus>
       </s.AuthForm>
     </s.AuthWrapper>
     {sendEmail && (

@@ -57,10 +57,9 @@ const AppRouter: React.FC<RouterProps> = ({
               minHeight: 'calc(100vh - 90px)',
             }}
           >
-            <Header userObj={userObj} />
-
             {userObj?.emailVerified ? (
               <Switch>
+                <Header userObj={userObj} />
                 <Route exact path="/" component={Home} />
                 <Route
                   path="/intro"
