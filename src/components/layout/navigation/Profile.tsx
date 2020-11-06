@@ -13,17 +13,19 @@ interface ProfileProps {
 
 const Profile = ({ userObj, logOut }: ProfileProps) => (
   <s.Profile>
-    <s.UserImageContainer>
+    {/* <s.UserImageContainer>
       <img
         src=""
         alt="profile-img"
         width="100%"
         height="100%"
       />
-    </s.UserImageContainer>
+    </s.UserImageContainer> */}
     <s.UserInfoContainer>
-      <s.UserGroup>단과대학</s.UserGroup>
-      <s.UserName>{userObj?.name}</s.UserName>
+      <s.UserGroup>{userObj?.college}</s.UserGroup>
+      <s.UserName>
+        {userObj?.nickname} <s.Sir>학우님</s.Sir>
+      </s.UserName>
     </s.UserInfoContainer>
     <s.SignOut onClick={logOut}>로그아웃</s.SignOut>
   </s.Profile>

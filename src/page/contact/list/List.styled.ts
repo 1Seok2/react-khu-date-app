@@ -1,13 +1,20 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled, { keyframes } from 'styled-components';
 import { color } from '@/theme/color';
+import { SmallTabletWidth } from '@/theme/width';
 
 export const ListContainer = styled.div`
-  width: 90%;
+  width: 100%;
   height: auto;
   margin: 0 auto;
   text-align: center;
   margin-top: 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: white;
 `;
 
 const popIn = keyframes`
@@ -28,20 +35,17 @@ interface ItemProps {
 
 export const ListItem = styled.div`
   display: inline-block;
-  width: 100%;
-  max-width: 10rem;
-  height: 10rem;
-  border-radius: 1rem;
-  padding: 1rem;
+  width: 33%;
+  height: calc(100vw * 0.33);
+  max-height: calc(767px * 0.33);
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: column;
-  margin-bottom: 12px;
   overflow: hidden;
-  margin: 0.4rem;
+  margin-bottom: 2px;
 
-  box-shadow: 0px 0px 12px -6px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.4s, background-size 0.4s;
+  /* box-shadow: 0px 0px 12px -6px rgba(0, 0, 0, 0.5); */
+  transition: background-size 0.4s;
   z-index: 0;
   ${(props: ItemProps) =>
     props.bgUri
@@ -57,12 +61,24 @@ export const ListItem = styled.div`
     props.delay * 80}ms both ease-in;
 
   &:hover {
-    box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.9);
+    /* box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.9); */
     background-size: 110%;
-    transition: box-shadow 0.4s, background-size 0.4s;
+    transition: background-size 0.4s;
   }
 
-  @media (max-width: 475px) {
+  border: 1px solid ${color.grayborder};
+
+  @media (max-width: 600px) {
+    width: 32.7%;
+    height: calc(100vw * 0.327);
+  }
+
+  @media (max-width: 320px) {
+    width: 32.4%;
+    height: calc(100vw * 0.324);
+  }
+
+  /* @media (max-width: 475px) {
     max-width: 9.2rem;
     height: 9.2rem;
   }
@@ -82,7 +98,7 @@ export const ListItem = styled.div`
     max-width: none;
     width: 80%;
     height: 80%;
-  }
+  } */
 `;
 
 export const Like = styled.button`

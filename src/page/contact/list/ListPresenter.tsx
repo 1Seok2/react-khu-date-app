@@ -30,9 +30,10 @@ const ListPresenter = ({
           delay={idx}
           bgUri={
             // 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
-            imgList !== undefined
-              ? imgList[idx]
-              : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
+            // imgList !== undefined
+            //   ? imgList[idx]
+            //   : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
+            person.uri
           }
         >
           <Link
@@ -45,7 +46,7 @@ const ListPresenter = ({
             }}
             style={styles.link}
           >
-            <div
+            {/* <div
               style={{
                 textAlign: 'right',
                 height: '10%',
@@ -55,7 +56,7 @@ const ListPresenter = ({
                 className="icon-heart"
                 style={{ color: color.date }}
               />
-            </div>
+            </div> */}
             <s.DescContainer>
               <s.Group>
                 {person.college} {person.age}세

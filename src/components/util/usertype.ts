@@ -9,4 +9,7 @@ export interface UserObj {
   gender?: string;
   college?: string;
   img?: number;
+  uri?: string;
+  emailVerified?: boolean;
+  isNew?: boolean;
 }

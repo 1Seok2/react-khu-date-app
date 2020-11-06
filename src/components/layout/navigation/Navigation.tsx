@@ -2,12 +2,16 @@
  * @description 햄버거 버튼 관련 메뉴 모음
  */
 
-import React, { memo } from 'react';
-import { FirebaseAuth } from '@/config/firebase.config';
+import React, { memo, useEffect, useState } from 'react';
+import {
+  FirebaseAuth,
+  FirebaseRDB,
+} from '@/config/firebase.config';
 import { UserObj } from '@/components/util/usertype';
 
 import MenuList from './Menu';
 import Profile from './Profile';
+import { color } from '@/theme/color';
 
 interface NavigationProps {
   pathname: string;
@@ -29,6 +33,28 @@ const Navigation = ({
 
   const logOut = () => FirebaseAuth.signOut();
 
+  const [unread, setUnread] = useState(0);
+
+  useEffect(() => {
+    let countUnread = 0;
+
+    FirebaseRDB.ref(`chat`).on(
+      'value',
+      (snap: firebase.database.DataSnapshot) => {
+        let key: any;
+        for (key in snap.val()) {
+          if (
+            snap.val()[key].receiver === userObj?.email &&
+            snap.val()[key].receiverSaw === 0
+          ) {
+            countUnread++;
+          }
+        }
+        setUnread(countUnread);
+      },
+    );
+  }, [unread]);
+
   return (
     <div className="other-menu-wrapper">
       <header>
@@ -39,6 +65,19 @@ const Navigation = ({
           onClick={onClickHBG}
         >
           <span className="lines"></span>
+          {unread !== 0 && (
+            <div
+              style={{
+                width: 12,
+                height: 12,
+                borderRadius: 16,
+                position: 'absolute',
+                right: 3,
+                top: 10,
+                backgroundColor: color.date,
+              }}
+            />
+          )}
         </button>
       </header>
       <nav className="nav-wrapper">
@@ -52,6 +91,8 @@ const Navigation = ({
               icon={value.icon}
               pathname={pathname}
               onClickHBG={onClickHBG}
+              userObj={userObj}
+              unread={unread}
             />
           ))}
         </ul>

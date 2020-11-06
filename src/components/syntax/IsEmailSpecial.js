@@ -1,5 +1,5 @@
 const IsEmailSpecial = asValue => {
-  const regExpSpecial = /[`~!#$%^&*|₩=+)(₩₩}'\\{₩";:₩/?]/gi;
+  const regExpSpecial = /[`~!#$%^&*|₩=+@)(₩₩}'\\{₩";:₩/?]/gi;
 
   if (asValue.includes('[') || asValue.includes(']'))
     return true;

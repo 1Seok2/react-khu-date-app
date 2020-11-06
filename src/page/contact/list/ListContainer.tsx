@@ -1,6 +1,5 @@
 /**
  * @description 이성 목록 불러오기
- * @todo 유저 이미지 불러오기
  */
 
 import React, { useEffect, useState } from 'react';
@@ -16,7 +15,6 @@ import { UserObj } from '@/components/util/usertype';
 
 const ListContainer = ({
   userObj,
-  ...props
 }: ListProps): JSX.Element => {
   const gender = userObj?.gender;
   const [isLoading, setLoading] = useState(true);
@@ -35,29 +33,30 @@ const ListContainer = ({
    */
   useEffect(() => {
     let list: any = [];
-    let img: any = [];
 
     FirebaseRDB.ref(`users`)
       .once('value')
-      .then((snap: firebase.database.DataSnapshot) => {
-        let key;
-        for (key in snap.val()) {
-          /* 모든 유저중 이성을 리스트로 */
-          if (snap.val()[key].gender !== gender) {
-            list = [...list, snap.val()[key]];
+      .then(
+        async (snap: firebase.database.DataSnapshot) => {
+          let key;
+          for (key in snap.val()) {
+            /* 모든 유저중 이성을 리스트로 */
+            if (snap.val()[key].gender !== gender) {
+              const uri = await FirebaseStorage.ref(
+                `hands/${snap.val()[key].email}/0.jpg`,
+              ).getDownloadURL();
 
-            FirebaseStorage.ref(
-              `hands/${snap.val()[key].email}/0.jpg`,
-            )
-              .getDownloadURL()
-              .then((uri: any) => {
-                img = [...img, uri];
-              })
-              .then(() => setImg(img));
+              const obj = {
+                ...snap.val()[key],
+                uri: uri,
+              };
+
+              list = [...list, obj];
+            }
           }
-        }
-        setOpponent(list);
-      })
+          setOpponent(list);
+        },
+      )
       .catch(err => console.error(err))
       .finally(() =>
         setTimeout(() => {

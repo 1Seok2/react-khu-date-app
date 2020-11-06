@@ -10,6 +10,7 @@ import Loading from '@/components/util/loading';
 
 import * as s from './Detail.styled';
 import { color } from '@/theme/color';
+import Toast from '@/components/util/toast';
 
 const DetailPresenter = ({
   isLoading,
@@ -21,6 +22,8 @@ const DetailPresenter = ({
   changeStatus,
   history,
   isRead,
+  success,
+  setSuccess,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -36,7 +39,7 @@ const DetailPresenter = ({
             ></s.ImageContainer>
           ))}
         </s.ImageWrappser>
-        <s.StatusButton
+        {/* <s.StatusButton
           prev={true}
           onClick={() => changeStatus('prev')}
         >
@@ -47,43 +50,44 @@ const DetailPresenter = ({
           onClick={() => changeStatus('next')}
         >
           <i className="icon-right-open" />
-        </s.StatusButton>
-        <s.ShowCount>
+        </s.StatusButton> */}
+        {/* <s.ShowCount>
           {status + 1} / {url?.length}
-        </s.ShowCount>
+        </s.ShowCount> */}
       </s.HandImageSlider>
       <s.DescContainer>
-        <s.Title>상대 소개 상세 정보</s.Title>
+        <s.Title>
+          {person.nickname}{' '}
+          <span style={{ color: color.gray }}>
+            학우님의 손
+          </span>
+        </s.Title>
         {/* <h2>
             가입일 :{' '}
             {moment(person.createdAt).format('YY.MM.DD')}
           </h2> */}
         {enable && (
           <s.Row>
-            <s.SubTitle>상대 확인여부</s.SubTitle>
+            <s.SubTitle>상대 확인</s.SubTitle>
             <s.Description>
               {isRead ? '확인했다!!' : '아직 안봤다 😭'}
             </s.Description>
           </s.Row>
         )}
         <s.Row>
-          <s.SubTitle>닉네임</s.SubTitle>
-          <s.Description>{person.nickname}</s.Description>
-        </s.Row>
-        <s.Row>
           <s.SubTitle>나이</s.SubTitle>
           <s.Description>{person.age}</s.Description>
         </s.Row>
         <s.Row>
-          <s.SubTitle>거주 지역</s.SubTitle>
+          <s.SubTitle>지역</s.SubTitle>
           <s.Description>{person.location}</s.Description>
         </s.Row>
         <s.Row>
-          <s.SubTitle>단과대학교</s.SubTitle>
+          <s.SubTitle>단과대</s.SubTitle>
           <s.Description>{person.college}</s.Description>
         </s.Row>
         <s.Empty />
-        <s.ButtonContainer>
+        {/* <s.ButtonContainer>
           <s.SButton
             onClick={() => history.goBack()}
             Btype="back"
@@ -99,8 +103,11 @@ const DetailPresenter = ({
           >
             {enable ? '전송완료' : '관심표현'}
           </s.SButton>
-        </s.ButtonContainer>
+        </s.ButtonContainer> */}
       </s.DescContainer>
+      {success && (
+        <Toast message={'전송 완료'} setShow={setSuccess} />
+      )}
     </>
   );
 export default DetailPresenter;

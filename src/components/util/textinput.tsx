@@ -10,26 +10,30 @@ import { color } from '@/theme/color';
 
 interface InputProps {
   name: string;
-  value: string;
+  value: string | undefined;
   onChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement
     >,
   ) => void;
-  placeholder: string;
+  placeholder?: string;
   required: boolean;
+  onKeyUp?: (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => void;
 }
 
 const SInput = styled.input`
-  border: 1px solid ${color.grayborder};
+  border: none;
+  border-bottom: 1px solid ${color.grayborder};
   background-color: none;
   margin-bottom: 8px;
-  padding: 8px 18px;
-  border-radius: 3px;
-  width: 80%;
+  padding: 8px;
+  width: 100%;
+  font-size: 16px;
   &:focus {
     outline: none;
-    border: 1px solid ${color.date};
+    border-bottom: 1px solid ${color.date};
   }
   &::placeholder {
     color: ${color.lightgray};
@@ -43,6 +47,7 @@ const TextInput = memo(
     onChange,
     placeholder,
     required,
+    onKeyUp,
   }: InputProps): JSX.Element => (
     <SInput
       name={name}
@@ -51,6 +56,7 @@ const TextInput = memo(
       placeholder={placeholder}
       onChange={onChange}
       required={required}
+      onKeyUp={onKeyUp}
     />
   ),
 );
