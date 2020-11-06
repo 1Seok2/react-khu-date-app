@@ -28,16 +28,18 @@ const ReceiveContainer = ({
     [],
   );
 
-  const [imgList, setImg] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [opponent, setOpponent] = useState<any>([]);
 
   /**
    * 리스트 가져오기
    */
   useEffect(() => {
     let list: any = [...receiveList];
-    let img: any = [];
-    FirebaseRDB.ref(`chat`).on(
+    let opponentList: any = [];
+
+    let subs: any;
+    subs = FirebaseRDB.ref(`chat`).on(
       'value',
       (snap: firebase.database.DataSnapshot) => {
         let key: any;
@@ -49,15 +51,19 @@ const ReceiveContainer = ({
             };
             list = [...list, obj];
 
-            /**
-             * 상대에 해당하는 사진 가져오기
-             */
-            FirebaseStorage.ref(`hands/${obj.sender}/0.jpg`)
-              .getDownloadURL()
-              .then((uri: any) => {
-                img = [...img, uri];
-              })
-              .then(() => setImg(img));
+            FirebaseRDB.ref(
+              `users/${snap.val()[key].senderId}`,
+            )
+              .once('value')
+              .then(
+                (snap: firebase.database.DataSnapshot) => {
+                  opponentList = [
+                    ...opponentList,
+                    snap.val(),
+                  ];
+                },
+              )
+              .then(() => setOpponent(opponentList));
           }
         }
 
@@ -70,6 +76,8 @@ const ReceiveContainer = ({
         }, 300);
       },
     );
+
+    // return () => subs();
   }, []);
 
   return (
@@ -77,7 +85,7 @@ const ReceiveContainer = ({
       receiveList={receiveList}
       isLoading={isLoading}
       userObj={userObj}
-      img={imgList}
+      opponent={opponent}
       {...props}
     />
   );

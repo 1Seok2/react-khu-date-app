@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import Heart from '@/components/util/heart';
 import { color } from '@/theme/color';
 import {
   SmallTabletWidth,
@@ -71,6 +72,9 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   animation: ${(props: ImageProps) =>
       props.current ? change : null}
     0.3s both ease-in;
+
+  border-radius: 1.2rem;
+  overflow: hidden;
 `;
 
 interface ButtonProps {
@@ -218,4 +222,72 @@ export const Description = styled.span`
 
 export const Empty = styled.div`
   height: 100px;
+`;
+
+export const ChangeStatusContainer = styled.div`
+  width: 60px;
+  height: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+`;
+
+interface StatusCircleButtonProps {
+  current?: boolean;
+}
+
+export const StatusCircleButton = styled.a`
+  width: 12px;
+  height: 12px;
+
+  border-radius: 12px;
+  background-color: ${(props: StatusCircleButtonProps) =>
+    props.current ? color.date : color.gray};
+`;
+
+const Vibe = keyframes`
+0%{
+  transform : none;
+}
+33%{
+  transform : rotate(30deg);
+}
+/* 50%{
+  transform : rotate(0deg);
+} */
+66%{
+  transform : rotate(-30deg);
+}
+100%{
+  transform:none;
+}
+`;
+
+export const LikeButton = styled.a`
+  background-image: url(${Heart});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 53px;
+  height: 53px;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0px 1px 8px -2px rgba(0, 0, 0, 0.6);
+  background-color: white;
+  z-index: 11;
+  @media (min-width: ${SmallTabletWidth}) {
+    right: calc((100vw - ${SmallTabletWidth}) / 2 + 2rem);
+  }
+
+  &:hover {
+    animation: ${Vibe} 2s infinite ease-in-out;
+  }
 `;

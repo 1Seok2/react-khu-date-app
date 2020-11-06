@@ -37,8 +37,9 @@ const Navigation = ({
 
   useEffect(() => {
     let countUnread = 0;
+    let subs: any;
 
-    FirebaseRDB.ref(`chat`).on(
+    subs = FirebaseRDB.ref(`chat`).on(
       'value',
       (snap: firebase.database.DataSnapshot) => {
         let key: any;
@@ -48,11 +49,20 @@ const Navigation = ({
             snap.val()[key].receiverSaw === 0
           ) {
             countUnread++;
+            FirebaseRDB.ref(
+              `chat/${snap.val()[key].createdAt}`,
+            ).on('value', snap => {
+              if (snap.val().receiverSaw === 1) {
+                countUnread--;
+              }
+            });
           }
         }
         setUnread(countUnread);
       },
     );
+
+    // return () => subs();
   }, [unread]);
 
   return (

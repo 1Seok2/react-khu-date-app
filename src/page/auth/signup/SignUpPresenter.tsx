@@ -12,6 +12,7 @@ import { AuthPresenterProps } from '../type';
 import Logo from '@/components/util/logo';
 import Toast from '@/components/util/toast';
 import Loading from '@/components/util/loading';
+import IsPassword from '@/components/syntax/IsPassword';
 
 const SignUpPresenter = ({
   SNSLogin,
@@ -38,8 +39,8 @@ const SignUpPresenter = ({
       <s.AuthForm>
         <s.InputContainer>
           <TextInput
-            name="nickname"
-            value={userInfo?.nickname}
+            name="id"
+            value={userInfo?.id}
             placeholder="이메일 앞 부분"
             onChange={onChange}
             required={true}
@@ -64,7 +65,11 @@ const SignUpPresenter = ({
         <s.ChangeAuthStatus
           onClick={() => {
             setNewAccount(!newAccount);
-            setError('');
+            if (!newAccount) {
+              setError(
+                IsPassword(userInfo?.password).message,
+              );
+            }
           }}
         >
           {newAccount

@@ -2,6 +2,8 @@
 
  
 .icon-heart:before { content: '\2665'; } /* '♥' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-ccw:before { content: '\27f2'; } /* '⟲' */
 .icon-left-open:before { content: '\e75d'; } /* '' */
 .icon-right-open:before { content: '\e75e'; } /* '' */
 .icon-paper-plane-empty:before { content: '\f1d9'; } /* '' */

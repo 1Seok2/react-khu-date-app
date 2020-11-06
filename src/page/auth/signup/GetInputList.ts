@@ -8,8 +8,8 @@ const GetInputList = (
   user: UserAuthObj,
 ): Array<Record<string, string>> => [
   {
-    name: 'nickname',
-    value: user.nickname,
+    name: 'id',
+    value: user.id,
     placeholder: '닉네임을 입력해주세요',
   },
   // {
