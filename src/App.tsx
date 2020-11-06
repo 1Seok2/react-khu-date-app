@@ -35,6 +35,8 @@ const App: React.FC = (): JSX.Element => {
    * 로그인 상태 변경 감지
    */
   useEffect(() => {
+    let subs: any;
+
     FirebaseAuth.onAuthStateChanged(
       (user: firebase.User | null): void => {
         if (user) {
@@ -51,7 +53,7 @@ const App: React.FC = (): JSX.Element => {
             /**
              * 유저 정보 실시간 업데이트
              */
-            FirebaseRDB.ref(`users/${uid}`).on(
+            subs = FirebaseRDB.ref(`users/${uid}`).on(
               'value',
               (snap: firebase.database.DataSnapshot) => {
                 const obj = snap.val();
@@ -82,6 +84,8 @@ const App: React.FC = (): JSX.Element => {
         }, 300);
       },
     );
+
+    // return () => subs();
   }, []);
 
   return (

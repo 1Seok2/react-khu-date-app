@@ -8,14 +8,11 @@ import Loading from '@/components/util/loading';
 import Nothing from '@/components/util/nothing';
 import { UserObj } from '@/components/util/usertype';
 import * as s from './Send.styled';
-import { Link } from 'react-router-dom';
-import { color } from '@/theme/color';
 
 interface SendProps {
   userObj: UserObj | null;
   sendList: Array<ChatObj>;
   isLoading: boolean;
-  imgList: any;
   opponent: any;
 }
 
@@ -23,7 +20,6 @@ const SendPresenter = ({
   userObj,
   sendList,
   isLoading,
-  imgList,
   opponent,
   ...props
 }: SendProps): JSX.Element =>
@@ -34,17 +30,7 @@ const SendPresenter = ({
   ) : (
     <s.ListContainer>
       {sendList.map((person, idx) => (
-        <s.ListItem
-          key={opponent[idx]?.email}
-          delay={idx}
-          bgUri={
-            // 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
-            imgList !== undefined
-              ? imgList[idx]
-              : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
-          }
-          read
-        >
+        <s.ListItem key={person.createdAt} delay={idx} read>
           <s.SLink
             to={{
               pathname: '/contact/detail',

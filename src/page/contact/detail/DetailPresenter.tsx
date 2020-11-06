@@ -24,6 +24,7 @@ const DetailPresenter = ({
   isRead,
   success,
   setSuccess,
+  setStatus,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -36,8 +37,17 @@ const DetailPresenter = ({
               uri={uri}
               key={uri}
               current={idx === status}
-            ></s.ImageContainer>
+            />
           ))}
+          <s.ChangeStatusContainer>
+            {url?.map((uri: string, idx: number) => (
+              <s.StatusCircleButton
+                key={uri}
+                current={idx === status}
+                onClick={() => setStatus(idx)}
+              />
+            ))}
+          </s.ChangeStatusContainer>
         </s.ImageWrappser>
         {/* <s.StatusButton
           prev={true}

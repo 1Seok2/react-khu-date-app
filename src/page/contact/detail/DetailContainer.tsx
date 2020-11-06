@@ -151,6 +151,7 @@ const Detail: React.FC<RouteComponentProps> = (
       isRead={isRead}
       success={success}
       setSuccess={setSuccess}
+      setStatus={setStatus}
     />
   );
 };

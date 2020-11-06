@@ -28,14 +28,11 @@ const SendContainer = ({
   const [isLoading, setLoading] = useState(true);
   const [opponent, setOpponent] = useState<any>([]);
 
-  const [imgList, setImg] = useState<Array<string>>([]);
-
   /**
    * 리스트 가져오기
    */
   useEffect(() => {
     let list: any = [];
-    let img: any = [];
     let opponentList: any = [];
 
     FirebaseRDB.ref(`chat`)
@@ -45,15 +42,6 @@ const SendContainer = ({
         for (key in snap.val()) {
           if (snap.val()[key].sender === userObj?.email) {
             list = [...list, snap.val()[key]];
-
-            FirebaseStorage.ref(
-              `hands/${snap.val()[key].email}/0.jpg`,
-            )
-              .getDownloadURL()
-              .then((uri: any) => {
-                img = [...img, uri];
-              })
-              .then(() => setImg(img));
 
             FirebaseRDB.ref(
               `users/${snap.val()[key].receiverId}`,
@@ -84,7 +72,6 @@ const SendContainer = ({
       userObj={userObj}
       sendList={sendList}
       isLoading={isLoading}
-      imgList={imgList}
       opponent={opponent}
       {...props}
     />
