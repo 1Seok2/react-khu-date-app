@@ -37,10 +37,10 @@ const ReceivePresenter = ({
         <s.ListItem
           key={receiveChat.createdAt}
           delay={idx}
-          // bgUri={receiveChat.uri}
           bgUri={img[idx]}
+          read={receiveChat.receiverSaw === 1}
         >
-          <Link
+          <s.SLink
             to={{
               pathname: '/mypage/receive/detail',
               state: {
@@ -48,30 +48,38 @@ const ReceivePresenter = ({
                 userObj: userObj, // 내 정보
               },
             }}
-            style={styles.link}
           >
-            <div
-              style={{
-                textAlign: 'right',
-                height: '10%',
-              }}
-            >
-              <i
-                className="icon-heart"
-                style={{ color: color.date }}
-              />
-            </div>
+            <s.Icon
+              read={receiveChat.receiverSaw === 1}
+              className={
+                receiveChat.receiverSaw === 1
+                  ? 'icon-envelope-open-o'
+                  : 'icon-mail'
+              }
+            />
             <s.DescContainer>
-              <s.Group>
-                {moment(receiveChat.createdAt).format(
-                  'YY.MM.DD HH:mm:ss',
-                )}
-              </s.Group>
-              <s.NickName>
+              <s.Strong>
                 {receiveChat.senderNickname}
-              </s.NickName>
+              </s.Strong>
+              <s.FixDesc
+                read={receiveChat.receiverSaw === 1}
+              >
+                님에게 받은 호감
+              </s.FixDesc>
             </s.DescContainer>
-          </Link>
+            <s.DateContainer>
+              <s.Date read={receiveChat.receiverSaw === 1}>
+                {moment(receiveChat.createdAt).format(
+                  'YY.MM.DD',
+                )}
+              </s.Date>
+              <s.Read read={receiveChat.receiverSaw === 1}>
+                {receiveChat.receiverSaw === 1
+                  ? '확인함!'
+                  : '확인 안함'}
+              </s.Read>
+            </s.DateContainer>
+          </s.SLink>
         </s.ListItem>
       ))}
     </s.ListContainer>
@@ -80,7 +88,7 @@ export default ReceivePresenter;
 
 const styles = {
   link: {
-    display: 'block',
+    display: 'flex',
     width: '100%',
     height: '100%',
   },

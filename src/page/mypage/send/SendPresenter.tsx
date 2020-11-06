@@ -43,8 +43,9 @@ const SendPresenter = ({
               ? imgList[idx]
               : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
           }
+          read
         >
-          <Link
+          <s.SLink
             to={{
               pathname: '/contact/detail',
               state: {
@@ -52,29 +53,32 @@ const SendPresenter = ({
                 userObj: userObj, // 내 정보
               },
             }}
-            style={styles.link}
           >
-            <div
-              style={{
-                textAlign: 'right',
-                height: '10%',
-              }}
-            >
-              <i
-                className="icon-heart"
-                style={{ color: color.date }}
-              />
-            </div>
+            <s.Icon
+              read
+              className={
+                person.receiverSaw === 1
+                  ? 'icon-envelope-open-o'
+                  : 'icon-mail'
+              }
+            />
             <s.DescContainer>
-              <s.Group>
-                {opponent[idx]?.college}{' '}
-                {opponent[idx]?.age}세
-              </s.Group>
-              <s.NickName>
-                {opponent[idx]?.nickname}
-              </s.NickName>
+              <s.Strong>{person.receiverNickname}</s.Strong>
+              <s.FixDesc read>님에게 보낸 호감</s.FixDesc>
             </s.DescContainer>
-          </Link>
+            <s.DateContainer>
+              <s.Date read>
+                {moment(person.createdAt).format(
+                  'YY.MM.DD',
+                )}
+              </s.Date>
+              <s.Read read>
+                {person.receiverSaw === 1
+                  ? '확인함!'
+                  : '확인 안함'}
+              </s.Read>
+            </s.DateContainer>
+          </s.SLink>
         </s.ListItem>
       ))}
     </s.ListContainer>

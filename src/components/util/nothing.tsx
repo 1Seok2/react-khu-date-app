@@ -9,6 +9,8 @@ const Nothing = () => (
       left: '50%',
       top: '50%',
       transform: 'translate(-50%,-50%)',
+      width: '100%',
+      textAlign: 'center',
     }}
   >
     목록이 존재하지 않습니다.
