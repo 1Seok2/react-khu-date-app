@@ -49,21 +49,6 @@ const DetailPresenter = ({
             ))}
           </s.ChangeStatusContainer>
         </s.ImageWrappser>
-        {/* <s.StatusButton
-          prev={true}
-          onClick={() => changeStatus('prev')}
-        >
-          <i className="icon-left-open" />
-        </s.StatusButton>
-        <s.StatusButton
-          prev={false}
-          onClick={() => changeStatus('next')}
-        >
-          <i className="icon-right-open" />
-        </s.StatusButton> */}
-        {/* <s.ShowCount>
-          {status + 1} / {url?.length}
-        </s.ShowCount> */}
       </s.HandImageSlider>
       <s.DescContainer>
         <s.Title>
@@ -114,6 +99,7 @@ const DetailPresenter = ({
             {enable ? '전송완료' : '관심표현'}
           </s.SButton>
         </s.ButtonContainer> */}
+        <s.LikeButton onClick={() => sendInterest()} />
       </s.DescContainer>
       {success && (
         <Toast message={'전송 완료'} setShow={setSuccess} />

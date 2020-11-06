@@ -61,6 +61,8 @@ const Detail: React.FC<RouteComponentProps> = (
           }
         },
       );
+    } else {
+      alert('이미 전송한 상대입니다');
     }
   };
 
