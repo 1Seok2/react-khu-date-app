@@ -11,7 +11,8 @@ export const ListContainer = styled.div`
   margin-top: 24px;
 
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   background-color: white;
@@ -42,7 +43,7 @@ export const ListItem = styled.div`
   align-items: flex-end;
   flex-direction: column;
   overflow: hidden;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 
   /* box-shadow: 0px 0px 12px -6px rgba(0, 0, 0, 0.5); */
   transition: background-size 0.4s;

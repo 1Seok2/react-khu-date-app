@@ -77,111 +77,6 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   overflow: hidden;
 `;
 
-interface ButtonProps {
-  prev?: boolean;
-}
-
-export const StatusButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  ${(props: ButtonProps) =>
-    props.prev ? `left : 1rem;` : `right:1rem;`}
-
-  padding : 0px;
-  width: 42px;
-  height: 42px;
-  margin: 0;
-  background-color: white;
-  border-radius: 24px;
-  box-shadow: 0px 1px 12px -3px rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s;
-  &:focus {
-    outline: none;
-    background-color: ${color.datelight};
-  }
-  &:hover {
-    background-color: ${color.datelight};
-    transition: background-color 0.3s;
-    cursor: pointer;
-  }
-  z-index: 1;
-`;
-
-export const ShowCount = styled.h3`
-  width: 3rem;
-  height: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
-  position: absolute;
-  bottom: 4px;
-  right: 1rem;
-  padding: 3px;
-  font-size: 12px;
-  font-weight: 500;
-`;
-
-export const ButtonContainer = styled.div`
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 100vw;
-  max-width: ${SmallTabletWidth};
-  height: 56px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid lightgray;
-  z-index: 1;
-
-  @media (max-width: ${SmartPhoneWidth}) {
-    height: 42px;
-  }
-`;
-
-interface SButtonProps {
-  Btype?: string;
-  bgColor?: string;
-  color?: string;
-  enable?: boolean;
-}
-
-export const SButton = styled.button`
-  flex: 1;
-  flex-grow: 1;
-  background-color: ${(props: SButtonProps) =>
-    props.Btype !== 'back' ? props.bgColor : '#fafafa'};
-  color: ${(props: SButtonProps) =>
-    props.Btype !== 'back' ? props.color : color.gray};
-  border-radius: 0;
-  height: 100%;
-
-  &:focus {
-    outline: none;
-  }
-
-  ${(props: SButtonProps) =>
-    props.enable
-      ? `
-    background-color : ${color.datedark};
-  `
-      : `
-    &:hover {
-      cursor: pointer;
-    background-color: ${(props: SButtonProps) =>
-      props.Btype !== 'back' ? color.datelight : '#fff'};
-    }
-    `}
-`;
-
 /**
  * description
  */
@@ -289,5 +184,69 @@ export const LikeButton = styled.a`
 
   &:hover {
     animation: ${Vibe} 2s infinite ease-in-out;
+  }
+`;
+
+export const Modal = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 12px;
+  width: 226px;
+  height: 150px;
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 12;
+  box-shadow: 0px 2px 15px -5px rgba(0, 0, 0, 0.8);
+`;
+
+export const NoticeContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Notice = styled.h3`
+  font-size: 13px;
+  font-weight: 300;
+  text-align: justify;
+  line-height: 16px;
+`;
+
+export const ButtonContainer = styled.div`
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+interface SButtonProps {
+  back?: boolean;
+}
+
+export const SButton = styled.button`
+  font-size: 10px;
+  font-weight: 500;
+  color: ${(props: SButtonProps) =>
+    props.back ? color.gray : 'white'};
+  flex-grow: 1;
+  flex: 1;
+  background-color: ${(props: SButtonProps) =>
+    props.back ? color.grayborder : color.date};
+  border-radius: 3px;
+  &:first-child {
+    margin-right: 4px;
+  }
+  &:focus {
+    outline: none;
   }
 `;

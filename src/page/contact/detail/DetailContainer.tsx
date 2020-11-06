@@ -4,6 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import { RouteComponentProps } from 'react-router';
 import {
   FirebaseRDB,
@@ -28,14 +29,37 @@ const Detail: React.FC<RouteComponentProps> = (
    */
   const [enable, setEnable] = useState(false);
   const [isRead, setRead] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const [status, setStatus] = useState(0);
   const [url, setUrl] = useState<any>();
+
   /**
    * 관심 표현 ❤️
    */
   const sendInterest = () => {
     if (!enable) {
+      console.log(
+        userObj.lastSend,
+        moment(userObj.lastSend).format(
+          'YY.MM.DD HH:mm:ss',
+        ),
+      );
+
+      if (
+        moment(userObj.lastSend).diff(Date.now(), 'days') <
+        7
+      ) {
+        alert(
+          `이미 최근에 전송하셨습니다.\n전송 가능 일은 ${moment(
+            userObj.lastSend,
+          )
+            .add(7, 'days')
+            .format('YY.MM.DD HH:mm:ss')} 입니다.`,
+        );
+        setModal(false);
+        return;
+      }
       const createdAt = Date.now();
 
       FirebaseRDB.ref(`chat/${createdAt}`).set(
@@ -58,6 +82,10 @@ const Detail: React.FC<RouteComponentProps> = (
             /* success ... */
             setSuccess(true);
             setEnable(true);
+
+            FirebaseRDB.ref(`users/${userObj.uid}`).update({
+              lastSend: createdAt,
+            });
           }
         },
       );
@@ -154,6 +182,8 @@ const Detail: React.FC<RouteComponentProps> = (
       success={success}
       setSuccess={setSuccess}
       setStatus={setStatus}
+      modal={modal}
+      setModal={setModal}
     />
   );
 };

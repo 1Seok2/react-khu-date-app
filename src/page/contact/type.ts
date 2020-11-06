@@ -22,4 +22,6 @@ export interface DetailProps {
     React.SetStateAction<boolean>
   >;
   setStatus: React.Dispatch<React.SetStateAction<number>>;
+  modal: boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
