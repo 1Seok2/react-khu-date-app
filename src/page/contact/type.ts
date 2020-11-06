@@ -21,4 +21,5 @@ export interface DetailProps {
   setSuccess?: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+  setStatus: React.Dispatch<React.SetStateAction<number>>;
 }

@@ -28,13 +28,7 @@ const ListPresenter = ({
         <s.ListItem
           key={person.email}
           delay={idx}
-          bgUri={
-            // 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
-            // imgList !== undefined
-            //   ? imgList[idx]
-            //   : 'https://1seok2.github.io/CSS-exercises/assets/tranditional/beauty-1822519_640.jpg'
-            person.uri
-          }
+          bgUri={person.uri}
         >
           <Link
             to={{
@@ -45,25 +39,7 @@ const ListPresenter = ({
               },
             }}
             style={styles.link}
-          >
-            {/* <div
-              style={{
-                textAlign: 'right',
-                height: '10%',
-              }}
-            >
-              <i
-                className="icon-heart"
-                style={{ color: color.date }}
-              />
-            </div> */}
-            <s.DescContainer>
-              <s.Group>
-                {person.college} {person.age}세
-              </s.Group>
-              <s.NickName>{person.nickname}</s.NickName>
-            </s.DescContainer>
-          </Link>
+          ></Link>
         </s.ListItem>
       ))}
     </s.ListContainer>

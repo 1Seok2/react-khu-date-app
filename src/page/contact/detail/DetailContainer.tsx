@@ -61,6 +61,8 @@ const Detail: React.FC<RouteComponentProps> = (
           }
         },
       );
+    } else {
+      alert('이미 전송한 상대입니다');
     }
   };
 
@@ -151,6 +153,7 @@ const Detail: React.FC<RouteComponentProps> = (
       isRead={isRead}
       success={success}
       setSuccess={setSuccess}
+      setStatus={setStatus}
     />
   );
 };

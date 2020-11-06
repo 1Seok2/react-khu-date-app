@@ -3,8 +3,8 @@
  */
 
 export interface UserAuthObj {
-  nickname: string;
-  id?: any;
+  nickname?: string;
+  id: any;
   password?: any;
 }
 

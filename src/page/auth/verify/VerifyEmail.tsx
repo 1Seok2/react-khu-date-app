@@ -11,6 +11,7 @@ import Toast from '@/components/util/toast';
 import * as s from './VerifyEmail.styled';
 import Logo from '@/components/util/logo';
 import Loading from '@/components/util/loading';
+import { color } from '@/theme/color';
 
 interface VerifyProps {
   userObj: UserObj | null;
@@ -53,17 +54,30 @@ const VerifyEmail = ({
     <>
       <s.Container>
         <img src={Logo} width="180px" height="180px" />
-        <s.NeedNotice>이메일을 인증해주세요!!</s.NeedNotice>
+        <s.NeedNotice>이메일을 인증해주세요</s.NeedNotice>
         <s.Email>
           <s.Email>가입된 이메일</s.Email>
           <s.UserEmail>{userObj?.email}</s.UserEmail>
         </s.Email>
-        <s.SendButton
-          onClick={() => verify()}
-          enable={enable}
-        >
-          {enable ? '전송완료' : '인증하기'}
-        </s.SendButton>
+        <s.ButtonWrapper>
+          <s.SendButton
+            onClick={() => {
+              if (enable) return;
+              verify();
+            }}
+            enable={enable}
+          >
+            {enable ? '전송완료' : '인증하기'}
+          </s.SendButton>
+          <s.ReloadButton
+            onClick={() => window.location.reload()}
+          >
+            <i
+              className="icon-ccw"
+              style={{ color: color.gray }}
+            />
+          </s.ReloadButton>
+        </s.ButtonWrapper>
         <s.Notice>
           인증 링크 확인 후 페이지를 새로고침 해주세요
         </s.Notice>

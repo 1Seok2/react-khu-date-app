@@ -1,13 +1,23 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled, { keyframes } from 'styled-components';
 import { color } from '@/theme/color';
+import {
+  SmallTabletWidth,
+  SmartPhoneWidth,
+} from '@/theme/width';
+import { Link } from 'react-router-dom';
 
 export const ListContainer = styled.div`
-  width: 90%;
+  width: 100%;
   height: auto;
   margin: 0 auto;
   text-align: center;
   margin-top: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const popIn = keyframes`
@@ -23,137 +33,104 @@ const popIn = keyframes`
 
 interface ItemProps {
   bgUri?: string;
-  delay: number;
+  delay?: number;
+  read?: boolean;
 }
 
 export const ListItem = styled.div`
-  display: inline-block;
-  width: 100%;
-  max-width: 10rem;
-  height: 10rem;
-  border-radius: 1rem;
-  padding: 1rem;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-direction: column;
-  margin-bottom: 12px;
-  overflow: hidden;
-  margin: 0.4rem;
+  width: 90%;
+  height: calc(100vw * 0.15);
+  min-height: 52px;
+  max-height: calc(${SmallTabletWidth} * 0.15);
+  margin-bottom: calc(${SmallTabletWidth} * 0.03);
+  border-radius: 10px;
 
-  box-shadow: 0px 0px 12px -6px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.4s, background-size 0.4s;
-  z-index: 0;
-  ${(props: ItemProps) =>
-    props.bgUri
-      ? `
-  background-image : url(${props.bgUri});
-  background-size : 100%;
-  background-position : center;
-  background-repeat : no-repeat;
-  `
-      : null}
-
-  animation : ${popIn} .2s ${props =>
-    props.delay * 80}ms both ease-in;
-
-  &:hover {
-    box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.9);
-    background-size: 110%;
-    transition: box-shadow 0.4s, background-size 0.4s;
-  }
-
-  @media (max-width: 475px) {
-    max-width: 9.2rem;
-    height: 9.2rem;
-  }
-  @media (max-width: 427px) {
-    max-width: 8rem;
-    height: 8rem;
-  }
-  @media (max-width: 385px) {
-    max-width: 6.8rem;
-    height: 6.8rem;
-  }
-  @media (max-width: 344px) {
-    max-width: 6rem;
-    height: 6rem;
-  }
-  @media (max-width: 320px) {
-    max-width: none;
-    width: 80%;
-    height: 80%;
-  }
+  background-color: ${props =>
+    props.read
+      ? 'rgb(202, 123, 103,0.3)'
+      : 'rgba(202, 123, 103,0.8)'};
+  animation: ${popIn} 0.2s
+    ${(props: ItemProps) =>
+      props.delay ? props.delay * 80 : 0}ms
+    both ease-in;
 `;
 
-export const Like = styled.button`
-  padding: 3px 5px;
-  background-color: ${color.date};
+export const SLink = styled(Link)`
+  width: 100%;
+  height: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+`;
+
+export const Icon = styled.i`
+  font-size: 24px;
+  margin: 0 5%;
+  color: ${(props: ItemProps) =>
+    props.read ? color.gray : color.grayborder};
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 40px;
+    margin: 0 3%;
+  }
 `;
 
 export const DescContainer = styled.div`
-  height: 25%;
-  margin-top: 59%;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 3%;
-  border-radius: 6px;
-  @media (max-width: 427px) {
-    height: 32%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+`;
+
+export const Strong = styled.h1`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${color.black};
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 24px;
   }
 `;
 
-export const Group = styled.h2`
+export const FixDesc = styled.span`
   font-size: 14px;
   font-weight: 300;
-  margin-bottom: 6px;
-  color: #fafafa;
-  text-align: left;
-  margin: 4px;
-
-  @media (max-width: 427px) {
-    font-size: 13px;
-  }
-  @media (max-width: 385px) {
-    font-size: 11px;
-  }
-  @media (max-width: 344px) {
-    font-size: 9px;
-  }
-  @media (max-width: 320px) {
-    font-size: 14px;
-  }
-`;
-
-export const NickName = styled.h1`
-  font-size: 18px;
-  font-weight: 500;
-  color: #fafafa;
-  text-align: left;
+  color: ${(props: ItemProps) =>
+    props.read ? color.gray : color.grayborder};
   margin-left: 4px;
-
-  @media (max-width: 427px) {
-    font-size: 16px;
-  }
-  @media (max-width: 385px) {
-    font-size: 14px;
-  }
-  @media (max-width: 344px) {
-    font-size: 13px;
-  }
-  @media (max-width: 320px) {
-    font-size: 18px;
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 24px;
   }
 `;
 
-export const HandImage = styled.div`
-  display: flex;
-  top: 0;
-  left: 0;
+export const DateContainer = styled.div`
+  margin-right: 5%;
+  width: 60px;
+  @media (min-width: ${SmartPhoneWidth}) {
+    width: 80px;
+  }
+`;
+
+export const Date = styled.h3`
+  font-size: 10px;
+  font-weight: 400;
+  color: ${(props: ItemProps) =>
+    props.read ? color.gray : color.grayborder};
   width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: lightblue;
+  text-align: right;
+  margin-bottom: 8px;
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 20px;
+  }
+`;
+
+export const Read = styled.h5`
+  font-size: 10px;
+  font-weight: ${(props: ItemProps) =>
+    props.read ? 300 : 400};
+  color: ${props =>
+    props.read ? color.gray : color.black};
+  width: 100%;
+  text-align: right;
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 20px;
+  }
 `;

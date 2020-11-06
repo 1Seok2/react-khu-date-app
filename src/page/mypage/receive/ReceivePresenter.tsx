@@ -2,7 +2,6 @@
  * @description 호감 받은 목록
  */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { ChatObj } from '../type';
 import { UserObj } from '@/components/util/usertype';
@@ -10,21 +9,21 @@ import { UserObj } from '@/components/util/usertype';
 import Loading from '@/components/util/loading';
 
 import * as s from './Receive.styled';
-import { color } from '@/theme/color';
 import Nothing from '@/components/util/nothing';
+import { FirebaseRDB } from '@/config/firebase.config';
 
 interface ReceiveProps {
   receiveList: Array<ChatObj>;
   isLoading: boolean;
   userObj: UserObj | null;
-  img?: any;
+  opponent: any;
 }
 
 const ReceivePresenter = ({
   receiveList,
   isLoading,
   userObj,
-  img,
+  opponent,
   ...props
 }: ReceiveProps): JSX.Element =>
   isLoading ? (
@@ -33,45 +32,55 @@ const ReceivePresenter = ({
     <Nothing />
   ) : (
     <s.ListContainer>
-      {receiveList.map((receiveChat, idx) => (
+      {receiveList.map((person, idx) => (
         <s.ListItem
-          key={receiveChat.createdAt}
+          key={person.createdAt}
           delay={idx}
-          // bgUri={receiveChat.uri}
-          bgUri={img[idx]}
+          read={person.receiverSaw === 1}
         >
-          <Link
+          <s.SLink
             to={{
-              pathname: '/mypage/receive/detail',
+              pathname: '/contact/detail',
               state: {
-                receiveChat: receiveChat, // 내게 호감 보낸 상대와 나 간의 챗 정보
+                person: opponent[idx], // 내가 상대 고른 상대 정보
                 userObj: userObj, // 내 정보
               },
             }}
-            style={styles.link}
+            onClick={() => {
+              if (person.receiverSaw !== 1) {
+                FirebaseRDB.ref(
+                  `chat/${person.createdAt}`,
+                ).update({
+                  receiverSaw: 1,
+                });
+              }
+            }}
           >
-            <div
-              style={{
-                textAlign: 'right',
-                height: '10%',
-              }}
-            >
-              <i
-                className="icon-heart"
-                style={{ color: color.date }}
-              />
-            </div>
+            <s.Icon
+              read={person.receiverSaw === 1}
+              className={
+                person.receiverSaw === 1
+                  ? 'icon-envelope-open-o'
+                  : 'icon-mail'
+              }
+            />
             <s.DescContainer>
-              <s.Group>
-                {moment(receiveChat.createdAt).format(
-                  'YY.MM.DD HH:mm:ss',
-                )}
-              </s.Group>
-              <s.NickName>
-                {receiveChat.senderNickname}
-              </s.NickName>
+              <s.Strong>{person.senderNickname}</s.Strong>
+              <s.FixDesc read>님에게 받은 호감</s.FixDesc>
             </s.DescContainer>
-          </Link>
+            <s.DateContainer>
+              <s.Date read={person.receiverSaw === 1}>
+                {moment(person.createdAt).format(
+                  'YY.MM.DD',
+                )}
+              </s.Date>
+              <s.Read read={person.receiverSaw === 1}>
+                {person.receiverSaw === 1
+                  ? '확인함!'
+                  : '확인 안함'}
+              </s.Read>
+            </s.DateContainer>
+          </s.SLink>
         </s.ListItem>
       ))}
     </s.ListContainer>
@@ -80,7 +89,7 @@ export default ReceivePresenter;
 
 const styles = {
   link: {
-    display: 'block',
+    display: 'flex',
     width: '100%',
     height: '100%',
   },
