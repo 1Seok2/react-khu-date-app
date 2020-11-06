@@ -24,6 +24,7 @@ const SelfIntroduceContainer = React.memo(
     const [privateData, setPrivateData] = useState<
       PrivateDataObject
     >({
+      nickname: '',
       gender: '',
       age: '',
       college: '',
@@ -49,10 +50,17 @@ const SelfIntroduceContainer = React.memo(
     const onChangeText = (
       e: React.ChangeEvent<HTMLInputElement>,
     ) => {
-      setPrivateData({
-        ...privateData,
-        age: e.target.value,
-      });
+      if (e.target.name === 'age') {
+        setPrivateData({
+          ...privateData,
+          age: e.target.value,
+        });
+      } else if (e.target.name === 'nickname') {
+        setPrivateData({
+          ...privateData,
+          nickname: e.target.value,
+        });
+      }
     };
 
     const onChangeLocation = (

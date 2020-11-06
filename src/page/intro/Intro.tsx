@@ -15,7 +15,7 @@ import {
 
 const Intro = ({ userObj, ...props }: any): JSX.Element => {
   const [introState, setIntroState] = useState({
-    scriptIndex: ScriptDatas.length,
+    scriptIndex: 0,
     scriptContent: ScriptDatas[0],
   });
 
@@ -98,7 +98,11 @@ const Intro = ({ userObj, ...props }: any): JSX.Element => {
           />
         )}
         <ArrowWrapper>
-          {selfIntroState === 5 ? (
+          {userObj?.age &&
+          introState.scriptIndex ===
+            ScriptDatas.length - 1 ? (
+            ''
+          ) : selfIntroState === 6 ? (
             ''
           ) : introState.scriptIndex <
             ScriptDatas.length ? (

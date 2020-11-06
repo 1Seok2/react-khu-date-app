@@ -16,7 +16,7 @@ export const IntroSection = styled.section`
   /* background: #fffafa; */
   background: white;
   height: 100vh;
-  width: 768px;
+  width: 100%;
   transition: opacity 0.5s;
 `;
 
