@@ -1,5 +1,6 @@
 import React from 'react';
 import { SelfIntroducePresenterProps } from '../type';
+import NickNameInput from './nickname/NickNameInput';
 import GenderSelect from './gender/GenderSelect';
 import AgeSelect from './age/AgeSelect';
 import CollegeSelect from './college/CollegeSelect';
@@ -25,40 +26,48 @@ const SelfIntroducePresenter = ({
     switch (index) {
       case 0:
         return (
+          <NickNameInput
+            value={privateData.nickname}
+            onChange={onChangeText}
+          ></NickNameInput>
+        );
+
+      case 1:
+        return (
           <GenderSelect
             value={privateData.gender}
             onClick={onClickGender}
           ></GenderSelect>
         );
-      case 1:
+      case 2:
         return (
           <AgeSelect
             value={privateData.age}
             onChange={onChangeText}
           ></AgeSelect>
         );
-      case 2:
+      case 3:
         return (
           <CollegeSelect
             value={privateData.college}
             onChange={onChangeCollege}
           ></CollegeSelect>
         );
-      case 3:
+      case 4:
         return (
           <LocationSelect
             value={privateData.location}
             onChange={onChangeLocation}
           ></LocationSelect>
         );
-      case 4:
+      case 5:
         return (
           <HandImageDrop
             files={privateData.files}
             onDrop={onDropImage}
           ></HandImageDrop>
         );
-      case 5:
+      case 6:
         return (
           <Submit
             userObj={userObj}

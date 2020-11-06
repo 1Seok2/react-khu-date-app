@@ -51,59 +51,70 @@ const AppRouter: React.FC<RouterProps> = ({
         isLoading ? (
           <Loading />
         ) : userObj?.emailVerified ? (
-          <div
-            style={{
-              paddingTop: 55,
-              overflowY: 'scroll',
-              minHeight: 'calc(100vh - 90px)',
-            }}
-          >
-            <Header userObj={userObj} />
+          userObj?.age ? (
+            <div
+              style={{
+                paddingTop: 55,
+                overflowY: 'scroll',
+                minHeight: 'calc(100vh - 90px)',
+              }}
+            >
+              <Header userObj={userObj} />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/intro">
+                  {props => (
+                    <Intro userObj={userObj} {...props} />
+                  )}
+                </Route>
+                <Route
+                  path="/contact/list"
+                  render={props => (
+                    <List userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  path="/contact/detail"
+                  component={Detail}
+                />
+                <Route
+                  path="/mypage/edit"
+                  render={props => (
+                    <Edit userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/mypage/receive"
+                  render={props => (
+                    <Receive userObj={userObj} {...props} />
+                  )}
+                />
+                <Route
+                  path="/mypage/receive/detail"
+                  render={props => (
+                    <ReceiveDetail {...props} />
+                  )}
+                />
+                <Route
+                  path="/mypage/send"
+                  render={props => (
+                    <Send userObj={userObj} {...props} />
+                  )}
+                />
+                <Redirect path="*" to="/" />
+              </Switch>
+            </div>
+          ) : (
             <Switch>
-              <Route exact path="/" component={Home} />
               <Route path="/intro">
                 {props => (
                   <Intro userObj={userObj} {...props} />
                 )}
               </Route>
-              <Route
-                path="/contact/list"
-                render={props => (
-                  <List userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                path="/contact/detail"
-                component={Detail}
-              />
-              <Route
-                path="/mypage/edit"
-                render={props => (
-                  <Edit userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                exact
-                path="/mypage/receive"
-                render={props => (
-                  <Receive userObj={userObj} {...props} />
-                )}
-              />
-              <Route
-                path="/mypage/receive/detail"
-                render={props => (
-                  <ReceiveDetail {...props} />
-                )}
-              />
-              <Route
-                path="/mypage/send"
-                render={props => (
-                  <Send userObj={userObj} {...props} />
-                )}
-              />
-              <Redirect path="*" to="/" />
+              <Redirect path="*" to="/intro" />
             </Switch>
-          </div>
+          )
         ) : (
           <Switch>
             <Route

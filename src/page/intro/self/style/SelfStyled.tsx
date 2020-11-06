@@ -12,8 +12,8 @@ export const Container = styled.div`
 export const SelectBox = styled.div<{
   isSelected: boolean;
 }>`
-  width: 200px;
-  height: 200px;
+  width: 30vw;
+  height: 30vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -45,8 +45,8 @@ export const InputContainer = styled.div`
 export const InputLabelText = styled.div``;
 
 export const InputTextBox = styled.input`
-  width: 150px;
-  height: 150px;
+  width: 30vw;
+  height: 20vw;
   padding: 5%;
   font-size: 48px;
   font-family: 'KyoboHand';
@@ -69,8 +69,8 @@ export const UploadedImagesWrapper = styled.div`
 `;
 
 export const UploadedImage = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 30vw;
+  height: 30vw;
   border: 2px solid hsl(0, 0%, 80%);
   border-radius: 10px;
 `;

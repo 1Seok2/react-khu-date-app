@@ -7,6 +7,7 @@ export interface ContentTextProps {
 }
 
 export interface PrivateDataObject {
+  nickname: string;
   gender: string;
   age: string;
   college: string;
