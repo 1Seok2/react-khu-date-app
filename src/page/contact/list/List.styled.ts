@@ -18,6 +18,13 @@ export const ListContainer = styled.div`
   background-color: white;
 `;
 
+export const Title = styled.h1`
+  margin-top: 32px;
+  margin-left: 18px;
+  font-size: 15px;
+  font-weight: 400;
+`;
+
 const popIn = keyframes`
 0%{
   visibility: hidden;

@@ -23,26 +23,29 @@ const ListPresenter = ({
   ) : opponent?.length === 0 ? (
     <Nothing />
   ) : (
-    <s.ListContainer>
-      {opponent?.map((person, idx) => (
-        <s.ListItem
-          key={person.email}
-          delay={idx}
-          bgUri={person.uri}
-        >
-          <Link
-            to={{
-              pathname: '/contact/detail',
-              state: {
-                person: person, // 내가 상대 고른 상대 정보
-                userObj: userObj, // 내 정보
-              },
-            }}
-            style={styles.link}
-          ></Link>
-        </s.ListItem>
-      ))}
-    </s.ListContainer>
+    <>
+      <s.Title>이성목록</s.Title>
+      <s.ListContainer>
+        {opponent?.map((person, idx) => (
+          <s.ListItem
+            key={person.email}
+            delay={idx}
+            bgUri={person.uri}
+          >
+            <Link
+              to={{
+                pathname: '/contact/detail',
+                state: {
+                  person: person, // 내가 상대 고른 상대 정보
+                  userObj: userObj, // 내 정보
+                },
+              }}
+              style={styles.link}
+            ></Link>
+          </s.ListItem>
+        ))}
+      </s.ListContainer>
+    </>
   );
 export default ListPresenter;
 
