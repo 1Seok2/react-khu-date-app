@@ -35,21 +35,22 @@ const AppRouter: React.FC<RouterProps> = ({
   isSignIn,
   userObj,
   isLoading,
-}): JSX.Element => (
-  <div
-    style={{
-      maxWidth: SmallTabletWidth,
-      minHeight: '100vh',
-      margin: '0 auto',
-      position: 'relative',
-      boxShadow: '0px 0px 14px -5px rgba(100,100,100,0.5)',
-    }}
-  >
-    {isSignIn ? (
-      <>
-        {isLoading ? (
+}): JSX.Element => {
+  return (
+    <div
+      style={{
+        maxWidth: SmallTabletWidth,
+        minHeight: '100vh',
+        margin: '0 auto',
+        position: 'relative',
+        boxShadow:
+          '0px 0px 14px -5px rgba(100,100,100,0.5)',
+      }}
+    >
+      {isSignIn ? (
+        isLoading ? (
           <Loading />
-        ) : (
+        ) : userObj?.emailVerified ? (
           <div
             style={{
               paddingTop: 55,
@@ -57,82 +58,72 @@ const AppRouter: React.FC<RouterProps> = ({
               minHeight: 'calc(100vh - 90px)',
             }}
           >
-            {userObj?.emailVerified ? (
-              <Switch>
-                <Header userObj={userObj} />
-                <Route exact path="/" component={Home} />
-                <Route
-                  path="/intro"
-                  render={props => (
-                    <Intro userObj={userObj} {...props} />
-                  )}
-                />
-                <Route
-                  path="/contact/list"
-                  render={props => (
-                    <List userObj={userObj} {...props} />
-                  )}
-                />
-                <Route
-                  path="/contact/detail"
-                  component={Detail}
-                />
-                <Route
-                  path="/mypage/edit"
-                  render={props => (
-                    <Edit userObj={userObj} {...props} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/mypage/receive"
-                  render={props => (
-                    <Receive userObj={userObj} {...props} />
-                  )}
-                />
-                <Route
-                  path="/mypage/receive/detail"
-                  render={props => (
-                    <ReceiveDetail {...props} />
-                  )}
-                />
-                <Route
-                  path="/mypage/send"
-                  render={props => (
-                    <Send userObj={userObj} {...props} />
-                  )}
-                />
-                <Redirect to="/" />
-              </Switch>
-            ) : (
-              <Switch>
-                <Route
-                  path="/auth/verify"
-                  render={() => (
-                    <VerifyEmail userObj={userObj} />
-                  )}
-                  // component={VerifyEmail}
-                  // param={userObj}
-                />
-                <Redirect to="/auth/verify" />
-              </Switch>
-            )}
+            <Header userObj={userObj} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/intro">
+                {props => (
+                  <Intro userObj={userObj} {...props} />
+                )}
+              </Route>
+              <Route
+                path="/contact/list"
+                render={props => (
+                  <List userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                path="/contact/detail"
+                component={Detail}
+              />
+              <Route
+                path="/mypage/edit"
+                render={props => (
+                  <Edit userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/mypage/receive"
+                render={props => (
+                  <Receive userObj={userObj} {...props} />
+                )}
+              />
+              <Route
+                path="/mypage/receive/detail"
+                render={props => (
+                  <ReceiveDetail {...props} />
+                )}
+              />
+              <Route
+                path="/mypage/send"
+                render={props => (
+                  <Send userObj={userObj} {...props} />
+                )}
+              />
+              <Redirect path="*" to="/" />
+            </Switch>
           </div>
-        )}
-      </>
-    ) : (
-      <Switch>
-        {/* <Route
-          exact
-          path="/auth/signin"
-          component={SignIn}
-        /> */}
-        <Route exact path="/auth" component={Auth} />
-        <Redirect path="*" to="/auth" />
-      </Switch>
-    )}
-  </div>
-);
+        ) : (
+          <Switch>
+            <Route
+              path="/auth/verify"
+              render={() => (
+                <VerifyEmail userObj={userObj} />
+              )}
+            />
+            <Redirect path="*" to="/auth/verify" />
+          </Switch>
+        )
+      ) : (
+        <Switch>
+          <Route exact path="/auth" component={Auth} />
+          <Redirect path="*" to="/auth" />
+        </Switch>
+      )}
+    </div>
+  );
+};
 
 export default AppRouter;
 

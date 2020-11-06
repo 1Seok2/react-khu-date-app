@@ -49,6 +49,13 @@ export const UserEmail = styled.span`
   margin-top: 24px;
 `;
 
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 interface SendButtonProps {
   enable: boolean;
 }
@@ -59,9 +66,23 @@ export const SendButton = styled.button`
   color: white;
   background-color: ${(props: SendButtonProps) =>
     props.enable ? color.datedark : color.date};
+  border: 1px solid
+    ${(props: SendButtonProps) =>
+      props.enable ? color.datedark : color.date};
   border-radius: 3px;
-  width: 100%;
+  flex-grow: 1;
   margin-top: 32px;
+`;
+
+export const ReloadButton = styled.button`
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid ${color.grayborder};
+  color: ${color.gray};
+  width: 50px;
+  margin-top: 32px;
+  border-radius: 3px;
+  margin-left: 4px;
 `;
 
 export const Notice = styled.h4`

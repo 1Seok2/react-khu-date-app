@@ -65,6 +65,8 @@ const ListContainer = ({
       );
   }, []);
 
+  console.log(userObj, opponent);
+
   return (
     <ListPresenter
       userObj={userObj}

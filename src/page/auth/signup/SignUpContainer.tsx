@@ -3,7 +3,10 @@
  */
 
 import React, { useState } from 'react';
-import { FirebaseAuth } from '@/config/firebase.config';
+import {
+  FirebaseAuth,
+  FirebaseRDB,
+} from '@/config/firebase.config';
 
 import { UserAuthObj } from '../type';
 
@@ -15,7 +18,7 @@ import IsPassword from '@/components/syntax/IsPassword';
 
 const SignUpContainer = (): JSX.Element => {
   const [userInfo, setInfo] = useState<UserAuthObj>({
-    nickname: '',
+    id: '',
     password: '',
   });
   const [error, setError] = useState('');
@@ -33,7 +36,7 @@ const SignUpContainer = (): JSX.Element => {
   ) => {
     const { name, value } = e.target;
 
-    if (!IsEmailSpecial(value) && name === 'nickname') {
+    if (!IsEmailSpecial(value) && name === 'id') {
       setInfo({
         ...userInfo,
         [name]: value,
@@ -44,7 +47,9 @@ const SignUpContainer = (): JSX.Element => {
           ...userInfo,
           [name]: value,
         });
-        setError(IsPassword(value).message);
+        if (newAccount) {
+          setError(IsPassword(value).message);
+        }
       }
     }
   };
@@ -64,13 +69,13 @@ const SignUpContainer = (): JSX.Element => {
       if (newAccount) {
         // sign up ...
         data = await FirebaseAuth.createUserWithEmailAndPassword(
-          userInfo.nickname + '@khu.ac.kr',
+          userInfo.id + '@khu.ac.kr',
           userInfo.password,
         );
       } else {
         // sign in ...
         data = await FirebaseAuth.signInWithEmailAndPassword(
-          userInfo.nickname + '@khu.ac.kr',
+          userInfo.id + '@khu.ac.kr',
           userInfo.password,
         );
       }
@@ -84,16 +89,21 @@ const SignUpContainer = (): JSX.Element => {
         FirebaseAuth.currentUser;
       if (newAccount) {
         if (data?.additionalUserInfo?.isNewUser && user) {
-          // user
-          //   .sendEmailVerification()
-          //   .then(() => {
-          //     setLoading(false);
-          //     setSendEmail(true);
-          //     FirebaseAuth.signOut();
-          //   })
-          //   .then(() => setNewAccount(false))
-          //   .catch(e => console.log(e));
           /* db에 저장 */
+          FirebaseRDB.ref(`users/${user.uid}`).set({
+            /* basic info */
+            email: userInfo.id + '@khu.ac.kr',
+            uid: user.uid,
+
+            /* temporary info */
+            gender: 'M',
+            age: 23,
+            nickname: '트럼프',
+            college: '생명과학대학',
+            image: 3,
+            createdAt: Date.now(),
+            location: '서울',
+          });
         }
       }
     }

@@ -12,7 +12,7 @@ import {
 
 import GlobalStyle from '@/assets/global/GlobalStyle';
 import './assets/css/Menu.css';
-import './assets/font/fontello-c7778059/css/fontello-embedded.css';
+import './assets/font/fontello-b383b95c/css/fontello-embedded.css';
 
 /**
  * props로 전달할 user정보
@@ -64,7 +64,7 @@ const App: React.FC = (): JSX.Element => {
                 if (isLoading) {
                   setTimeout(() => {
                     setLoading(false);
-                  }, 200);
+                  }, 100);
                 }
               },
             );
