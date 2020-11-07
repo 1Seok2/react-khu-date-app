@@ -90,12 +90,12 @@ const AppRouter: React.FC<RouterProps> = ({
                     <Receive userObj={userObj} {...props} />
                   )}
                 />
-                <Route
+                {/* <Route
                   path="/mypage/receive/detail"
                   render={props => (
                     <ReceiveDetail {...props} />
                   )}
-                />
+                /> */}
                 <Route
                   path="/mypage/send"
                   render={props => (
