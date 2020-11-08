@@ -96,6 +96,7 @@ const SignUpContainer = (): JSX.Element => {
             /* basic info */
             email: userInfo.id + '@khu.ac.kr',
             uid: user.uid,
+            isNewbie: true,
 
             /* temporary info */
             gender: 'M',

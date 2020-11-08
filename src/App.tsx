@@ -83,7 +83,7 @@ const App: React.FC = (): JSX.Element => {
         }
         setTimeout(() => {
           setInit(true);
-        }, 300);
+        }, 200);
       },
     );
 

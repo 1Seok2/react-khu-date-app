@@ -8,22 +8,26 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { UserObj } from './components/util/usertype';
 
 /* before sign in ... */
-// import SignIn from './page/auth/signin';
 import Auth from './page/auth/signup';
+import Find from './page/find';
 
 /* after sign in ... */
 import Intro from './page/intro';
+import VerifyEmail from './page/auth/verify';
+
 import Home from './page/home';
 import Detail from './page/contact/detail';
 import List from './page/contact/list';
 import Edit from './page/mypage/edit';
 import Receive from './page/mypage/receive';
-import ReceiveDetail from './page/mypage/receive/detail';
 import Send from './page/mypage/send';
-import { SmallTabletWidth } from './theme/width';
+
+/* common ... */
 import Loading from './components/util/loading';
 import Header from './components/layout/header';
-import VerifyEmail from './page/auth/verify';
+
+/* sytle ...  */
+import { SmallTabletWidth } from './theme/width';
 
 interface RouterProps {
   isSignIn: boolean;
@@ -92,12 +96,6 @@ const AppRouter: React.FC<RouterProps> = ({
                     <Receive userObj={userObj} {...props} />
                   )}
                 />
-                {/* <Route
-                  path="/mypage/receive/detail"
-                  render={props => (
-                    <ReceiveDetail {...props} />
-                  )}
-                /> */}
                 <Route
                   path="/mypage/send"
                   render={props => (
@@ -131,6 +129,7 @@ const AppRouter: React.FC<RouterProps> = ({
       ) : (
         <Switch>
           <Route exact path="/auth" component={Auth} />
+          <Route exact path="/find" component={Find} />
           <Redirect path="*" to="/auth" />
         </Switch>
       )}
