@@ -57,6 +57,8 @@ const App: React.FC = (): JSX.Element => {
               'value',
               (snap: firebase.database.DataSnapshot) => {
                 const obj = snap.val();
+                console.log(obj);
+
                 setUserObj({
                   ...obj,
                   uid: uid,

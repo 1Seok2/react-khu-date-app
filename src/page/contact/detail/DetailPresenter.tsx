@@ -20,13 +20,13 @@ const DetailPresenter = ({
   url,
   status,
   changeStatus,
-  history,
   isRead,
   success,
   setSuccess,
   setStatus,
   modal,
   setModal,
+  response,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -71,6 +71,16 @@ const DetailPresenter = ({
             </s.Description>
           </s.Row>
         )}
+        {response && (
+          <s.Row>
+            <s.SubTitle>답변 여부</s.SubTitle>
+            <s.Description>
+              {response.receiverOk === 1
+                ? '이미 답변하셨습니다'
+                : '답변 부탁드려요!'}
+            </s.Description>
+          </s.Row>
+        )}
         <s.Row>
           <s.SubTitle>나이</s.SubTitle>
           <s.Description>{person.age}</s.Description>
@@ -84,7 +94,12 @@ const DetailPresenter = ({
           <s.Description>{person.college}</s.Description>
         </s.Row>
         <s.Empty />
-        <s.LikeButton onClick={() => setModal(true)} />
+        <s.LikeButton
+          onClick={() => {
+            if (response === '이미 답변하셨습니다') return;
+            setModal(true);
+          }}
+        />
       </s.DescContainer>
       {success && (
         <Toast message={'전송 완료'} setShow={setSuccess} />

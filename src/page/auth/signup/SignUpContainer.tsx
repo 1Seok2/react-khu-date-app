@@ -49,6 +49,8 @@ const SignUpContainer = (): JSX.Element => {
         });
         if (newAccount) {
           setError(IsPassword(value).message);
+        } else {
+          if (error) setError('');
         }
       }
     }

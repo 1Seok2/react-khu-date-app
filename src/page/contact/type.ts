@@ -15,7 +15,6 @@ export interface DetailProps {
   url?: Array<string>;
   status: number;
   changeStatus: (type: string) => void;
-  history: any;
   isRead: boolean;
   success?: boolean;
   setSuccess?: React.Dispatch<
@@ -24,4 +23,5 @@ export interface DetailProps {
   setStatus: React.Dispatch<React.SetStateAction<number>>;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  response: any;
 }
