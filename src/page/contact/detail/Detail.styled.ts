@@ -100,19 +100,33 @@ export const Row = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 11px;
+
+  @media (min-width: ${SmartPhoneWidth}) {
+    margin-bottom: 1.3rem;
+  }
 `;
 
 export const SubTitle = styled.h2`
   margin-left: 8px;
   margin-right: 6px;
-  width: 80px;
+  width: 30%;
+  min-width: 80px;
+  max-width: 130px;
   font-size: 14px;
   font-weight: 400;
+
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 20px;
+  }
 `;
 
 export const Description = styled.span`
   font-size: 17px;
   font-weight: 600;
+
+  @media (min-width: ${SmartPhoneWidth}) {
+    font-size: 26px;
+  }
 `;
 
 export const Empty = styled.div`
