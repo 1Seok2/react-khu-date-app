@@ -15,7 +15,7 @@ import {
 
 const Intro = ({ userObj, ...props }: any): JSX.Element => {
   const [introState, setIntroState] = useState({
-    scriptIndex: 0,
+    scriptIndex: ScriptDatas.length,
     scriptContent: ScriptDatas[0],
   });
 
@@ -77,12 +77,14 @@ const Intro = ({ userObj, ...props }: any): JSX.Element => {
             ''
           ) : selfIntroState === 0 ? (
             <IoIosArrowBack
-              size={24}
+              size={32}
+              color={'gray'}
               onClick={onClickPrevButton}
             />
           ) : (
             <IoIosArrowBack
-              size={24}
+              size={32}
+              color={'gray'}
               onClick={() => onClickSelfButton(-1)}
             />
           )}
@@ -107,12 +109,14 @@ const Intro = ({ userObj, ...props }: any): JSX.Element => {
           ) : introState.scriptIndex <
             ScriptDatas.length ? (
             <IoIosArrowForward
-              size={24}
+              size={32}
+              color={'gray'}
               onClick={onClickNextButton}
             />
           ) : (
             <IoIosArrowForward
-              size={24}
+              size={32}
+              color={'gray'}
               onClick={() => onClickSelfButton(1)}
             />
           )}

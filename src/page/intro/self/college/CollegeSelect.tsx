@@ -8,7 +8,8 @@ import { color } from '../../../../theme/color';
 const customStyles = {
   container: (provided: any) => ({
     ...provided,
-    width: 300,
+    width: 200,
+    marginTop: '10%',
   }),
   control: (provided: any) => ({
     ...provided,
@@ -16,7 +17,7 @@ const customStyles = {
   }),
   valueContainer: (provided: any) => ({
     ...provided,
-    minHeight: 150,
+    minHeight: 80,
     justifyContent: 'space-around',
   }),
   singleValue: (provided: any) => ({

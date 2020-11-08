@@ -15,13 +15,13 @@ export const KyoboFont = createGlobalStyle`
 export const IntroSection = styled.section`
   /* background: #fffafa; */
   background: white;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   transition: opacity 0.5s;
 `;
 
 export const ContentContainer = styled.div`
-  height: 100vh;
+  height: calc(100vh - (55px));
   display: flex;
   flex-direction: row;
   justify-content: space-around;
