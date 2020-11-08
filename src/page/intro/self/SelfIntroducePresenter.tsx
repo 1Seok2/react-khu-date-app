@@ -82,7 +82,7 @@ const SelfIntroducePresenter = ({
 
   return (
     <SelfIntroduceFormat>
-      <Title>본인을 소개해주세요.</Title>
+      {/* <Title>본인을 소개해주세요.</Title> */}
       {SelfIntroduceState(index)}
     </SelfIntroduceFormat>
   );

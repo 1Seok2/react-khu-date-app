@@ -1,8 +1,14 @@
 import styled from 'styled-components';
+import {
+  SmallTabletWidth,
+  SmartPhoneWidth,
+} from '@/theme/width';
 import { color } from '../../../../theme/color';
 
 export const Container = styled.div`
-  height: 100%;
+  height: -moz-calc(100vh - (55px));
+  height: -webkit-calc(100vh - (55px));
+  height: calc(100vh - (55px));
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,8 +18,8 @@ export const Container = styled.div`
 export const SelectBox = styled.div<{
   isSelected: boolean;
 }>`
-  width: 30vw;
-  height: 30vw;
+  width: 15vw;
+  height: 15vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -32,27 +38,37 @@ export const SelectBox = styled.div<{
     color: white;
     font-weight: 600;
   }
+
+  @media (max-width: ${SmartPhoneWidth}) {
+    width: 20vw;
+    height: 20vw;
+  }
 `;
 
 export const InputContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const InputLabelText = styled.div``;
+export const InputLabelText = styled.div`
+  font-family: 'KyoboHand';
+  font-size: 24px;
+`;
 
 export const InputTextBox = styled.input`
-  width: 30vw;
-  height: 20vw;
-  padding: 5%;
-  font-size: 48px;
+  width: 50%;
+  height: 10%;
+  padding: 3%;
+  margin-top: 10%;
+  font-size: 24px;
   font-family: 'KyoboHand';
   text-align: center;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 5px;
+  text-align: left;
 `;
 
 export const ContentWrapper = styled.div`
@@ -65,14 +81,20 @@ export const ContentWrapper = styled.div`
 export const UploadedImagesWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: space-around;
 `;
 
 export const UploadedImage = styled.img`
-  width: 30vw;
-  height: 30vw;
+  width: 15vw;
+  height: 15vw;
   border: 2px solid hsl(0, 0%, 80%);
   border-radius: 10px;
+
+  @media (max-width: ${SmartPhoneWidth}) {
+    width: 20vw;
+    height: 20vw;
+  }
 `;
 
 export const ImageDropZone = styled.div`
@@ -80,8 +102,12 @@ export const ImageDropZone = styled.div`
   border: 5px dashed hsl(0, 0%, 80%);
   border-radius: 10px;
   width: 100%;
-  height: 180px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: ${SmartPhoneWidth}) {
+    height: 100px;
+  }
 `;
