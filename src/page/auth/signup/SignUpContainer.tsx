@@ -49,6 +49,8 @@ const SignUpContainer = (): JSX.Element => {
         });
         if (newAccount) {
           setError(IsPassword(value).message);
+        } else {
+          if (error) setError('');
         }
       }
     }
@@ -94,6 +96,7 @@ const SignUpContainer = (): JSX.Element => {
             /* basic info */
             email: userInfo.id + '@khu.ac.kr',
             uid: user.uid,
+            isNewbie: true,
 
             /* temporary info */
             gender: 'M',

@@ -20,11 +20,13 @@ const DetailPresenter = ({
   url,
   status,
   changeStatus,
-  history,
   isRead,
   success,
   setSuccess,
   setStatus,
+  modal,
+  setModal,
+  response,
 }: DetailProps): JSX.Element =>
   isLoading ? (
     <Loading />
@@ -69,6 +71,16 @@ const DetailPresenter = ({
             </s.Description>
           </s.Row>
         )}
+        {response && (
+          <s.Row>
+            <s.SubTitle>답변 여부</s.SubTitle>
+            <s.Description>
+              {response.receiverOk === 1
+                ? '이미 답변하셨습니다'
+                : '답변 부탁드려요!'}
+            </s.Description>
+          </s.Row>
+        )}
         <s.Row>
           <s.SubTitle>나이</s.SubTitle>
           <s.Description>{person.age}</s.Description>
@@ -82,27 +94,35 @@ const DetailPresenter = ({
           <s.Description>{person.college}</s.Description>
         </s.Row>
         <s.Empty />
-        {/* <s.ButtonContainer>
-          <s.SButton
-            onClick={() => history.goBack()}
-            Btype="back"
-          >
-            뒤로가기
-          </s.SButton>
-          <s.SButton
-            Btype="like"
-            bgColor={color.date}
-            color="white"
-            onClick={sendInterest}
-            enable={enable}
-          >
-            {enable ? '전송완료' : '관심표현'}
-          </s.SButton>
-        </s.ButtonContainer> */}
-        <s.LikeButton onClick={() => sendInterest()} />
+        <s.LikeButton
+          onClick={() => {
+            if (response === '이미 답변하셨습니다') return;
+            setModal(true);
+          }}
+        />
       </s.DescContainer>
       {success && (
         <Toast message={'전송 완료'} setShow={setSuccess} />
+      )}
+      {modal && (
+        <s.Modal>
+          <s.NoticeContainer>
+            <s.Notice>
+              이성 학우님에게 관심을 표현하신다면 1주일간
+              다른 학우님께 관심을 표현하실 수 없습니다.{' '}
+              <br /> 정말로 해당 학우님께 관심을
+              표현하실건가요?
+            </s.Notice>
+          </s.NoticeContainer>
+          <s.ButtonContainer>
+            <s.SButton back onClick={() => setModal(false)}>
+              좀 더 고민할래요
+            </s.SButton>
+            <s.SButton onClick={() => sendInterest()}>
+              네 !!
+            </s.SButton>
+          </s.ButtonContainer>
+        </s.Modal>
       )}
     </>
   );

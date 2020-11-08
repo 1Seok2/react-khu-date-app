@@ -57,6 +57,8 @@ const App: React.FC = (): JSX.Element => {
               'value',
               (snap: firebase.database.DataSnapshot) => {
                 const obj = snap.val();
+                console.log(obj);
+
                 setUserObj({
                   ...obj,
                   uid: uid,
@@ -81,7 +83,7 @@ const App: React.FC = (): JSX.Element => {
         }
         setTimeout(() => {
           setInit(true);
-        }, 300);
+        }, 200);
       },
     );
 
