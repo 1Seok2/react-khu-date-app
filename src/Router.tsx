@@ -9,7 +9,7 @@ import { UserObj } from './components/util/usertype';
 
 /* before sign in ... */
 import Auth from './page/auth/signup';
-import Find from './page/find';
+import Find from './page/auth/find';
 
 /* after sign in ... */
 import Intro from './page/intro';

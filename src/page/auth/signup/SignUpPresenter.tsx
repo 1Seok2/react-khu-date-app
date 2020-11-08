@@ -80,9 +80,11 @@ const SignUpPresenter = ({
             ? '이미 계정이 있으신가요?'
             : '학교 웹메일로 회원가입'}
         </s.ChangeAuthStatus>
-        <s.FindPassword to="/find">
-          비밀번호 찾기
-        </s.FindPassword>
+        {newAccount || (
+          <s.FindPassword to="/find">
+            비밀번호 찾기
+          </s.FindPassword>
+        )}
       </s.AuthForm>
     </s.AuthWrapper>
     {sendEmail && (
