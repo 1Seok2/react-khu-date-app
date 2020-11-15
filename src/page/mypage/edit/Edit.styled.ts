@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import styled from 'styled-components';
+import { color } from '../../../theme/color';
 
 export const Container = styled.div`
   padding: 10%;
@@ -53,4 +54,10 @@ background-image: url('https://1seok2.github.io/CSS-exercises/assets/tranditiona
   width: 20vh;
   height: 20vh;
   margin-bottom: 10%;
+`;
+
+export const SaveButton = styled.button`
+  background: ${color.pointcolor};
+  margin-left: 3%;
+  color: white;
 `;

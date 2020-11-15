@@ -18,6 +18,13 @@ const EditContainer = ({
   const [success, setSuccess] = useState(false);
 
   const [editable, setEditable] = useState<boolean>(false);
+  const [isCollegeEditing, setCollegeEditing] = useState<
+    boolean
+  >(false);
+  const [isLocationEditing, setLocationEditing] = useState<
+    boolean
+  >(false);
+
   const [url, setUrl] = useState<any>();
 
   /**
@@ -42,6 +49,25 @@ const EditContainer = ({
       .finally((): void => setEditable(false));
   };
 
+  const saveEditedInfo = (editTargetName: string) => {
+    FirebaseRDB.ref(`users/${userObj?.uid}`)
+      .update({
+        [editTargetName]: state[editTargetName],
+      })
+      .catch(err => console.error(err))
+      .finally((): void => setEditable(false));
+  };
+
+  const onChangeSelector = (
+    editTargetName: string,
+    item: any,
+  ) => {
+    setState({
+      ...state,
+      [editTargetName]: item.value,
+    });
+  };
+
   const onChange = (e: any) => {
     const {
       target: { name, value },
@@ -51,6 +77,14 @@ const EditContainer = ({
       ...state,
       [name]: value,
     });
+  };
+
+  const onClickEdit = (editTargetName: string) => {
+    if (editTargetName === 'college') {
+      setCollegeEditing(p => !p);
+    } else if (editTargetName === 'location') {
+      setLocationEditing(p => !p);
+    }
   };
 
   const getImage = async () => {
@@ -76,12 +110,6 @@ const EditContainer = ({
       setUrl(uris);
       ok = true;
     });
-    // .then(() => {
-    //   setLoading(false);
-    //   // interval = setInterval(() => {
-    //   //   setStatus(prev => (prev + 1) % userObj.img);
-    //   // }, 2500);
-    // });
 
     return () => clearInterval(interval);
   }, []);
@@ -91,10 +119,15 @@ const EditContainer = ({
       state={state}
       url={url}
       editable={editable}
+      isCollegeEditing={isCollegeEditing}
+      isLocationEditing={isLocationEditing}
       editMyInfo={editMyInfo}
+      saveEditedInfo={saveEditedInfo}
       cancelEdit={cancelEdit}
+      onClickEdit={onClickEdit}
       makeEdit={makeEdit}
       onChange={onChange}
+      onChangeSelector={onChangeSelector}
     />
   );
 };
